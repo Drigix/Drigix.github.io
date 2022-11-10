@@ -1,0 +1,94 @@
+<div class="company-reservations-dialog">
+  <div *ngIf="edit; else createWorker">
+    <form #formAddCompanyWorker (ngSubmit)="onSubmit()" [formGroup]="addReservationForm">
+
+      <input type="text" pInputText formControlName="name" placeholder="{{'global.form.name' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addReservationForm.get('name')!.invalid && (addReservationForm.get('name')!.dirty || addReservationForm.get('name')!.touched)">
+        <small *ngIf="addReservationForm.get('name')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <input type="text" pInputText formControlName="date" placeholder="{{'global.form.date' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addReservationForm.get('date')!.invalid && (addReservationForm.get('date')!.dirty || addReservationForm.get('date')!.touched)">
+        <small *ngIf="addReservationForm.get('date')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <p-dropdown id="worker" name="worker" formControlName="worker"
+        placeholder="{{'global.reservation.chooseWorker' | translate}}">
+      </p-dropdown>
+      <div class="input-invalid-text" *ngIf="addReservationForm.get('worker')!.invalid && (addReservationForm.get('worker')!.dirty || addReservationForm.get('worker')!.touched)">
+        <small *ngIf="addReservationForm.get('worker')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <p-dropdown id="service" name="service" formControlName="service"
+        placeholder="{{'global.reservation.chooseService' | translate}}">
+      </p-dropdown>
+      <div class="input-invalid-text" *ngIf="addReservationForm.get('service')!.invalid && (addReservationForm.get('service')!.dirty || addReservationForm.get('service')!.touched)">
+        <small *ngIf="addReservationForm.get('service')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <div class="buttons-container-dialog">
+        <p-button type="submit" styleClass="button-width"
+         label="{{'global.action.save' | translate}}" [disabled]="addReservationForm.invalid === true">
+        </p-button>
+        <p-button type="button" styleClass="button-width"
+         label="{{'global.action.close' | translate}}" (onClick)="onClose()">
+        </p-button>
+      </div>
+    </form>
+  </div>
+
+  <ng-template #createWorker>
+    <form #formAddCompanyWorker (ngSubmit)="onSubmit()" [formGroup]="addReservationForm">
+
+      <input type="text" pInputText formControlName="name" [(ngModel)]="name" placeholder="{{'global.form.name' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addReservationForm.get('name')!.invalid && (addReservationForm.get('name')!.dirty || addReservationForm.get('name')!.touched)">
+        <small *ngIf="addReservationForm.get('name')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <input type="text" pInputText formControlName="date" placeholder="{{'global.form.date' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addReservationForm.get('date')!.invalid && (addReservationForm.get('date')!.dirty || addReservationForm.get('date')!.touched)">
+        <small *ngIf="addReservationForm.get('date')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <p-dropdown id="worker" name="worker" formControlName="worker"
+      placeholder="{{'global.reservation.chooseWorker' | translate}}">
+      </p-dropdown>
+      <div class="input-invalid-text" *ngIf="addReservationForm.get('worker')!.invalid && (addReservationForm.get('worker')!.dirty || addReservationForm.get('worker')!.touched)">
+      <small *ngIf="addReservationForm.get('worker')?.errors?.['required']">
+        {{'global.form.fieldRequired' | translate }}
+      </small>
+      </div>
+
+      <p-dropdown id="service" name="service" formControlName="service"
+      placeholder="{{'global.form.newEmail' | translate}}">
+      </p-dropdown>
+      <div class="input-invalid-text" *ngIf="addReservationForm.get('service')!.invalid && (addReservationForm.get('service')!.dirty || addReservationForm.get('service')!.touched)">
+        <small *ngIf="addReservationForm.get('service')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <div class="buttons-container-dialog">
+        <p-button type="submit" styleClass="button-width"
+        label="{{'global.action.save' | translate}}" [disabled]="addReservationForm.invalid === true">
+        </p-button>
+        <p-button type="button" styleClass="button-width"
+         label="{{'global.action.close' | translate}}" (onClick)="onClose()">
+        </p-button>
+      </div>
+
+    </form>
+  </ng-template>
+</div>

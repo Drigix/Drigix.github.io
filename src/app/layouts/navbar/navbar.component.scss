@@ -1,0 +1,109 @@
+:host ::ng-deep .p-menubar {
+    background-color: #75121c;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    height: 70px;
+}
+
+:host ::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-text {
+    color: white;
+}
+
+:host ::ng-deep .p-menuitem-icon {
+  position: absolute;
+}
+
+:host ::ng-deep .languages .p-button {
+  border-color: transparent;
+  height: 40px;
+  width: 45px;
+  margin-top:3px;
+  margin-right: 10px;
+}
+
+:host ::ng-deep .account .p-button {
+  background-color: lightgray;
+  color: var(--primary-color);
+  border-radius: 50%;
+  height: 50px;
+  width: 55px;
+}
+
+:host ::ng-deep .notLoginAccount .p-button {
+  background-color: white;
+  color: var(--primary-color);
+  border-radius: 15px;
+}
+
+.pi-bell {
+  color: white;
+  padding-bottom: 15px;
+}
+
+.pi-flag {
+  color: white;
+  font-size: 20px;
+}
+
+.notification {
+  display: inline;
+  padding-right: 20px;
+}
+
+.languages-menu {
+  position: absolute;
+  right: 60px;
+  top: 60px;
+  background-color: var(--primary-color);
+  color:white;
+  border-radius: 5px;
+
+  ul {
+    list-style-type: none;
+    margin-left: -20px;
+  }
+
+  li {
+    margin: 0;
+    padding: 20px 30px;
+    color: white;
+    font-weight: 700;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+  img {
+    width: 20px;
+  }
+}
+
+.user-menu {
+  position: absolute;
+  right: 5px;
+  top: 60px;
+  background-color: var(--primary-color);
+  color:white;
+  border-radius: 5px;
+
+  ul {
+    list-style-type: none;
+    margin-left: -20px;
+  }
+
+  li {
+    margin: 0;
+    padding: 20px 30px;
+    color: white;
+    font-weight: 700;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+}
+
+.items-to-users {
+  display: flex;
+}
+
+:host ::ng-deep .p-dropdown {
+  margin-right: 30px;
+  width: 100px;
+}

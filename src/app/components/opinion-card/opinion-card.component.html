@@ -1,0 +1,14 @@
+<div class="opinion-card">
+  <ng-container *ngFor="let opinion of companyOpinions | slice:page!*10:page!*10 + 10;">
+    <div class="card-content">
+      <div class="header">
+        <h2>{{opinion.name}}</h2>
+        <p-rating [readonly]="true" [(ngModel)]="opinion.rating">
+        </p-rating>
+      </div>
+      <div class="description">
+        <p>{{opinion.description}}</p>
+      </div>
+    </div>
+  </ng-container>
+</div>

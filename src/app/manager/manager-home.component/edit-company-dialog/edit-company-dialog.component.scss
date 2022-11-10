@@ -1,0 +1,15 @@
+.form-content {
+  display: grid;
+  grid-template-columns: auto auto;
+
+  input {
+    width: 50%;
+    margin: 20px;
+  }
+}
+
+
+:host ::ng-deep .p-dropdown {
+  width: 50%;
+  margin: 10px;
+}

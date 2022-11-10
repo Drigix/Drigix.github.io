@@ -1,0 +1,20 @@
+<div class="main">
+  <p-carousel [value]="listCompanies" [numVisible]="3">
+    <ng-template let-listCompany class="list" pTemplate="item">
+      <div class="card" #element [style.transform]="getTransform()">
+        <div class="card-content" routerLink="/company/{{companyName}}">
+          <img src="https://d375139ucebi94.cloudfront.net/region2/pl/104637/biz_photo/c732831d4fdd4ca6a79ba95521b7e468.jpeg?size=640x427">
+          <div class="data-company">
+          <h2>{{companyName}}</h2>
+          <div class="rating">
+            <p-rating [readonly]="true" [(ngModel)]="rating">
+            </p-rating>
+            <p>({{amountOfRating}})</p>
+          </div>
+          <p>{{companyAddress}}</p>
+        </div>
+       </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+</div>

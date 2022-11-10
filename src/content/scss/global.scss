@@ -1,0 +1,85 @@
+@import 'bootstrap-variables';
+@import '~primeicons/primeicons.css';
+
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+
+}
+
+body::after {
+  content: '';
+  display: block;
+  height: 100px;
+}
+
+html {
+  height: 100%;
+}
+
+.wrapper {
+  background-color: white;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  width: calc(100% - 20px);
+  max-width: 1280px;
+  position: relative;
+  img {
+    max-width: 1280px;
+  }
+}
+
+
+.dialog-window {
+  .dialog-window-form {
+    display: grid;
+    justify-items: center;
+    input {
+    margin: 15px;
+    }
+  }
+}
+
+.table-with-buttons {
+ display: grid;
+ grid-template-rows: 1080px 58px;
+ padding-bottom: 50px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-width {
+  width: 120px;
+}
+
+.full-height {
+  height: 100%;
+  width: 100%;
+}
+
+:host ::ng-deep .p-password {
+  width: 300px;
+}
+
+.buttons-container-dialog {
+  button {
+    margin: 10px;
+  }
+}
+
+.rounded {
+  border-top: 6px solid gray;
+  border-radius: 25px;
+  width: 200px;
+}
+
+.input-invalid-text {
+  color:var(--primary-color-lighter);
+  margin-top:-12px;
+}

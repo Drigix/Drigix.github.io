@@ -1,0 +1,71 @@
+<div class="company-workers-dialog">
+  <div *ngIf="edit; else createWorker">
+    <form #formAddCompanyWorker (ngSubmit)="onSubmit()" [formGroup]="addCompanyWorkerForm">
+
+      <input type="text" pInputText formControlName="name" placeholder="{{'global.form.name' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addCompanyWorkerForm.get('name')!.invalid && (addCompanyWorkerForm.get('name')!.dirty || addCompanyWorkerForm.get('name')!.touched)">
+        <small *ngIf="addCompanyWorkerForm.get('name')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <input type="text" pInputText formControlName="surname" placeholder="{{'global.form.surname' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addCompanyWorkerForm.get('surname')!.invalid && (addCompanyWorkerForm.get('surname')!.dirty || addCompanyWorkerForm.get('surname')!.touched)">
+        <small *ngIf="addCompanyWorkerForm.get('surname')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <input type="text" pInputText formControlName="id" placeholder="{{'global.form.id' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addCompanyWorkerForm.get('id')!.invalid && (addCompanyWorkerForm.get('id')!.dirty || addCompanyWorkerForm.get('id')!.touched)">
+        <small *ngIf="addCompanyWorkerForm.get('id')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+      <div class="buttons-container-dialog">
+        <p-button type="submit" styleClass="button-width"
+         label="{{'global.action.save' | translate}}" [disabled]="addCompanyWorkerForm.invalid === true">
+        </p-button>
+        <p-button type="button" styleClass="button-width"
+         label="{{'global.action.close' | translate}}" (onClick)="onClose()">
+        </p-button>
+      </div>
+    </form>
+  </div>
+
+  <ng-template #createWorker>
+    <form #formAddCompanyWorker (ngSubmit)="onSubmit()" [formGroup]="addCompanyWorkerForm">
+
+      <input type="text" pInputText formControlName="name" [(ngModel)]="name" placeholder="{{'global.form.name' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addCompanyWorkerForm.get('name')!.invalid && (addCompanyWorkerForm.get('name')!.dirty || addCompanyWorkerForm.get('name')!.touched)">
+        <small *ngIf="addCompanyWorkerForm.get('name')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <input type="text" pInputText formControlName="surname" placeholder="{{'global.form.surname' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addCompanyWorkerForm.get('surname')!.invalid && (addCompanyWorkerForm.get('surname')!.dirty || addCompanyWorkerForm.get('surname')!.touched)">
+        <small *ngIf="addCompanyWorkerForm.get('surname')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <input type="text" pInputText formControlName="id" placeholder="{{'global.form.id' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addCompanyWorkerForm.get('id')!.invalid && (addCompanyWorkerForm.get('id')!.dirty || addCompanyWorkerForm.get('id')!.touched)">
+        <small *ngIf="addCompanyWorkerForm.get('id')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <div class="buttons-container-dialog">
+        <p-button type="submit" styleClass="button-width"
+        label="{{'global.action.save' | translate}}" [disabled]="addCompanyWorkerForm.invalid === true">
+        </p-button>
+        <p-button type="button" styleClass="button-width"
+         label="{{'global.action.close' | translate}}" (onClick)="onClose()">
+        </p-button>
+      </div>
+
+    </form>
+  </ng-template>
+</div>

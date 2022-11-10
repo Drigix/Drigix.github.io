@@ -1,0 +1,47 @@
+.home {
+  label {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+}
+
+.category {
+  text-align: center;
+  display: flex;
+  text-decoration: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  img {
+    height: 120px;
+    width: 180px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+}
+
+.text-with-photo {
+  display: grid;
+  grid-template-columns: 400px auto;
+  justify-content: space-evenly;
+  padding-bottom: 80px;
+  img {
+    height: 600px;
+  }
+}
+
+:host ::ng-deep .pi-card {
+  height: 200px;
+  width: 100%;
+}
+
+:host ::ng-deep .p-galleria-item {
+  width: calc(100% - 5px);
+}
+
+:host ::ng-deep .p-galleria-content {
+  width: calc(100% - 5px);
+}

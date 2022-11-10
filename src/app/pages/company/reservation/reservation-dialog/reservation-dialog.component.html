@@ -1,0 +1,23 @@
+<div class="reservation-dialog">
+  <div class="calendar">
+    <p-calendar id="bookDate" name="bookDate" placeholder="{{'global.reservation.chooseDate' | translate}}"
+    [minDate]="currentDate" dateFormat="dd.mm.yy" [showTime]="true" [inline]="true"
+    (onSelect)="onDateSelect()" [(ngModel)]="reservationDate"
+    appendTo="body"></p-calendar>
+  </div>
+  <div class="right-side">
+    <div class="workers">
+      <p-dropdown id="bookWorkers" name="bookWorkers" placeholder="{{'global.reservation.chooseWorker' | translate}}"
+       appendTo="body">
+      </p-dropdown>
+    </div>
+    <div class="remarks">
+      <textarea rows="5" cols="30" pInputTextarea placeholder="Dodatkowe uwagi"></textarea>
+    </div>
+    <div class="select-option">
+      <p>Wybrana data: {{reservationDate}}</p>
+      <p>Wybrany pracownik: losowy</p>
+    </div>
+    <p-button label="{{'global.action.book' | translate}}"></p-button>
+  </div>
+</div>

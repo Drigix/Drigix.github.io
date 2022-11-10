@@ -1,0 +1,18 @@
+<div class="home">
+  <div class="wrapper">
+    <div *ngIf="isCompanyExist; else createCompany">
+      <p-button label="{{'global.action.edit' | translate }}" (onClick)="openEditCompanyDialog()"></p-button>
+      <app-company-page (company)="setCompany($event)"></app-company-page>
+
+    </div>
+    <ng-template #createCompany>
+      <h2>Witaj!</h2>
+      <p>Zalogowałeś się jako menager, co pozwala ci na utworzenienie strony internetowej własnej firmy w naszej aplikacji.</p>
+      <p>Jedyne co musisz zrobić to kliknąć w przycisk poniżej i uzupelnić pola formularzu.</p>
+      <p-button label="{{'global.action.createCompany' | translate }}" (onClick)="openCreateCompanyDialog()"></p-button>
+    </ng-template>
+  </div>
+</div>
+
+
+

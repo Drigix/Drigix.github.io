@@ -1,0 +1,33 @@
+.service-page {
+  padding-bottom: 50px;
+}
+
+.filter {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.filterMenu {
+  margin: 20px;
+}
+
+.service-page-content {
+  margin-left: 100px;
+  padding-bottom: 100px;
+}
+
+:host ::ng-deep .p-multiselect {
+  width: 300px;
+  margin: 20px;
+  margin-top: 60px;
+}
+
+:host ::ng-deep .p-dropdown {
+  width: 300px;
+  margin: 20px;
+  margin-top: 60px;
+}
+
+:host ::ng-deep .p-button {
+  margin: 20px
+}

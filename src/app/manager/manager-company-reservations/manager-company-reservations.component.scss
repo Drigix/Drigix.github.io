@@ -1,0 +1,13 @@
+.company-reservations {
+  display: flex;
+  height: 100%;
+}
+
+.table-content {
+  width: 1280px;
+  height: 1000px;
+}
+
+:host ::ng-deep .p-button {
+  margin: 0 20px;
+}

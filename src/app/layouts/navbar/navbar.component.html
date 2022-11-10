@@ -1,0 +1,75 @@
+<p-menubar [model]="items">
+  <div class="items-to-users">
+    <div class="languages">
+      <!-- <p-dropdown [options]="flagLanguages" [(ngModel)]="selectedLanguages">
+        <ng-container *ngFor="let item of flagLanguages">
+          <img src="{{item.img}}"> {{item.name}}
+        </ng-container>
+      </p-dropdown> -->
+      <p-button [(ngModel)]="selectedLanguages"
+        (onClick)="showLanguageMenu()">
+        <i class="pi pi-flag"></i>
+      </p-button>
+    </div>
+  <div class="account" *ngIf="logIn; else notLogIn">
+    <div class="notification" *ngIf="amoutOfNotification === 0; else notificationExist">
+      <i class="pi pi-bell" severity="success" (click)="op.toggle($event)"></i>
+    </div>
+    <ng-template #notificationExist>
+      <div class="notification">
+        <i class="pi pi-bell" pBadge [value]="amoutOfNotification.toString()" severity="success" (click)="op.toggle($event)"></i>
+      </div>
+    </ng-template>
+    <p-button (onClick)="showUserMenu()">
+      <p-avatar icon="pi pi-user">
+      </p-avatar>
+    </p-button>
+  </div>
+  <ng-template #notLogIn>
+    <div class="notLoginAccount">
+      <p-button id="login" name="login"
+        (onClick)="openLoginDialog('login')"
+        label="{{'global.action.login' | translate}}">
+    </p-button>
+    </div>
+  </ng-template>
+  </div>
+</p-menubar>
+
+<div class="languages-menu" *ngIf="languagesMenu">
+  <ul>
+    <li>
+      <img src="https://m.media-amazon.com/images/I/31T7rSr1TYL._SY1000_.jpg" (click)="changeLanguage('Polish')">
+    </li>
+    <li>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Flag_of_the_United_Kingdom.svg" (click)="changeLanguage('English')">
+    </li>
+  </ul>
+</div>
+
+<div class="user-menu" *ngIf="showMenu">
+  <ul>
+    <li>
+      <i class="pi pi-user-edit"></i>
+      <a routerLink="/user-profile">
+        <span>
+          {{'global.action.account' | translate}}
+        </span>
+      </a>
+    </li>
+    <li *ngIf="!isManagerLogged">
+      <i class="pi pi-history"></i>
+      {{'global.action.history' | translate}}
+    </li>
+    <li (click)="logoutAccount()" style="cursor: pointer;">
+      <i class="pi pi-power-off"></i>
+      {{'global.action.logout' | translate}}
+    </li>
+  </ul>
+</div>
+
+<p-overlayPanel #op>
+  <ng-template pTemplate>
+      Content
+  </ng-template>
+</p-overlayPanel>

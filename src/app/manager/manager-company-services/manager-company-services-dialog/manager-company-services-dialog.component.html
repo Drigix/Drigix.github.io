@@ -1,0 +1,72 @@
+<div class="company-services-dialog">
+  <div *ngIf="edit; else createWorker">
+    <form #formAddCompanyWorker (ngSubmit)="onSubmit()" [formGroup]="addServiceForm">
+
+      <input type="text" pInputText formControlName="name" placeholder="{{'global.form.serviceName' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addServiceForm.get('name')!.invalid && (addServiceForm.get('name')!.dirty || addServiceForm.get('name')!.touched)">
+        <small *ngIf="addServiceForm.get('name')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <input type="text" pInputText formControlName="time" placeholder="{{'global.form.serviceTime' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addServiceForm.get('time')!.invalid && (addServiceForm.get('time')!.dirty || addServiceForm.get('time')!.touched)">
+        <small *ngIf="addServiceForm.get('time')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <input type="text" pInputText formControlName="price" placeholder="{{'global.form.servicePrice' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addServiceForm.get('price')!.invalid && (addServiceForm.get('price')!.dirty || addServiceForm.get('price')!.touched)">
+        <small *ngIf="addServiceForm.get('price')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <div class="buttons-container-dialog">
+        <p-button type="submit" styleClass="button-width"
+         label="{{'global.action.save' | translate}}" [disabled]="addServiceForm.invalid === true">
+        </p-button>
+        <p-button type="button" styleClass="button-width"
+         label="{{'global.action.close' | translate}}" (onClick)="onClose()">
+        </p-button>
+      </div>
+    </form>
+  </div>
+
+  <ng-template #createWorker>
+    <form #formAddCompanyWorker (ngSubmit)="onSubmit()" [formGroup]="addServiceForm">
+
+      <input type="text" pInputText formControlName="name" placeholder="{{'global.form.serviceName' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addServiceForm.get('name')!.invalid && (addServiceForm.get('name')!.dirty || addServiceForm.get('name')!.touched)">
+        <small *ngIf="addServiceForm.get('name')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <input type="text" pInputText formControlName="time" placeholder="{{'global.form.serviceTime' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addServiceForm.get('time')!.invalid && (addServiceForm.get('time')!.dirty || addServiceForm.get('time')!.touched)">
+        <small *ngIf="addServiceForm.get('time')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <input type="text" pInputText formControlName="price" placeholder="{{'global.form.servicePrice' | translate}}"/>
+      <div class="input-invalid-text" *ngIf="addServiceForm.get('price')!.invalid && (addServiceForm.get('price')!.dirty || addServiceForm.get('price')!.touched)">
+        <small *ngIf="addServiceForm.get('price')?.errors?.['required']">
+          {{'global.form.fieldRequired' | translate }}
+        </small>
+      </div>
+
+      <div class="buttons-container-dialog">
+        <p-button type="submit" styleClass="button-width"
+        label="{{'global.action.save' | translate}}" [disabled]="addServiceForm.invalid === true">
+        </p-button>
+        <p-button type="button" styleClass="button-width"
+         label="{{'global.action.close' | translate}}" (onClick)="onClose()">
+        </p-button>
+      </div>
+
+    </form>
+  </ng-template>
+</div>

@@ -1,0 +1,52 @@
+<div class="dialog-window">
+  <form #formNewCompany="ngForm" (ngSubmit)="onSubmit()" [formGroup]="newCompanyForm">
+    <div class="form-content">
+      <div class="left-side">
+        <input type="text" pInputText formControlName="name" placeholder="{{'global.company.name' | translate}}" [(ngModel)]="company!.name"/>
+        <div class="input-invalid-text" *ngIf="newCompanyForm.get('name')!.invalid && (newCompanyForm.get('name')!.dirty || newCompanyForm.get('name')!.touched)">
+          <small *ngIf="newCompanyForm.get('name')?.errors?.['required']">
+            {{ 'global.form.fieldRequired' | translate }}
+          </small>
+        </div>
+
+        <div class="industry">
+          <p-dropdown id="industry" name="industry" placeholder="{{'global.company.industry' | translate}}"
+          [options]="industries" [(ngModel)]="company!.industry" optionLabel="name" formControlName="industry">
+         </p-dropdown>
+        </div>
+
+        <input type="text" pInputText formControlName="city" placeholder="{{'global.company.city' | translate}}" [(ngModel)]="company!.city"/>
+        <div class="input-invalid-text" *ngIf="newCompanyForm.get('city')!.invalid && (newCompanyForm.get('city')!.dirty || newCompanyForm.get('city')!.touched)">
+          <small *ngIf="newCompanyForm.get('city')?.errors?.['required']">
+            {{'global.form.fieldRequired' | translate }}
+          </small>
+        </div>
+
+        <input type="text" pInputText formControlName="address" placeholder="{{'global.company.address' | translate}}" [(ngModel)]="company!.address"/>
+        <div class="input-invalid-text" *ngIf="newCompanyForm.get('address')!.invalid && (newCompanyForm.get('address')!.dirty || newCompanyForm.get('address')!.touched)">
+          <small *ngIf="newCompanyForm.get('address')?.errors?.['required']">
+            {{'global.form.fieldRequired' | translate }}
+          </small>
+        </div>
+
+        <input type="text" pInputText formControlName="postalCode" placeholder="{{'global.company.postalCode' | translate}}" [(ngModel)]="company!.postalCode"/>
+        <div class="input-invalid-text" *ngIf="newCompanyForm.get('postalCode')!.invalid && (newCompanyForm.get('postalCode')!.dirty || newCompanyForm.get('postalCode')!.touched)">
+          <small *ngIf="newCompanyForm.get('postalCode')?.errors?.['required']">
+            {{'global.form.fieldRequired' | translate }}
+          </small>
+        </div>
+      </div>
+
+    <div class="right-side">
+      <h2>prawa strona</h2>
+    </div>
+
+    </div>
+
+    <div class="buttons-container-dialog">
+      <p-button type="submit" styleClass="button-width" label="{{'global.action.save' | translate }}" [disabled]="formNewCompany.invalid === true"></p-button>
+      <p-button type="button" styleClass="button-width" label="{{'global.action.close' | translate }}" (onClick)="onClose()"></p-button>
+    </div>
+  </form>
+</div>
+

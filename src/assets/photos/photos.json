@@ -1,0 +1,10 @@
+{
+  "data": [
+    {
+      "previewImageSrc": "./galleria1.jpg",
+      "thumbnailImageSrc": "./galleria1s.jpg",
+      "alt": "Description for Image 1",
+      "title": "Title 1"
+    }
+  ]
+}

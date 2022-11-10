@@ -1,0 +1,7 @@
+{
+  "/api": {
+      "target": "https://reservio.azurewebsites.net",
+      "secure": true,
+      "changeOrigin": true
+  }
+}

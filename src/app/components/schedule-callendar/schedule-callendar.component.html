@@ -1,0 +1,23 @@
+<div class="schedule-callendar">
+  <div class="callendar-header">
+    <p-button (onClick)="minusDay()">
+      <i class="pi pi-arrow-circle-left"></i>
+    </p-button>
+    <div class="date">
+      {{currentDate | date:'MMMM d y'}}
+    </div>
+    <p-button (onClick)="plusDay()">
+      <i class="pi pi-arrow-circle-right"></i>
+    </p-button>
+  </div>
+  <div class="callendar-hours">
+    <ng-container *ngFor="let item of workHours">
+      <div class="list-item">
+        {{item.hour}}
+        <div class="worker">
+          {{item.workers}}
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

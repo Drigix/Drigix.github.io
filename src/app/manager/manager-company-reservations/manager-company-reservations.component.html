@@ -1,0 +1,32 @@
+<div class="company-reservations">
+  <div class="wrapper">
+      <div class="table-with-buttons full-height">
+        <app-table [columns]="reservationsColumns" [values]="reservations" (selected)="onWorkerSelect($event)"
+          [showTableName]="true" tableName="{{'global.header.reservations' | translate }}">
+        </app-table>
+
+        <div class="button-container">
+          <p-button icon="pi pi-plus" styleClass="button-width"
+           label="{{'global.action.add' | translate }}" (onClick)="openCompanyReservationDialog()">
+          </p-button>
+          <p-button icon="pi pi-pencil" styleClass="button-width" [disabled]="selectedWorker === null"
+           label="{{'global.action.edit' | translate }}" (onClick)="openCompanyReservationDialog(true)">
+          </p-button>
+          <p-button icon="pi pi-trash" styleClass="button-width" [disabled]="selectedWorker === null"
+           label="{{'global.action.delete' | translate }}" (onClick)="openDeleteDialog()">
+          </p-button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog #cd key="confirmDeleteDialog" [style]="{width: '450px'}" icon="pi pi-exclamation-circle">
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check"
+     label="{{'global.action.confirm' | translate }}" (onClick)="cd.accept()">
+    </p-button>
+    <p-button icon="pi pi-times"
+     label="{{'global.action.close' | translate }}" (onClick)="cd.reject()">
+    </p-button>
+  </ng-template>
+</p-confirmDialog>

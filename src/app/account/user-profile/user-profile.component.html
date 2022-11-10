@@ -1,0 +1,56 @@
+<div class="wrapper">
+  <div class="page-content page-container" id="page-content">
+    <div class="padding">
+      <div class="row container d-flex justify-content-center">
+        <div class="col-xl-6 col-md-12">
+          <div class="card user-card-full">
+            <div class="row m-l-0 m-r-0">
+              <div class="col-sm-4 bg-c-lite-green user-profile">
+                <div class="card-block text-center text-white">
+                  <div class="m-b-25">
+                    <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius"
+                      alt="User-Profile-Image">
+                  </div>
+                  <h6 class="f-w-600">{{user!.firstName + ' ' + user!.lastName}}</h6>
+                  <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="card-block">
+                  <h6 class="m-b-20 p-b-5 b-b-default f-w-600">{{'global.user.information' | translate}}</h6>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <i class="pi pi-envelope"></i>
+                      <p class="m-b-10 f-w-600" style="display: inline ; margin-left: 5px;">{{'global.user.email' | translate}}</p>
+                      <h6 class="text-muted f-w-400">{{user!.email}}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                      <i class="pi pi-phone"></i>
+                      <p class="m-b-10 f-w-600" style="display: inline ; margin-left: 5px;">{{'global.user.phonenumber' | translate}}</p>
+                      <h6 class="text-muted f-w-400">{{user!.phone}}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="buttons-container">
+    <p-button id="changePassword" name="changePassword"
+      (onClick)="changePassword('changePassword')"
+      label="{{'global.action.changePassword' | translate}}">
+    </p-button>
+    <p-button id="changeEmail" name="changeEmail"
+      (onClick)="changePassword('changeEmail')"
+      label="{{'global.action.changeEmail' | translate}}">
+    </p-button>
+    <p-button id="changePhoneNumber" name="changeNumber"
+      (onClick)="changePassword('changePhoneNumber')"
+      label="{{'global.action.changePhoneNumber' | translate}}">
+    </p-button>
+  </div>
+</div>
+

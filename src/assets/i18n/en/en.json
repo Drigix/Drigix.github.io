@@ -1,0 +1,8 @@
+{
+  "global": {
+    "action": {
+      "save": "Save",
+      "close": "Close"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.callendar-header {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: system-ui;
+}
+
+.date {
+  margin: 0 20px;
+}
+
+.callendar-hours {
+  padding-bottom: 50px;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 150px auto;
+  font-size: 40px;
+  font-weight: bold;
+  padding: 30px 20px;
+  border-top: 1px solid var(--primary-color);
+}
+
+.worker {
+  font-size: 15px;
+  font-weight: 300;
+}
+
+
+.pi {
+  font-size: 40px;
+}

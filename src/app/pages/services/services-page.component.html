@@ -1,0 +1,31 @@
+<div class="service-page">
+  <div class="wrapper">
+    <div class="filter">
+      <p-button (onClick)="onShowFilter()"
+        label="{{'global.action.filter' | translate}}">
+        <i *ngIf="showFilter" class="pi pi-arrow-down"></i>
+        <i *ngIf="!showFilter" class="pi pi-arrow-up"></i>
+      </p-button>
+      <div class="filterMenu" [hidden]="showFilter">
+        <p-multiSelect [options]="cities" [(ngModel)]="selectedCity"
+        (onChange)="filterByCities()"
+         placeholder="{{'global.placeholder.chooseCities' | translate}}">
+        </p-multiSelect>
+        <p-dropdown [options]="filterBy"
+         placeholder="{{'global.placeholder.chooseFilter' | translate}}" [autoDisplayFirst]="false">
+        </p-dropdown>
+        <p-dropdown #serviceType id="serviceType" name="serviceType" [options]="industries" [(ngModel)]="selectedServiceType"
+          (onChange)="filterByIndustry()"
+          placeholder="{{'global.placeholder.chooseFilter' | translate}}" [autoDisplayFirst]="false">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <div class="service-page-content">
+      <app-company-card [listOfCompanies]="companies" [page]="companyPage"></app-company-card>
+    </div>
+
+    <p-paginator [rows]="9" [totalRecords]="companies.length" (onPageChange)="changePage($event)"></p-paginator>
+  </div>
+</div>
+

@@ -1,0 +1,72 @@
+<div class="company-page">
+  <div class="wrapper">
+    <p-tabMenu [model]="items"></p-tabMenu>
+    <div class="company" #homeView id="home">
+      <div class="company-content">
+        <img src="https://d375139ucebi94.cloudfront.net/region2/pl/104637/biz_photo/c732831d4fdd4ca6a79ba95521b7e468.jpeg?size=640x427">
+        <div class="data-company">
+          <h2>{{currentCompany?.name}}</h2>
+          <div class="rounded"></div>
+          <div class="rating">
+            <p-rating [readonly]="true" [(ngModel)]="currentCompany!.rating!">
+            </p-rating>
+            <p>({{amountOfRating}})</p>
+          </div>
+          <div class="rounded"></div>
+          <p>{{currentCompany?.address}} {{currentCompany?.postalCode}} {{currentCompany?.city}}</p>
+       </div>
+      </div>
+
+      <div class="company-description">
+        <div class="header">
+          <h2>{{'global.company.header.description' | translate}}</h2>
+          <div class="rounded"></div>
+        </div>
+        <p>Krótki opis firmy</p>
+      </div>
+
+      <div class="company-services" #servicesView id="services">
+        <div class="header">
+          <h2>{{'global.company.header.companyServices' | translate}}</h2>
+          <div class="rounded"></div>
+        </div>
+        <ng-container *ngFor="let item of companyServices">
+          <div class="company-service-info">
+            <p>Nazwa usługi</p>
+            <P>Czas</P>
+            <p>Cena</p>
+            <div style="padding-top: 10px;">
+              <p-button label="{{'global.action.book' | translate}}" (onClick)="checkIsLogged()"></p-button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="company-gallery" #galleryView id="gallery">
+        <div class="header">
+          <h2>{{'global.company.header.gallery' | translate}}</h2>
+          <div class="rounded"></div>
+        </div>
+        <app-galleria></app-galleria>
+      </div>
+
+      <div class="company-lokalization" #lokalizationView id="lokalization">
+        <div class="header">
+          <h2>{{'global.company.header.localization' | translate}}</h2>
+        <div class="rounded"></div>
+        </div>
+        <app-gmap></app-gmap>
+      </div>
+
+      <div class="company-opinions" #opinionsView id="opinions">
+        <div class="header">
+          <h2>{{'global.company.header.opinions' | translate}}</h2>
+          <div class="rounded"></div>
+        </div>
+        <app-opinion-card [companyOpinions]="companyOpinions" [page]="opinionPage"></app-opinion-card>
+        <p-paginator [rows]="9" [totalRecords]="companyOpinions.length" (onPageChange)="changePage($event)"></p-paginator>
+      </div>
+
+    </div>
+  </div>
+</div>

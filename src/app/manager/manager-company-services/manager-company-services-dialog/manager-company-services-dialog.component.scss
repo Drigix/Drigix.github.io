@@ -1,0 +1,15 @@
+.company-services-dialog {
+  input {
+    margin: 20px;
+    width: 40%;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+:host ::ng-deep .p-dropdown {
+  margin: 20px;
+}

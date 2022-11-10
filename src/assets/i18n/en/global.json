@@ -1,0 +1,113 @@
+{
+  "global": {
+    "action": {
+      "add": "Add",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "confirm": "Confirm",
+      "close": "Close",
+      "send": "Send",
+      "login": "Login",
+      "logout": "Logout",
+      "book": "Book",
+      "createCompany": "Create company website",
+      "filter": "Filter",
+      "account": "Account",
+      "yourCompany": "Your company",
+      "history": "History",
+      "changePassword": "Change password",
+      "changeEmail": "Change email",
+      "changePhoneNumber": "Change phone number"
+    },
+    "header": {
+      "changePassword": "Password change",
+      "changeEmail": "Email change",
+      "changePhoneNumber": "Phonenumber change",
+      "login": "Login",
+      "createCompany": "Create company website",
+      "confirmDelete": "Confirm delete",
+      "companyWorkers": "Company workers",
+      "addCompanyWorker": "Add new worker",
+      "editCompanyWorker": "Edit worker",
+      "reservations": "Reservations",
+      "addReservation": "Add reservation",
+      "editReservation": "Edit reservation"
+    },
+    "message": {
+      "success": "Success",
+      "error": "Error",
+      "confirmDelete": "Are you sure to delete this element?",
+      "emailActive": "Active email was send to a your address email",
+      "differentPasswords": "Password field and confirm password field is different!",
+      "wrongEmailOrPassword": "Address email or password are wrong!",
+      "wrongPassword": "Password is wrong!"
+    },
+    "form": {
+      "fieldRequired": "This field is required",
+      "createAccount": "Create account",
+      "forgotPassword": "Forgot your password?",
+      "oldPassword": "New password",
+      "newPassword": "Old password",
+      "confirmPassword": "Confirm password",
+      "oldEmail": "Old email",
+      "newEmail": "New email",
+      "oldPhonenumber": "Old phonenumber",
+      "newPhonenumber": "New phonenumber",
+      "name": "Name",
+      "surname": "Surname",
+      "date": "Date",
+      "serviceName": "Service name",
+      "serviceTime": "Duration of the service",
+      "servicePrice": "Price of the service"
+    },
+    "services": {
+      "hairdresser": "Hairdresser",
+      "barber": "Barber",
+      "beautician": "Beautician",
+      "tatoo": "Tatoo",
+      "spa": "Spa",
+      "piercing": "Piercing"
+    },
+    "placeholder": {
+      "chooseCities": "Choose cities",
+      "chooseFilter": "Choose sort by",
+      "search": "Search"
+    },
+    "user": {
+      "name": "Name",
+      "surname": "Surname",
+      "email": "Email",
+      "password": "Password",
+      "phonenumber": "Phonenumber",
+      "date": "Date of birthday",
+      "role": "Rola użytkownika",
+      "information": "User information"
+    },
+    "company": {
+      "header": {
+        "home": "General",
+        "description": "Description",
+        "companyServices": "Company services",
+        "gallery": "Gallery",
+        "localization": "Localization",
+        "opinions": "Opinions"
+      },
+      "name": "Company name",
+      "industry": "Company industry",
+      "city": "City",
+      "address": "Address",
+      "postalCode": "Postal code"
+    },
+    "reservation": {
+      "chooseDate": "Choose meeting date",
+      "chooseWorker": "Choose worker",
+      "chooseService": "Choose service"
+    },
+    "faq": {
+      "header1": "You need help?",
+      "header2": "Contact with us",
+      "oftenQuestions": "The most often questions"
+    }
+  }
+}

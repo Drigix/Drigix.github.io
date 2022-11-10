@@ -1,0 +1,26 @@
+<div class="main">
+  <ng-container *ngFor="let item of listOfCompanies | slice:page!*10:page!*10 + 10;" class="list">
+    <div class="card" #element>
+        <img src="https://d375139ucebi94.cloudfront.net/region2/pl/104637/biz_photo/c732831d4fdd4ca6a79ba95521b7e468.jpeg?size=640x427">
+        <div class="data-company">
+         <h2>{{item.name}}</h2>
+         <div class="rating">
+            <p-rating [readonly]="true" [(ngModel)]="item.rating">
+            </p-rating>
+            <p>({{amountOfRating}})</p>
+         </div>
+         <p>{{item.address}}, {{item.postalCode}}, {{item.city}}</p>
+         <div class="open-close-time">
+          <p>{{item.openingTime}}:00 - {{item.closingTime}}:00 </p>
+          <div *ngIf="currentTime! < timeToNumber(item.openingTime) || currentTime! > timeToNumber(item.closingTime); else companyOpen">
+            <p style="font-weight: bold; color: red; padding-left: 10px;">ZAMKNIĘTE</p>
+          </div>
+          <ng-template #companyOpen>
+            <p style="font-weight: bold; color: forestgreen; padding-left: 10px;">OTWARTE</p>
+          </ng-template>
+         </div>
+          <p-button label="Sprawdź" routerLink="/company/{{item.name}}"></p-button>
+       </div>
+    </div>
+  </ng-container>
+</div>
