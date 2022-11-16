@@ -35,16 +35,20 @@
       "editReservation": "Edycja rezerwacji",
       "services": "Usługi",
       "addService": "Dodanie usługi",
-      "editService": "Edycja usługi"
+      "editService": "Edycja usługi",
+      "addWorkerSchedule": "Dodanie harmonogramu pracownika",
+      "editWorkerSchedule": "Edycja harmonogramu pracownika"
     },
     "message": {
       "success": "Sukces",
       "error": "Błąd",
+      "information": "Informacja",
       "confirmDelete": "Czy na pewno chcesz usunąć ten element?",
       "emailActive": "Email aktywacyjny został wysłany na podany adres email",
       "differentPasswords": "Hasło i hasło potwierdzające różnią się",
       "wrongEmailOrPassword": "Podane email lub hasło jest nieprawidłowe!",
-      "wrongPassword": "Podane hasło jest nieprawidłowe!"
+      "wrongPassword": "Podane hasło jest nieprawidłowe!",
+      "infoToLogin": "Ta czynność wymaga zalogowania się!"
     },
     "form": {
       "fieldRequired": "To pole jest wymagane",
@@ -104,7 +108,8 @@
       "postalCode": "Kod pocztowy"
     },
     "reservation": {
-      "chooseDate": "Wybierz date spotkaniu",
+      "reservationDate": "Data rezerwacji",
+      "chooseDate": "Wybierz date spotkania",
       "chooseWorker": "Wybierz pracownika",
       "chooseService": "Wybierz usługę"
     },

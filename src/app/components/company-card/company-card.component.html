@@ -12,7 +12,7 @@
          <p>{{item.address}}, {{item.postalCode}}, {{item.city}}</p>
          <div class="open-close-time">
           <p>{{item.openingTime}}:00 - {{item.closingTime}}:00 </p>
-          <div *ngIf="currentTime! < timeToNumber(item.openingTime) || currentTime! > timeToNumber(item.closingTime); else companyOpen">
+          <div *ngIf="currentTime! < timeToNumber(item.openingTime) || currentTime! >= timeToNumber(item.closingTime); else companyOpen">
             <p style="font-weight: bold; color: red; padding-left: 10px;">ZAMKNIĘTE</p>
           </div>
           <ng-template #companyOpen>

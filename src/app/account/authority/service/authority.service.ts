@@ -23,10 +23,6 @@ export class AuthorityService {
     return this.http.post(this.LOGIN_URL, { email, password }, {responseType: 'text'});
   }
 
-  // signup(firstName: string, lastName: string, email: string, password: string, phone: string, birthDay: string, role: string): Observable<any> {
-  //   return this.http.post('https://reservio.azurewebsites.net/Account/sign-up', { firstName, lastName, email, password, phone, birthDay, role});
-  // }
-
   signup(user: User): Observable<any> {
     return this.http.post(this.SIGNUP_URL, user);
   }

@@ -1,3 +1,5 @@
+import { FormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
 import { ConfirmationService } from 'primeng/api';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
@@ -16,7 +18,9 @@ import { ManagerCompanyReservationsComponent } from './manager-company-reservati
     ComponentModule,
     ButtonModule,
     TranslateModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    CalendarModule,
+    FormsModule
   ],
   providers: [
     ConfirmationService

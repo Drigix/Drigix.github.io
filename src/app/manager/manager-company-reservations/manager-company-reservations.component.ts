@@ -16,24 +16,29 @@ export class ManagerCompanyReservationsComponent implements OnInit{
   reservations = [
     {
       name: 'Michał',
-      data: '02.02.2022',
+      date: new Date(2022,10,10),
       worker: 'Ola',
+      time: '9:00',
       service: "Strzyżenie męskie"
     },
     {
       name: 'Marcin',
-      data: '02.02.2022',
+      date: new Date(2022,10,11),
       worker: 'Szymon',
+      time: '9:00',
       service: "Strzyżenie męskie"
     },
     {
       name: 'Bartek',
-      data: '02.02.2022',
+      date: new Date(),
       worker: 'Alicja',
+      time: '9:00',
       service: "Strzyżenie męskie"
     }
   ];
-
+  filteredReservations: any[] = [];
+  currentDate: Date = new Date();
+  reservationsDate: Date | null = null;
   selectedWorker: any | null = null;
 
   constructor(
@@ -44,14 +49,16 @@ export class ManagerCompanyReservationsComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    this.filteredReservations = this.reservations;
     this.loadColumns();
   }
 
   loadColumns(): void {
     this.reservationsColumns = [
       { field: 'name', header: 'Imie' },
-      { field: 'data', header: 'Data' },
+      { field: 'date', header: 'Data' },
       { field: 'worker', header: 'Pracownik' },
+      { field: 'time', header: 'Godzina' },
       { field: 'service', header: 'Usługa' }
     ];
   }
@@ -59,6 +66,14 @@ export class ManagerCompanyReservationsComponent implements OnInit{
   onWorkerSelect(event: any): void {
     this.selectedWorker = event;
     console.log(this.selectedWorker);
+  }
+
+  filterByDate(): void {
+    this.reservations = [];
+    // this.filteredReservations.forEach((item) =>
+    // {item.date.toDateString() === this.reservationsDate?.toDateString() ? this.reservations.push(item): null});
+    this.reservations = this.filteredReservations.filter((item) => item.date.toDateString() === this.reservationsDate?.toDateString());
+    console.log(this.reservationsDate?.toDateString());
   }
 
   openCompanyReservationDialog(edit = false): void {

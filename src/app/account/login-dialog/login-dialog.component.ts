@@ -45,7 +45,7 @@ export class LoginDialogComponent implements OnInit {
     birthDay: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     phoneNumber: ['', [Validators.required, Validators.pattern("[0-9 ]{11}")]],
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
     confirmPassword: ['', [Validators.required]],
     role: ['', [Validators.required]]
   })
@@ -55,6 +55,7 @@ export class LoginDialogComponent implements OnInit {
   });
 
   type: string | null = null;
+  isReservation = false;
 
   name: any;
 
@@ -70,6 +71,10 @@ export class LoginDialogComponent implements OnInit {
 
     ngOnInit(): void {
       this.type = this.config.data.type;
+      this.isReservation = this.config.data.reservation;
+      if(this.isReservation) {
+        this.messageService.add({key: 'mainToast', severity: 'info', summary: this.translateService.instant('global.message.information'), detail :this.translateService.instant('global.message.infoToLogin')});
+      }
     }
 
     onLogIn(): void {

@@ -88,19 +88,28 @@ export class CompanyPageComponent implements OnInit {
         header: this.translateService.instant('global.action.book'),
         width: '40%',
         data: {
-          type: 'login'
+          type: 'login',
+          reservation: true
         }
       });
-      ref.onClose.subscribe((response) => this.handleReservationDialog(response));
+      ref.onClose.subscribe((response) => this.handleReservationDialogAfterLogin(response));
     } else {
       this.openReservationDialog();
+    }
+  }
+
+  handleReservationDialogAfterLogin(response: any): void {
+    if(response.result) {
+      this.openReservationDialog();
+    } else {
+      this.messageService.add({key: 'mainToast', severity: 'error', summary:'Błąd', detail:'Błąd'});
     }
   }
 
   openReservationDialog(): void {
     const ref = this.dialogService.open(ReservationDialogComponent, {
       header: this.translateService.instant('global.action.book'),
-      width: '40%'
+      width: '60%'
     });
     ref.onClose.subscribe((response) => this.handleReservationDialog(response));
   }

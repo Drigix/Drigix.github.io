@@ -112,8 +112,12 @@ export class NavbarComponent implements OnInit {
             routerLink: 'manager/company-services'
           },
           {
-            label: 'Harmonogram',
+            label: 'Harmonogram rezerwacji',
             routerLink: '/manager/company-schedule'
+          },
+          {
+            label: 'Harmonogram pracowników',
+            routerLink: '/manager/company-worker-schedule'
           }
         ]
       }

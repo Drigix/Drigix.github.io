@@ -1,7 +1,7 @@
 <div class="reservation-dialog">
   <div class="calendar">
     <p-calendar id="bookDate" name="bookDate" placeholder="{{'global.reservation.chooseDate' | translate}}"
-    [minDate]="currentDate" dateFormat="dd.mm.yy" [showTime]="true" [inline]="true"
+    [minDate]="currentDate" dateFormat="dd.mm.yy" [disabledDates]="tempDates" [showTime]="true" [inline]="true"
     (onSelect)="onDateSelect()" [(ngModel)]="reservationDate"
     appendTo="body"></p-calendar>
   </div>

@@ -1,3 +1,4 @@
+import { ManagerCompanyWorkerScheduleComponent } from './manager/manager-company-worker-schedule/manager-company-worker-schedule.component';
 import { ManagerCompanyReservationsComponent } from './manager/manager-company-reservations/manager-company-reservations.component';
 import { ManagerCompanyWorkersComponent } from './manager/manager-company-workers/manager-company-workers.component';
 import { ManagerCompanyScheduleComponent } from './manager/manager-company-schedule/manager-company-schedulecomponent';
@@ -56,6 +57,10 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       {
         path: 'manager/company-schedule',
         component: ManagerCompanyScheduleComponent
+      },
+      {
+        path: 'manager/company-worker-schedule',
+        component: ManagerCompanyWorkerScheduleComponent
       }
     ])
   ],
