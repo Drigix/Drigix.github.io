@@ -79,6 +79,13 @@
       "chooseFilter": "Choose sort by",
       "search": "Search"
     },
+    "account": {
+      "menu": {
+        "profile": "Profile",
+        "history": "Reservations history",
+        "setting": "Settings"
+      }
+    },
     "user": {
       "name": "Name",
       "surname": "Surname",

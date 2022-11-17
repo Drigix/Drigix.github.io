@@ -43,88 +43,9 @@ export class NavbarComponent implements OnInit {
       this.logIn = isUserLogin;
       this.isManagerLogged = USER_ROLE;
       if(this.isManagerLogged !== 'employee') {
-        this.items = [
-            {
-                label: 'Home',
-                routerLink: '/'
-            },
-            {
-                label: 'Usługi',
-                items: [
-                  {
-                    label: 'Fryzjer',
-                    routerLink: '/services/hairdresser',
-                    state: {type: 'hairdresser'},
-                    command: () => this.onServiceChange('hairdresser')
-                  },
-                  {
-                    label: 'Barber',
-                    routerLink: '/services/barber',
-                    state: {type: 'barber'},
-                    command: () => this.onServiceChange('barber')
-                  },
-                  {
-                    label: 'Kosmetyka',
-                    routerLink: '/services/beautician',
-                    state: {type: 'beautician'},
-                    command: () => this.onServiceChange('beautician')
-                  },
-                  {
-                    label: 'Salony tatuażu',
-                    routerLink: '/services/tatoo',
-                    state: {type: 'tatoo'},
-                    command: () => this.onServiceChange('tatoo')
-                  },
-                  {
-                    label: 'SPA',
-                    routerLink: '/services/spa',
-                    state: {type: 'spa'},
-                    command: () => this.onServiceChange('spa')
-                  },
-                  {
-                    label: 'Piercing',
-                    routerLink: '/services/piercing',
-                    state: {type: 'piercing'},
-                    command: () => this.onServiceChange('piercing')
-                  }
-                ]
-            },
-            {
-                label: 'O nas',
-                routerLink: '/aboutus'
-            },
-            {
-                label: 'Kontakt',
-                routerLink: '/contact'
-            }
-        ];
+        this.setUserMenu();
       } else {
-        this.items = [
-          {
-            label: 'Home',
-            routerLink: '/'
-          },
-          {
-            label: 'Pracownicy',
-            routerLink: 'manager/company-workers'
-          },
-          {
-            label: 'Rezerwacje',
-            routerLink: 'manager/company-reservations'
-          },
-          {
-            label: 'Usługi',
-            routerLink: 'manager/company-services'
-          },
-          {
-            label: 'Harmonogram rezerwacji',
-            routerLink: '/manager/company-schedule'
-          },
-          {
-            label: 'Harmonogram pracowników',
-            routerLink: '/manager/company-worker-schedule'
-          }
-        ]
+        this.setMenagerMenu();
       }
     }
 

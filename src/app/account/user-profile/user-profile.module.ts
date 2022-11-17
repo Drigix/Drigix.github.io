@@ -8,6 +8,9 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { UserProfileComponent } from './user-profile.component';
+import { MenuModule } from 'primeng/menu';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { UserProfileComponent } from './user-profile.component';
     AvatarModule,
     LoginDialogModule,
     DynamicDialogModule,
-    TranslateModule
+    TranslateModule,
+    MenuModule,
+    TabMenuModule,
+    FormsModule
   ],
   exports: [
     UserProfileComponent

@@ -86,6 +86,13 @@
       "chooseFilter": "Wybierz sortowanie",
       "search": "Szukaj"
     },
+    "account": {
+      "menu": {
+        "profile": "Profil",
+        "history": "Historia rezerwacji",
+        "setting": "Ustawienia"
+      }
+    },
     "user": {
       "name": "Imie",
       "surname": "Nazwisko",

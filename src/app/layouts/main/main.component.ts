@@ -15,13 +15,13 @@ export class MainComponent implements OnInit {
   constructor(private navbarComponent: NavbarComponent) {}
 
   ngOnInit(): void {
-    // this.logIn = isUserLogin;
-    // this.isManagerLogged = USER_ROLE;
-    // if(this.isManagerLogged !== 'employee') {
-    //   this.navbarComponent.setUserMenu();
-    // } else {
-    //   this.navbarComponent.setMenagerMenu();
-    // }
+    this.logIn = isUserLogin;
+    this.isManagerLogged = USER_ROLE;
+    if(this.isManagerLogged !== 'employee') {
+      this.navbarComponent.setUserMenu();
+    } else {
+      this.navbarComponent.setMenagerMenu();
+    }
   }
 
 

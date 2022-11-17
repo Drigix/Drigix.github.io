@@ -11,6 +11,10 @@ import { User } from 'src/app/entities/user/user.model';
 })
 export class UserProfileComponent implements OnInit {
 
+    items: any[] = [];
+    isMenuProfile = true;
+    isMenuHistory = false;
+    isMenuSettings = false;
     user: User | null = null;
 
     name = 'Michał Ławinski';
@@ -22,7 +26,28 @@ export class UserProfileComponent implements OnInit {
     constructor(public dialogService: DialogService, public translateService: TranslateService) {}
 
     ngOnInit(): void {
+      this.items = [
+        {label: this.translateService.instant('global.account.menu.profile'), icon: 'pi pi-id-card', command: ()=> this.changeMenu('profile')},
+        {label: this.translateService.instant('global.account.menu.history'), icon: 'pi-shopping-bag', command: ()=> this.changeMenu('history')},
+        {label: this.translateService.instant('global.account.menu.setting'), icon: 'pi pi-user-edit', command: ()=> this.changeMenu('settings')}
+      ];
       this.user = new User(null, 'Michał', 'Ławinski', 'test@gmail.com','123' , '9877655432', '02.02.2022', 'client');
+    }
+
+    changeMenu(menuOption: string): void {
+      if(menuOption === 'profile') {
+        this.isMenuProfile = true;
+        this.isMenuHistory = false;
+        this.isMenuSettings = false;
+      } else if (menuOption === 'history') {
+        this.isMenuProfile = false;
+        this.isMenuHistory = true;
+        this.isMenuSettings = false;
+      } else if (menuOption === 'settings') {
+        this.isMenuProfile = false;
+        this.isMenuHistory = false;
+        this.isMenuSettings = true;
+      }
     }
 
     changePassword(type: string): void {

@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
   providers: [DialogService, MessageService]
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   title = 'Project_IO';
 
   constructor(private config: PrimeNGConfig, private translateService: TranslateService, private router: Router,
@@ -25,15 +25,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.authorityComponent.checkIsUserLogin();
     this.translateService.setDefaultLang('pl/global');
   }
-
-  ngAfterViewInit(): void {
-    const DSLScript = document.createElement('script');
-    DSLScript.src = 'https://maps.googleapis.com/maps/api/js?key=xxxxx'; // replace by your API key
-    DSLScript.type = 'text/javascript';
-    document.body.appendChild(DSLScript);
-    document.body.removeChild(DSLScript);
-  }
-
   translate(lang: string) {
     this.translateService.use(lang);
     this.translateService.get('primeng').subscribe(res => this.config.setTranslation(res));
