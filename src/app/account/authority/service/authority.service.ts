@@ -50,7 +50,6 @@ export class AuthorityService {
     if (jsonJwt) {
       this.jwt = JSON.parse(jsonJwt!);
       this.headers = new HttpHeaders({'Authorization': ' Bearer ' + this.jwt!.accessToken});
-      console.log(this.jwt);
     }
     return this.jwt ? true : false;
   }

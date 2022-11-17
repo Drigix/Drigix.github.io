@@ -1,3 +1,4 @@
+import { Company } from './../../entities/company/company.model';
 import { Language } from './../../entities/language/language.model';
 import { Router } from '@angular/router';
 import { CreateCompanyDialog } from './../../account/create-company-dialog/create-company-dialog.component';
@@ -18,7 +19,8 @@ export class NavbarComponent implements OnInit {
 
     @ViewChild('menu', {static: false}) menu?: ElementRef<HTMLElement>;
 
-    isManagerLogged = '';
+    role = '';
+    isClient = true;
 
     showMenu = false;
 
@@ -28,6 +30,8 @@ export class NavbarComponent implements OnInit {
 
     items: MenuItem[] = [];
     languages: Language[] = [];
+    companies: Company[] = [];
+    selectedComapny: Company | null = null;
     selectedLanguage: Language | null = new Language('pl', '/src/assets/photos/flags/flaga_polski.jpg');
     selectedLanguages: any;
     amoutOfNotification = 1;
@@ -37,14 +41,15 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit(): void {
       this.languages = [
-        new Language('pl', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Flag_of_Poland.svg/320px-Flag_of_Poland.svg.png'),
-        new Language('en', 'https://flagcdn.com/w2560/gb.png')
+        new Language('pl', '../../../assets/photos/flags/flaga_polski.jpg'),
+        new Language('en', '../../../assets/photos/flags/flaga_wielkiejbrytani.jpg')
       ];
       this.logIn = isUserLogin;
-      this.isManagerLogged = USER_ROLE;
-      if(this.isManagerLogged !== 'employee') {
+      this.role = USER_ROLE;
+      if(this.role !== 'employee') {
         this.setUserMenu();
       } else {
+        this.isClient = false;
         this.setMenagerMenu();
       }
     }
@@ -179,6 +184,10 @@ export class NavbarComponent implements OnInit {
     localStorage.setItem('jwt', '');
     window.location.reload();
     //this.router.navigateByUrl('')
+  }
+
+  filterCompanies(event: any) {
+    console.log(event.query);
   }
 
   onServiceChange(type: string): void {

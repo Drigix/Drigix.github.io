@@ -1,8 +1,23 @@
 :host ::ng-deep .p-menubar {
-    background-color: #75121c;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    background-color: #73121c;
+    border-radius: 0;
     height: 70px;
+}
+
+:host ::ng-deep .p-menubar-root-list {
+  padding-left: 50px;
+}
+
+:host ::ng-deep .p-submenu-list ul {
+  padding-left: -50px !important;
+}
+
+.logo {
+  position: absolute;
+  left: 5px;
+  img {
+    height: 50px;
+  }
 }
 
 :host ::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-text {
@@ -30,6 +45,8 @@
 }
 
 :host ::ng-deep .notLoginAccount .p-button {
+  margin-top: 2px;
+  margin-right: 8px;
   background-color: white;
   color: var(--primary-color);
   border-radius: 15px;
@@ -48,32 +65,6 @@
 .notification {
   display: inline;
   padding-right: 20px;
-}
-
-.languages-menu {
-  position: absolute;
-  right: 60px;
-  top: 60px;
-  background-color: var(--primary-color);
-  color:white;
-  border-radius: 5px;
-
-  ul {
-    list-style-type: none;
-    margin-left: -20px;
-  }
-
-  li {
-    margin: 0;
-    padding: 20px 30px;
-    color: white;
-    font-weight: 700;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
-  }
-  img {
-    width: 20px;
-  }
 }
 
 .user-menu {
@@ -103,11 +94,26 @@
   display: flex;
 }
 
+.search {
+  padding-top: 2px;
+  padding-right: 40px;
+}
+
 :host ::ng-deep .p-dropdown {
   margin-right: 30px;
+  margin-top: 2px;
   width: 100px;
+  height: 80%;
+  border-radius: 15px;
 }
 
 :host ::ng-deep .p-dropdown .p-dropdown-label {
   padding-left: 10px;
+}
+
+:host ::ng-deep .p-autocomplete {
+  input {
+    border-radius: 15px;
+    width: 300px;
+  }
 }

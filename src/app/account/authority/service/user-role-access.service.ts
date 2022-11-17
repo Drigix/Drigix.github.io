@@ -1,6 +1,6 @@
 import { isUserLogin, USER_ROLE } from './../authority.component';
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 
 @Injectable({ providedIn: 'root' })

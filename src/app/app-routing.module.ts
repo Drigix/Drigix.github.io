@@ -50,22 +50,42 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       },
       {
         path: 'manager/company-workers',
+        data: {
+          authorities: ['employee']
+        },
+        canActivate: [UserRouteAccessService],
         component: ManagerCompanyWorkersComponent
       },
       {
         path: 'manager/company-reservations',
+        data: {
+          authorities: ['employee']
+        },
+        canActivate: [UserRouteAccessService],
         component: ManagerCompanyReservationsComponent
       },
       {
         path: 'manager/company-services',
+        data: {
+          authorities: ['employee']
+        },
+        canActivate: [UserRouteAccessService],
         component: ManagerCompanyServicesComponent
       },
       {
         path: 'manager/company-schedule',
+        data: {
+          authorities: ['employee']
+        },
+        canActivate: [UserRouteAccessService],
         component: ManagerCompanyScheduleComponent
       },
       {
         path: 'manager/company-worker-schedule',
+        data: {
+          authorities: ['employee']
+        },
+        canActivate: [UserRouteAccessService],
         component: ManagerCompanyWorkerScheduleComponent
       }
     ])

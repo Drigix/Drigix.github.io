@@ -28,7 +28,7 @@ export class UserProfileComponent implements OnInit {
     ngOnInit(): void {
       this.items = [
         {label: this.translateService.instant('global.account.menu.profile'), icon: 'pi pi-id-card', command: ()=> this.changeMenu('profile')},
-        {label: this.translateService.instant('global.account.menu.history'), icon: 'pi-shopping-bag', command: ()=> this.changeMenu('history')},
+        {label: this.translateService.instant('global.account.menu.history'), icon: 'pi pi-shopping-bag', command: ()=> this.changeMenu('history')},
         {label: this.translateService.instant('global.account.menu.setting'), icon: 'pi pi-user-edit', command: ()=> this.changeMenu('settings')}
       ];
       this.user = new User(null, 'Michał', 'Ławinski', 'test@gmail.com','123' , '9877655432', '02.02.2022', 'client');

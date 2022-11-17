@@ -23,6 +23,7 @@ html {
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-left: auto;
   margin-right: auto;
+  min-height: 100vh;
   width: calc(100% - 20px);
   max-width: 1280px;
   position: relative;
@@ -44,7 +45,8 @@ html {
 
 .table-with-buttons {
  display: grid;
- grid-template-rows: 1080px 58px;
+ min-height: 100vh;
+ //grid-template-rows: 1080px 58px;
  padding-bottom: 50px;
 }
 

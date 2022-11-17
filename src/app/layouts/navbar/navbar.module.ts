@@ -13,6 +13,7 @@ import {BadgeModule} from 'primeng/badge';
 import {MenuModule} from 'primeng/menu'
 import {DropdownModule} from 'primeng/dropdown';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     DropdownModule,
     FormsModule,
     TranslateModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    AutoCompleteModule
   ],
   providers: [
     ServicesPageComponent
