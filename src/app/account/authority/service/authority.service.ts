@@ -5,16 +5,26 @@ import { Observable } from 'rxjs';
 import { webSocket } from "rxjs/webSocket";
 import { User } from 'src/app/entities/user/user.model';
 
+interface Jwt {
+  accessToken?: string;
+  role?: string;
+  permissions?: string [];
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthorityService {
 
   private resourceUrl = 'https://reservio.azurewebsites.net';
-
   LOGIN_URL = this.resourceUrl + '/Account/sign-in';
-
   SIGNUP_URL = this.resourceUrl + '/Account/sign-up';
+  CHANGE_PASSWORD_URL = this.resourceUrl + '/Account/password-change';
+  RESET_PASSWORD_URL = this.resourceUrl + '/Account/password-reset';
+
+  jwt: Jwt | null = null;
+
+  headers: HttpHeaders | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -27,10 +37,21 @@ export class AuthorityService {
     return this.http.post(this.SIGNUP_URL, user);
   }
 
-  checkJwt(): boolean {
-    const jwt = localStorage.getItem('jwt');
-    return jwt ? true : false;
+  changePassword(currentPassword: string, newPassword: string): Observable<any> {
+    return this.http.put(this.CHANGE_PASSWORD_URL, {currentPassword, newPassword}, {headers: this.headers!});
   }
 
+  resetPassword(email: string): Observable<any> {
+    return this.http.put(this.RESET_PASSWORD_URL, {email});
+  }
 
+  checkJwt(): boolean {
+    const jsonJwt = localStorage.getItem('jwt');
+    if (jsonJwt) {
+      this.jwt = JSON.parse(jsonJwt!);
+      this.headers = new HttpHeaders({'Authorization': ' Bearer ' + this.jwt!.accessToken});
+      console.log(this.jwt);
+    }
+    return this.jwt ? true : false;
+  }
 }

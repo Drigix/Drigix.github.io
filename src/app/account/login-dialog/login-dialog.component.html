@@ -2,14 +2,14 @@
 
   <div *ngIf="type === 'changePassword' && loading === false; else changeEmail" class="dialog-window-form">
     <form #formChangePassword="ngForm" (ngSubmit)="onPasswordChange()" [formGroup]="passwordForm">
-      <p-password formControlName="oldPassword" id="oldPassword" name="oldPassword" placeholder="{{'global.form.oldPassword'| translate}}"></p-password>
+      <p-password formControlName="oldPassword" id="oldPassword" name="oldPassword" placeholder="{{'global.form.oldPassword'| translate}}" [(ngModel)]="currentPassword"></p-password>
       <div class="input-invalid-text" *ngIf="passwordForm.get('oldPassword')!.invalid && (passwordForm.get('oldPassword')!.dirty || passwordForm.get('oldPassword')!.touched)">
         <small *ngIf="passwordForm.get('oldPassword')?.errors?.['required']">
           {{'global.form.fieldRequired' | translate }}
         </small>
       </div>
 
-      <p-password formControlName="newPassword" [toggleMask]="true" placeholder="{{'global.form.newPassword' | translate}}"></p-password>
+      <p-password formControlName="newPassword" [toggleMask]="true" placeholder="{{'global.form.newPassword' | translate}}" [(ngModel)]="newPassword"></p-password>
       <div class="input-invalid-text" *ngIf="passwordForm.get('newPassword')!.invalid && (passwordForm.get('newPassword')!.dirty || passwordForm.get('newPassword')!.touched)">
         <small *ngIf="passwordForm.get('newPassword')?.errors?.['required']">
           {{'global.form.fieldRequired' | translate }}
@@ -202,7 +202,7 @@
     <div *ngIf="type === 'forgotPassword' && loading === false; else spinner" class="dialog-window-form">
       <form #formForgotPassword="ngForm" (ngSubmit)="onPasswordForgot()" [formGroup]="forgotPasswordForm" class="dialog-window-form">
 
-        <input type="text" pInputText formControlName="email" placeholder="{{'global.user.email' | translate}}"/>
+        <input type="text" pInputText formControlName="email" placeholder="{{'global.user.email' | translate}}" [(ngModel)]="email"/>
         <div class="input-invalid-text" *ngIf="forgotPasswordForm.get('email')!.invalid && (forgotPasswordForm.get('email')!.dirty || forgotPasswordForm.get('email')!.touched)">
           <small *ngIf="forgotPasswordForm.get('email')?.errors?.['required']">
             {{'global.form.fieldRequired' | translate }}

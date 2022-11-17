@@ -43,12 +43,16 @@
       "success": "Sukces",
       "error": "Błąd",
       "information": "Informacja",
+      "activatingEmail": "Email aktywacyjny zostął wysłany na podaney email",
       "confirmDelete": "Czy na pewno chcesz usunąć ten element?",
-      "emailActive": "Email aktywacyjny został wysłany na podany adres email",
       "differentPasswords": "Hasło i hasło potwierdzające różnią się",
       "wrongEmailOrPassword": "Podane email lub hasło jest nieprawidłowe!",
       "wrongPassword": "Podane hasło jest nieprawidłowe!",
-      "infoToLogin": "Ta czynność wymaga zalogowania się!"
+      "infoToLogin": "Ta czynność wymaga zalogowania się!",
+      "passwordForgotSuccess": "Hasło zostało zresetowane pomyślne! Nowe hasło zostało wysłane na podany adres email",
+      "passwordForgotError": "Hasło nie zostało zresetowane! Spróbuj ponownie",
+      "passwordChangeSuccess": "Zmiana hasła powiodła się!",
+      "passwordChangeError": "Zmiana hasła nie powiodła się"
     },
     "form": {
       "fieldRequired": "To pole jest wymagane",

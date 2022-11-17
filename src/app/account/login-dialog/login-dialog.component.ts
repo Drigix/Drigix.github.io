@@ -1,3 +1,4 @@
+import { HttpRequest } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { USER_ROLE } from './../authority/authority.component';
@@ -54,6 +55,10 @@ export class LoginDialogComponent implements OnInit {
     email: ['', [Validators.required]]
   });
 
+  currentPassword: string | null = null;
+  newPassword: string | null = null;
+  email: string | null = null;
+
   type: string | null = null;
   isReservation = false;
 
@@ -94,11 +99,16 @@ export class LoginDialogComponent implements OnInit {
     }
 
     onSignUp(): void {
+      this.loading = true;
       if(this.user.password === this.confirmPassword) {
         this.authorityService.signup(this.user!).subscribe(
           (response) => {
             this.ref.close();
-            this.messageService.add({key: 'mainToast', severity:'success', summary: 'Sukces', detail: 'Meil aktywacyjny zostął wysłany na podaney email'});
+            this.messageService.add({key: 'mainToast', severity:'success', summary: 'Sukces', detail: this.translateService.instant('global.message.activatingEmail')});
+            this.loading = false;
+          },
+          (error) => {
+            this.loading = true;
           }
         );
       } else {
@@ -108,7 +118,17 @@ export class LoginDialogComponent implements OnInit {
 
     onPasswordChange(): void {
       this.loading = true;
-      this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.emailActive')});
+      this.authorityService.changePassword(this.currentPassword!, this.newPassword!).subscribe(
+        (response) => {
+          this.loading = false;
+          this.ref.close();
+          this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.passwordChangeSuccess')});
+        },
+        (error) => {
+          this.loading = false;
+          this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.passwordChangeError')});
+        }
+      )
     }
 
     onEmailChange(): void {
@@ -116,11 +136,22 @@ export class LoginDialogComponent implements OnInit {
     }
 
     onPhonenumberChange(): void {
-      this.loading = true;
+      //this.loading = true;
     }
 
     onPasswordForgot(): void {
       this.loading = true;
+      this.authorityService.resetPassword(this.email!).subscribe(
+        (response) => {
+          this.loading = false;
+          this.ref.close();
+          this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.passwordForgotSuccess')});
+        },
+        (error) => {
+          this.loading = false;
+          this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.passwordForgotError')});
+        }
+      )
     }
 
     onClose(): void {

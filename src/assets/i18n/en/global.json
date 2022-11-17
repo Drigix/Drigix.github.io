@@ -37,11 +37,16 @@
     "message": {
       "success": "Success",
       "error": "Error",
+      "activatingEmail": "Activating email was send for served email",
       "confirmDelete": "Are you sure to delete this element?",
       "emailActive": "Active email was send to a your address email",
       "differentPasswords": "Password field and confirm password field is different!",
       "wrongEmailOrPassword": "Address email or password are wrong!",
-      "wrongPassword": "Password is wrong!"
+      "wrongPassword": "Password is wrong!",
+      "passwordForgotSuccess": "Password has been reset. New password has been send to served email.",
+      "passwordForgotError": "Password has not been reser! Try again!",
+      "passwordChangeSuccess": "Password has been change.",
+      "passwordChangeError": "Password has not been change!"
     },
     "form": {
       "fieldRequired": "This field is required",
