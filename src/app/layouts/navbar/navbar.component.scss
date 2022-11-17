@@ -107,3 +107,7 @@
   margin-right: 30px;
   width: 100px;
 }
+
+:host ::ng-deep .p-dropdown .p-dropdown-label {
+  padding-left: 10px;
+}

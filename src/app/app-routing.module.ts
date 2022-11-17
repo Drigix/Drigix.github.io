@@ -1,3 +1,5 @@
+import { Authority } from './account/authority/authority.model';
+import { UserRouteAccessService } from './account/authority/service/user-role-access.service';
 import { ManagerCompanyWorkerScheduleComponent } from './manager/manager-company-worker-schedule/manager-company-worker-schedule.component';
 import { ManagerCompanyReservationsComponent } from './manager/manager-company-reservations/manager-company-reservations.component';
 import { ManagerCompanyWorkersComponent } from './manager/manager-company-workers/manager-company-workers.component';
@@ -32,6 +34,10 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       },
       {
         path: 'user-profile',
+        data: {
+          authorities: ['client', 'employee']
+        },
+        canActivate: [UserRouteAccessService],
         component: UserProfileComponent
       },
       {

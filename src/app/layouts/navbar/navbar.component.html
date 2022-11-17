@@ -1,15 +1,19 @@
 <p-menubar [model]="items">
   <div class="items-to-users">
     <div class="languages">
-      <!-- <p-dropdown [options]="flagLanguages" [(ngModel)]="selectedLanguages">
-        <ng-container *ngFor="let item of flagLanguages">
-          <img src="{{item.img}}"> {{item.name}}
-        </ng-container>
-      </p-dropdown> -->
-      <p-button [(ngModel)]="selectedLanguages"
-        (onClick)="showLanguageMenu()">
-        <i class="pi pi-flag"></i>
-      </p-button>
+      <p-dropdown [options]="languages" [(ngModel)]="selectedLanguage" (onChange)="changeLanguage()"
+          optionLabel="name">
+          <ng-template pTemplate="selectedItem">
+            <div class="dropdown-item" *ngIf="selectedLanguage">
+              <img style="width: 30px;" [src]="selectedLanguage.svg" />
+            </div>
+          </ng-template>
+          <ng-template let-language pTemplate="item">
+            <div class="dropdown-item">
+              <img style="width: 30px;" [src]="language.svg" />
+            </div>
+          </ng-template>
+        </p-dropdown>
     </div>
   <div class="account" *ngIf="logIn; else notLogIn">
     <div class="notification" *ngIf="amoutOfNotification === 0; else notificationExist">
@@ -35,17 +39,6 @@
   </ng-template>
   </div>
 </p-menubar>
-
-<div class="languages-menu" *ngIf="languagesMenu">
-  <ul>
-    <li>
-      <img src="https://m.media-amazon.com/images/I/31T7rSr1TYL._SY1000_.jpg" (click)="changeLanguage('Polish')">
-    </li>
-    <li>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Flag_of_the_United_Kingdom.svg" (click)="changeLanguage('English')">
-    </li>
-  </ul>
-</div>
 
 <div class="user-menu" *ngIf="showMenu">
   <ul>

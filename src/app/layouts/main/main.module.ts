@@ -18,6 +18,9 @@ import {ToastModule} from 'primeng/toast';
     FooterModule,
     ToastModule
   ],
+  providers: [
+    NavbarComponent
+  ],
   exports: [
     MainComponent
   ]
