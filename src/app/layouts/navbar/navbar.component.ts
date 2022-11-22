@@ -9,6 +9,7 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AppComponent } from 'src/app/app.component';
 import { isUserLogin, USER_ROLE } from 'src/app/account/authority/authority.component';
+import { Authority } from 'src/app/account/authority/authority.model';
 
 @Component({
   selector: 'app-navbar',
@@ -46,9 +47,13 @@ export class NavbarComponent implements OnInit {
       ];
       this.logIn = isUserLogin;
       this.role = USER_ROLE;
-      if(this.role !== 'employee') {
+      if(this.role !== Authority.EMPLOYEE && this.role !== Authority.OWNER) {
         this.setUserMenu();
-      } else {
+      } else if (this.role !== Authority.OWNER) {
+        this.isClient = false;
+        this.setEmployeeMenu();
+      }
+      else {
         this.isClient = false;
         this.setMenagerMenu();
       }
@@ -110,6 +115,15 @@ export class NavbarComponent implements OnInit {
             routerLink: '/contact'
         }
     ];
+    }
+
+    setEmployeeMenu(): void {
+      this.items = [
+        {
+          label: 'Home',
+          routerLink: '/'
+        }
+      ]
     }
 
     setMenagerMenu(): void {

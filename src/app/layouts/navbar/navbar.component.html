@@ -1,54 +1,56 @@
 <p-menubar [model]="items">
-  <div class="logo">
-    <img src="../../../assets/photos/logo.png">
-  </div>
-  <div class="items-to-users">
-    <div class="search" *ngIf="isClient">
-      <p-autoComplete [(ngModel)]="selectedComapny" [showEmptyMessage]="true" [suggestions]="companies"
-        (completeMethod)="filterCompanies($event)" field="name" placeholder="{{'global.action.search' | translate}}">
-        <i class="pi pi-search"></i>
-      </p-autoComplete>
-    </div>
-    <div class="languages">
-      <p-dropdown [options]="languages" [(ngModel)]="selectedLanguage" (onChange)="changeLanguage()"
-          optionLabel="name">
-          <ng-template pTemplate="selectedItem">
-            <div class="dropdown-item" *ngIf="selectedLanguage">
-              <img style="width: 30px;" [src]="selectedLanguage.svg" />
-            </div>
-          </ng-template>
-          <ng-template let-language pTemplate="item">
-            <div class="dropdown-item">
-              <img style="width: 30px;" [src]="language.svg" />
-            </div>
-          </ng-template>
-        </p-dropdown>
-    </div>
-  <div class="account" *ngIf="logIn; else notLogIn">
-    <div *ngIf="isClient">
-      <div class="notification" *ngIf="amoutOfNotification === 0; else notificationExist">
-        <i class="pi pi-bell" severity="success" (click)="op.toggle($event)"></i>
+  <ng-template pTemplate="start">
+    <img src="../../../assets/photos/logo.png" height="40" class="mr-2">
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div class="items-to-users">
+      <div class="search" *ngIf="isClient">
+        <p-autoComplete [(ngModel)]="selectedComapny" [showEmptyMessage]="true" [suggestions]="companies"
+          (completeMethod)="filterCompanies($event)" field="name" placeholder="{{'global.action.search' | translate}}">
+          <i class="pi pi-search"></i>
+        </p-autoComplete>
       </div>
-      <ng-template #notificationExist>
-        <div class="notification">
-          <i class="pi pi-bell" pBadge [value]="amoutOfNotification.toString()" severity="success" (click)="op.toggle($event)"></i>
+      <div class="languages">
+        <p-dropdown [options]="languages" [(ngModel)]="selectedLanguage" (onChange)="changeLanguage()"
+            optionLabel="name">
+            <ng-template pTemplate="selectedItem">
+              <div class="dropdown-item" *ngIf="selectedLanguage">
+                <img style="width: 30px;" [src]="selectedLanguage.svg" />
+              </div>
+            </ng-template>
+            <ng-template let-language pTemplate="item">
+              <div class="dropdown-item">
+                <img style="width: 30px;" [src]="language.svg" />
+              </div>
+            </ng-template>
+          </p-dropdown>
+      </div>
+    <div class="account" *ngIf="logIn; else notLogIn">
+      <div *ngIf="isClient">
+        <div class="notification" *ngIf="amoutOfNotification === 0; else notificationExist">
+          <i class="pi pi-bell" severity="success" (click)="op.toggle($event)"></i>
         </div>
-      </ng-template>
+        <ng-template #notificationExist>
+          <div class="notification">
+            <i class="pi pi-bell" pBadge [value]="amoutOfNotification.toString()" severity="success" (click)="op.toggle($event)"></i>
+          </div>
+        </ng-template>
+      </div>
+      <p-button (onClick)="showUserMenu()">
+        <p-avatar icon="pi pi-user">
+        </p-avatar>
+      </p-button>
     </div>
-    <p-button (onClick)="showUserMenu()">
-      <p-avatar icon="pi pi-user">
-      </p-avatar>
-    </p-button>
-  </div>
-  <ng-template #notLogIn>
-    <div class="notLoginAccount">
-      <p-button id="login" name="login"
-        (onClick)="openLoginDialog('login')"
-        label="{{'global.action.login' | translate}}">
-    </p-button>
+    <ng-template #notLogIn>
+      <div class="notLoginAccount">
+        <p-button id="login" name="login"
+          (onClick)="openLoginDialog('login')"
+          label="{{'global.action.login' | translate}}">
+      </p-button>
+      </div>
+    </ng-template>
     </div>
   </ng-template>
-  </div>
 </p-menubar>
 
 <div class="user-menu" *ngIf="showMenu">

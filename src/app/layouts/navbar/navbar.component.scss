@@ -4,22 +4,6 @@
     height: 70px;
 }
 
-:host ::ng-deep .p-menubar-root-list {
-  padding-left: 50px;
-}
-
-:host ::ng-deep .p-submenu-list ul {
-  padding-left: -50px !important;
-}
-
-.logo {
-  position: absolute;
-  left: 5px;
-  img {
-    height: 50px;
-  }
-}
-
 :host ::ng-deep .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-text {
     color: white;
 }
