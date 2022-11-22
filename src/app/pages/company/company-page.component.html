@@ -8,12 +8,12 @@
           <h2>{{currentCompany?.name}}</h2>
           <div class="rounded"></div>
           <div class="rating">
-            <p-rating [readonly]="true" [(ngModel)]="currentCompany!.rating!">
-            </p-rating>
+            <!-- <p-rating [readonly]="true" [(ngModel)]="currentCompany!.rating!">
+            </p-rating> -->
             <p>({{amountOfRating}})</p>
           </div>
           <div class="rounded"></div>
-          <p>{{currentCompany?.address}} {{currentCompany?.postalCode}} {{currentCompany?.city}}</p>
+          <p>{{currentCompany?.address?.street}} {{currentCompany?.address?.zipCode}} {{currentCompany?.address?.city}}</p>
        </div>
       </div>
 

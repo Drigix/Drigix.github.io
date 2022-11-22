@@ -1,4 +1,4 @@
-<div *ngIf="isManagerLogged !== 'employee'; else homeManager" class="home">
+<div *ngIf="isManagerLogged !== 'employee' && isManagerLogged !== 'owner'; else homeManager" class="home">
   <div class="wrapper">
     <app-galleria [showText]="true"></app-galleria>
 

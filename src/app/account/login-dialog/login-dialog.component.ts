@@ -108,7 +108,7 @@ export class LoginDialogComponent implements OnInit {
             this.loading = false;
           },
           (error) => {
-            this.loading = true;
+            this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.signUpError')});
           }
         );
       } else {

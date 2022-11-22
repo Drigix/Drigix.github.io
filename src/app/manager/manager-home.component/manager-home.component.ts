@@ -1,3 +1,5 @@
+import { USER_ROLE } from 'src/app/account/authority/authority.component';
+import { Authority } from './../../account/authority/authority.model';
 import { EditCompanyDialogComponent } from './edit-company-dialog/edit-company-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
@@ -13,13 +15,16 @@ import { Company } from 'src/app/entities/company/company.model';
 })
 export class ManagerHomeComponent implements OnInit {
 
-  isCompanyExist = true;
+  isCompanyExist = false;
 
   company: Company | null = null;
 
   constructor(public router: Router, public dialogService: DialogService, public translateService: TranslateService) { }
 
   ngOnInit(): void {
+    if(Authority.OWNER === USER_ROLE) {
+      this.isCompanyExist = true;
+    }
   }
 
   setCompany(event: any): void {

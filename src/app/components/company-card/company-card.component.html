@@ -5,16 +5,16 @@
         <div class="data-company">
          <h2>{{item.name}}</h2>
          <div class="rating">
-            <p-rating [readonly]="true" [(ngModel)]="item.rating">
-            </p-rating>
+            <!-- <p-rating [readonly]="true" [(ngModel)]="item.rating">
+            </p-rating> -->
             <p>({{amountOfRating}})</p>
          </div>
-         <p>{{item.address}}, {{item.postalCode}}, {{item.city}}</p>
+         <p>{{item.address!.street!}}, {{item.address!.zipCode!}}, {{item.address!.city!}}</p>
          <div class="open-close-time">
-          <p>{{item.openingTime}}:00 - {{item.closingTime}}:00 </p>
-          <div *ngIf="currentTime! < timeToNumber(item.openingTime) || currentTime! >= timeToNumber(item.closingTime); else companyOpen">
+          <!-- <p>{{item.openingTime}}:00 - {{item.closingTime}}:00 </p>
+          <div *ngIf="currentTime! < timeToNumber(item.openingTime!) || currentTime! >= timeToNumber(item.closingTime!); else companyOpen">
             <p style="font-weight: bold; color: red; padding-left: 10px;">ZAMKNIĘTE</p>
-          </div>
+          </div> -->
           <ng-template #companyOpen>
             <p style="font-weight: bold; color: forestgreen; padding-left: 10px;">OTWARTE</p>
           </ng-template>

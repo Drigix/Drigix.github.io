@@ -1,6 +1,6 @@
 .company-reservations {
-  display: flex;
-  height: 100%;
+  display: grid;
+  grid-template-rows: 80px 100vh;
 }
 
 .table-content {

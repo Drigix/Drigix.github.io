@@ -35,7 +35,7 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       {
         path: 'user-profile',
         data: {
-          authorities: ['client', 'employee']
+          authorities: [Authority.CLIENT, Authority.EMPLOYEE, Authority.OWNER]
         },
         canActivate: [UserRouteAccessService],
         component: UserProfileComponent
@@ -51,7 +51,7 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       {
         path: 'manager/company-workers',
         data: {
-          authorities: ['employee']
+          authorities: [Authority.OWNER]
         },
         canActivate: [UserRouteAccessService],
         component: ManagerCompanyWorkersComponent
@@ -59,7 +59,7 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       {
         path: 'manager/company-reservations',
         data: {
-          authorities: ['employee']
+          authorities: [Authority.OWNER]
         },
         canActivate: [UserRouteAccessService],
         component: ManagerCompanyReservationsComponent
@@ -67,7 +67,7 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       {
         path: 'manager/company-services',
         data: {
-          authorities: ['employee']
+          authorities: [Authority.OWNER]
         },
         canActivate: [UserRouteAccessService],
         component: ManagerCompanyServicesComponent
@@ -75,7 +75,7 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       {
         path: 'manager/company-schedule',
         data: {
-          authorities: ['employee']
+          authorities: [Authority.OWNER]
         },
         canActivate: [UserRouteAccessService],
         component: ManagerCompanyScheduleComponent
@@ -83,7 +83,7 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       {
         path: 'manager/company-worker-schedule',
         data: {
-          authorities: ['employee']
+          authorities: [Authority.OWNER]
         },
         canActivate: [UserRouteAccessService],
         component: ManagerCompanyWorkerScheduleComponent

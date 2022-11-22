@@ -2,13 +2,14 @@ import { isUserLogin, USER_ROLE } from './../authority.component';
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
+import { Location } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class UserRouteAccessService implements CanActivate {
 
   roleAuthority: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private _location: Location) {}
 
   // canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
   //   return this.accountService.identity().pipe(
@@ -40,7 +41,7 @@ export class UserRouteAccessService implements CanActivate {
       this.roleAuthority = route.data['authorities'];
       return this.roleAuthority.includes(USER_ROLE);
     } else {
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
       return false;
     }
   }

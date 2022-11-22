@@ -1,12 +1,13 @@
 import { isUserLogin } from './../../account/authority/authority.component';
 import { LoginDialogComponent } from './../../account/login-dialog/login-dialog.component';
-import { Industry } from './../../entities/industry/industry.model';
+import { Category } from '../../entities/industry/category.model';
 import { ReservationDialogComponent } from './reservation/reservation-dialog/reservation-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Company } from './../../entities/company/company.model';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { MenuItem, MessageService } from "primeng/api";
+import { Address } from 'src/app/entities/company/address.model';
 
 @Component({
   selector: 'app-company-page',
@@ -18,12 +19,12 @@ export class CompanyPageComponent implements OnInit {
   @Output() company =  new EventEmitter<Company>();
 
   isAccountLogged = false;
-
+  address: Address = new Address(1, 'Katowice', 'Zwycięstwa 10', '42-600', 'Poland');
   items: MenuItem[] = [];
 
   currentCompany: Company | null = null;
 
-  industry: Industry | null = null;
+  industry: Category | null = null;
 
   amountOfRating = 120;
 
@@ -51,8 +52,8 @@ export class CompanyPageComponent implements OnInit {
   }
 
   loadDataCompany(): void {
-    this.industry = new Industry(1, 'hairdresser');
-    this.currentCompany = new Company(1, 'Nazwa firmy', this.industry, 'Gliwice', 'Zwycięstwa 10', '42-100', 3, '9:00', '20:00');
+    this.industry = new Category('1', 'hairdresser');
+    this.currentCompany = new Company();
     this.exportCompany();
     this.companyOpinions = [
       {

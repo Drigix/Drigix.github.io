@@ -11,6 +11,8 @@ interface Jwt {
   permissions?: string [];
 }
 
+export var globalHeaders: any;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -33,6 +35,11 @@ export class AuthorityService {
     return this.http.post(this.LOGIN_URL, { email, password }, {responseType: 'text'});
   }
 
+  loguot(): void {
+    localStorage.setItem('jwt', '');
+    window.location.reload();
+  }
+
   signup(user: User): Observable<any> {
     return this.http.post(this.SIGNUP_URL, user);
   }
@@ -50,6 +57,7 @@ export class AuthorityService {
     if (jsonJwt) {
       this.jwt = JSON.parse(jsonJwt!);
       this.headers = new HttpHeaders({'Authorization': ' Bearer ' + this.jwt!.accessToken});
+      globalHeaders = this.headers;
     }
     return this.jwt ? true : false;
   }

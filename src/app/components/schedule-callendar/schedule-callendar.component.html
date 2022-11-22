@@ -14,8 +14,23 @@
     <ng-container *ngFor="let item of workHours">
       <div class="list-item">
         {{item.hour}}
-        <div class="worker">
-          {{item.workers}}
+        <div class="reservation">
+          <ng-container *ngFor="let reservation of item.reservations">
+            <div class="worker">
+              <span>
+                <label id="worker">Pracownik: </label>
+              {{reservation.worker}}
+              </span>
+              <span>
+                <label id="client">Klient: </label>
+                {{reservation.client}}
+              </span>
+              <span>
+                <label id="service">Usługa: </label>
+                {{reservation.service}}
+              </span>
+            </div>
+          </ng-container>
         </div>
       </div>
     </ng-container>

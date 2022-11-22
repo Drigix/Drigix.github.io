@@ -2,36 +2,51 @@
     <form #formNewCompany="ngForm" (ngSubmit)="onSubmit()" [formGroup]="newCompanyForm">
       <div class="form-content">
         <div class="left-side">
-          <input type="text" pInputText formControlName="name" placeholder="{{'global.company.name' | translate}}"/>
+          <input type="text" pInputText formControlName="name" placeholder="{{'global.company.name' | translate}}" [(ngModel)]="createdCompany!.name!"/>
           <div class="input-invalid-text" *ngIf="newCompanyForm.get('name')!.invalid && (newCompanyForm.get('name')!.dirty || newCompanyForm.get('name')!.touched)">
             <small *ngIf="newCompanyForm.get('name')?.errors?.['required']">
               {{'global.form.fieldRequired' | translate }}
             </small>
           </div>
 
+          <input type="text" pInputText formControlName="nip" placeholder="{{'global.company.nip' | translate}}" [(ngModel)]="createdCompany!.nip!"/>
+          <div class="input-invalid-text" *ngIf="newCompanyForm.get('nip')!.invalid && (newCompanyForm.get('nip')!.dirty || newCompanyForm.get('nip')!.touched)">
+            <small *ngIf="newCompanyForm.get('nip')?.errors?.['required']">
+              {{'global.form.fieldRequired' | translate }}
+            </small>
+          </div>
+
           <div class="industry">
             <p-dropdown id="industry" name="industry" placeholder="{{'global.company.industry' | translate}}"
-            [options]="industries" optionLabel="name" formControlName="industry">
+            [options]="industries" optionLabel="name" formControlName="industry" [(ngModel)]="createdCompanyCategory">
            </p-dropdown>
           </div>
 
-          <input type="text" pInputText formControlName="city" placeholder="{{'global.company.city' | translate}}"/>
+          <input type="text" pInputText formControlName="city" placeholder="{{'global.company.city' | translate}}" [(ngModel)]="createdCompanyAddress!.city"/>
           <div class="input-invalid-text" *ngIf="newCompanyForm.get('city')!.invalid && (newCompanyForm.get('city')!.dirty || newCompanyForm.get('city')!.touched)">
             <small *ngIf="newCompanyForm.get('city')?.errors?.['required']">
               {{'global.form.fieldRequired' | translate }}
             </small>
           </div>
 
-          <input type="text" pInputText formControlName="address" placeholder="{{'global.company.address' | translate}}"/>
+          <input type="text" pInputText formControlName="address" placeholder="{{'global.company.address' | translate}}" [(ngModel)]="createdCompanyAddress!.street"/>
           <div class="input-invalid-text" *ngIf="newCompanyForm.get('address')!.invalid && (newCompanyForm.get('address')!.dirty || newCompanyForm.get('address')!.touched)">
             <small *ngIf="newCompanyForm.get('address')?.errors?.['required']">
               {{'global.form.fieldRequired' | translate }}
             </small>
           </div>
 
-          <input type="text" pInputText formControlName="postalCode" placeholder="{{'global.company.postalCode' | translate}}"/>
+          <input type="text" pInputText formControlName="postalCode" placeholder="{{'global.company.postalCode' | translate}}" [(ngModel)]="createdCompanyAddress!.zipCode"/>
           <div class="input-invalid-text" *ngIf="newCompanyForm.get('postalCode')!.invalid && (newCompanyForm.get('postalCode')!.dirty || newCompanyForm.get('postalCode')!.touched)">
             <small *ngIf="newCompanyForm.get('postalCode')?.errors?.['required']">
+              {{'global.form.fieldRequired' | translate }}
+            </small>
+          </div>
+
+
+          <input type="text" pInputText formControlName="country" placeholder="{{'global.company.country' | translate}}" [(ngModel)]="createdCompanyAddress!.country"/>
+          <div class="input-invalid-text" *ngIf="newCompanyForm.get('country')!.invalid && (newCompanyForm.get('country')!.dirty || newCompanyForm.get('country')!.touched)">
+            <small *ngIf="newCompanyForm.get('country')?.errors?.['required']">
               {{'global.form.fieldRequired' | translate }}
             </small>
           </div>
@@ -53,7 +68,7 @@
       </div>
 
       <div class="buttons-container-dialog">
-        <p-button type="submit" styleClass="button-width" label="{{'global.action.save' | translate}}" [disabled]="formNewCompany.invalid === true"></p-button>
+        <p-button type="submit" styleClass="button-width" label="{{'global.action.save' | translate}}" [disabled]="newCompanyForm.invalid === true"></p-button>
         <p-button type="button" styleClass="button-width" label="{{'global.action.close' | translate}}" (onClick)="onClose()"></p-button>
       </div>
     </form>

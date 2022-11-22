@@ -1,4 +1,5 @@
-export class Authority {
-  public USER = 'client';
-  public MANAGER = 'employee';
+export enum Authority {
+  CLIENT = 'client',
+  EMPLOYEE = 'employee',
+  OWNER = 'owner',
 }

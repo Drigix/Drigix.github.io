@@ -25,8 +25,22 @@
 }
 
 .worker {
+  display: grid;
+  background-color: var(--primary-color);
+  color:white;
+  border: 1px solid var(--primary-color);
+  border-radius: 15px;
+  padding: 8px;
+  margin-right: 30px;
   font-size: 15px;
   font-weight: 300;
+  label {
+    font-weight: bold;
+  }
+}
+
+.reservation {
+  display: flex;
 }
 
 

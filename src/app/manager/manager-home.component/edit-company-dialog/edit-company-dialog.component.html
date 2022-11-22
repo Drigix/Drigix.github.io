@@ -11,11 +11,11 @@
 
         <div class="industry">
           <p-dropdown id="industry" name="industry" placeholder="{{'global.company.industry' | translate}}"
-          [options]="industries" [(ngModel)]="company!.industry" optionLabel="name" formControlName="industry">
+          [options]="industries" [(ngModel)]="company!.categoryId" optionLabel="name" formControlName="industry">
          </p-dropdown>
         </div>
 
-        <input type="text" pInputText formControlName="city" placeholder="{{'global.company.city' | translate}}" [(ngModel)]="company!.city"/>
+        <input type="text" pInputText formControlName="city" placeholder="{{'global.company.city' | translate}}" [(ngModel)]="company!.address!.city!"/>
         <div class="input-invalid-text" *ngIf="newCompanyForm.get('city')!.invalid && (newCompanyForm.get('city')!.dirty || newCompanyForm.get('city')!.touched)">
           <small *ngIf="newCompanyForm.get('city')?.errors?.['required']">
             {{'global.form.fieldRequired' | translate }}
@@ -29,7 +29,7 @@
           </small>
         </div>
 
-        <input type="text" pInputText formControlName="postalCode" placeholder="{{'global.company.postalCode' | translate}}" [(ngModel)]="company!.postalCode"/>
+        <input type="text" pInputText formControlName="postalCode" placeholder="{{'global.company.postalCode' | translate}}" [(ngModel)]="company!.address!.zipCode"/>
         <div class="input-invalid-text" *ngIf="newCompanyForm.get('postalCode')!.invalid && (newCompanyForm.get('postalCode')!.dirty || newCompanyForm.get('postalCode')!.touched)">
           <small *ngIf="newCompanyForm.get('postalCode')?.errors?.['required']">
             {{'global.form.fieldRequired' | translate }}
