@@ -53,7 +53,9 @@
       "passwordForgotSuccess": "Hasło zostało zresetowane pomyślne! Nowe hasło zostało wysłane na podany adres email",
       "passwordForgotError": "Hasło nie zostało zresetowane! Spróbuj ponownie",
       "passwordChangeSuccess": "Zmiana hasła powiodła się!",
-      "passwordChangeError": "Zmiana hasła nie powiodła się"
+      "passwordChangeError": "Zmiana hasła nie powiodła się",
+      "userDataChangeSuccess": "Twoje dane zostały zmienione!",
+      "userDataChangeError": "Wystąpił błąd podczas zmiany danych, spróbuj jeszcze raz!"
     },
     "form": {
       "fieldRequired": "To pole jest wymagane",
@@ -114,10 +116,12 @@
         "opinions": "Opinie"
       },
       "name": "Nazwa firmy",
+      "nip": "NIP",
       "industry": "Branża firmy",
       "city": "Miasto",
       "address": "Adres",
-      "postalCode": "Kod pocztowy"
+      "postalCode": "Kod pocztowy",
+      "country": "Kraj"
     },
     "reservation": {
       "reservationDate": "Data rezerwacji",

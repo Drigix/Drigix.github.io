@@ -39,9 +39,10 @@
 }
 
 :host ::ng-deep .p-galleria-item {
-  width: calc(100% - 5px);
+  min-width: 1280px;
 }
 
 :host ::ng-deep .p-galleria-content {
-  width: calc(100% - 5px);
+  min-width: 1280px;
+  max-height: 660px;
 }

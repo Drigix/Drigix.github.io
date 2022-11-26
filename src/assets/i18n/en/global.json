@@ -47,7 +47,9 @@
       "passwordForgotSuccess": "Password has been reset. New password has been send to served email.",
       "passwordForgotError": "Password has not been reser! Try again!",
       "passwordChangeSuccess": "Password has been change.",
-      "passwordChangeError": "Password has not been change!"
+      "passwordChangeError": "Password has not been change!",
+      "userDataChangeSuccess": "Your data has been change!",
+      "userDataChangeError": "Error occured, try again!"
     },
     "form": {
       "fieldRequired": "This field is required",
@@ -94,7 +96,7 @@
       "password": "Password",
       "phonenumber": "Phonenumber",
       "date": "Date of birthday",
-      "role": "Rola użytkownika",
+      "role": "User role",
       "information": "User information"
     },
     "company": {
@@ -107,10 +109,12 @@
         "opinions": "Opinions"
       },
       "name": "Company name",
+      "nip": "NIP",
       "industry": "Company industry",
       "city": "City",
       "address": "Address",
-      "postalCode": "Postal code"
+      "postalCode": "Postal code",
+      "country": "Country"
     },
     "reservation": {
       "chooseDate": "Choose meeting date",

@@ -1,8 +1,12 @@
+import { MessageService } from 'primeng/api';
+import { HttpResponse } from '@angular/common/http';
+import { AuthorityService } from './../authority/service/authority.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginDialogComponent } from './../login-dialog/login-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/entities/user/user.model';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
@@ -11,19 +15,24 @@ import { User } from 'src/app/entities/user/user.model';
 })
 export class UserProfileComponent implements OnInit {
 
+  changeUserDataForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    surname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
+    birthDay: ['', [Validators.required]],
+    email: [{value: '', disabled: true}, [Validators.required, Validators.email]],
+    phoneNumber: ['', [Validators.required, Validators.pattern("[0-9 ]{11}")]],
+    role: [{value: '', disabled: true}, [Validators.required]]
+  })
+
     items: any[] = [];
     isMenuProfile = true;
     isMenuHistory = false;
     isMenuSettings = false;
     user: User | null = null;
+    changeUser: User | null = null;
 
-    name = 'Michał Ławinski';
-
-    phoneNumber = '799987763';
-
-    email = 'test@gmail.com';
-
-    constructor(public dialogService: DialogService, public translateService: TranslateService) {}
+    constructor(public dialogService: DialogService, public translateService: TranslateService, private authorityService: AuthorityService,
+      private messageService: MessageService, private fb: UntypedFormBuilder) {}
 
     ngOnInit(): void {
       this.items = [
@@ -31,7 +40,16 @@ export class UserProfileComponent implements OnInit {
         {label: this.translateService.instant('global.account.menu.history'), icon: 'pi pi-shopping-bag', command: ()=> this.changeMenu('history')},
         {label: this.translateService.instant('global.account.menu.setting'), icon: 'pi pi-user-edit', command: ()=> this.changeMenu('settings')}
       ];
-      this.user = new User(null, 'Michał', 'Ławinski', 'test@gmail.com','123' , '9877655432', '02.02.2022', 'client');
+      this.loadUserData();
+    }
+
+    loadUserData(): void {
+      this.authorityService.getUserData().subscribe(
+        (res: HttpResponse<User>) => {
+          this.user = res.body ?? null;
+          this.changeUser = res.body ?? null;
+        }
+      )
     }
 
     changeMenu(menuOption: string): void {
@@ -50,6 +68,17 @@ export class UserProfileComponent implements OnInit {
       }
     }
 
+    changeUserData(): void {
+      this.authorityService.changeUserData(this.changeUser!).subscribe(
+        (response) => {
+          this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.userDataChangeSuccess')});
+        },
+        (error) => {
+          this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.userDataChangeError')});
+        }
+      )
+    }
+
     changePassword(type: string): void {
       const ref = this.dialogService.open(LoginDialogComponent,
          {
@@ -59,5 +88,10 @@ export class UserProfileComponent implements OnInit {
             type: type
           }
          });
+    }
+
+    temp(): void {
+      console.log(this.user);
+      console.log(this.changeUser);
     }
  }

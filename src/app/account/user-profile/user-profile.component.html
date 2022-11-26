@@ -5,7 +5,7 @@
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0m5Cy4lXCbuyG54L0vuo3i5-ALavHe9KmhWA_wDM&s">
       <h2>{{user!.firstName!}} {{user!.lastName!}}</h2>
       <p>
-        {{user!.birthDay!}}
+        {{user!.birthDay! | date: 'yyyy-MM-dd'}}
       </p>
       <p>
         <i class="pi pi-envelope"></i>
@@ -19,20 +19,6 @@
         {{user!.role!}}
       </p>
       </div>
-      <div class="buttons-container">
-        <p-button id="changePassword" name="changePassword"
-          (onClick)="changePassword('changePassword')"
-          label="{{'global.action.changePassword' | translate}}">
-        </p-button>
-        <p-button id="changeEmail" name="changeEmail"
-          (onClick)="changePassword('changeEmail')"
-          label="{{'global.action.changeEmail' | translate}}">
-        </p-button>
-        <p-button id="changePhoneNumber" name="changeNumber"
-          (onClick)="changePassword('changePhoneNumber')"
-          label="{{'global.action.changePhoneNumber' | translate}}">
-        </p-button>
-      </div>
     </div>
   <ng-template #menuHistory>
     <div class="history" *ngIf="isMenuHistory; else menuSettings">
@@ -41,7 +27,94 @@
   </ng-template>
   <ng-template #menuSettings>
     <div class="settings" *ngIf="isMenuSettings">
-      <h2>menuSettings</h2>
+      <h2>Dane podstawowe</h2>
+      <form #formChangeUserData="ngForm" (ngSubmit)="changeUserData()" [formGroup]="changeUserDataForm">
+        <div class="account-data">
+          <div class="user-data">
+            <label for="float-input">{{'global.user.name' | translate}}: </label>
+            <input type="text" pInputText formControlName="name" [(ngModel)]="changeUser!.firstName!" (close)="temp()">
+            <div *ngIf="changeUserDataForm.get('name')!.invalid && (changeUserDataForm.get('name')!.dirty || changeUserDataForm.get('name')!.touched)">
+              <small class="p-error block" *ngIf="changeUserDataForm.get('name')?.errors?.['required']">
+                {{'global.form.fieldRequired' | translate }}
+              </small>
+
+            </div>
+            <small class="form-text text-danger" *ngIf="changeUserDataForm.controls['name'].hasError('minLenght')">
+              Your password is required to be at least 3 characters.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="changeUserDataForm.get('newPassword')?.errors?.['maxlength']">
+              Your password cannot be longer than 20 characters.
+            </small>
+          </div>
+          <div class="user-data">
+            <label for="float-input">{{'global.user.surname' | translate}}: </label>
+            <input type="text" pInputText formControlName="surname" [(ngModel)]="changeUser!.lastName!">
+            <div class="input-invalid-text" *ngIf="changeUserDataForm.get('surname')!.invalid && (changeUserDataForm.get('surname')!.dirty || changeUserDataForm.get('surname')!.touched)">
+              <small *ngIf="changeUserDataForm.get('surname')?.errors?.['required']">
+                {{'global.form.fieldRequired' | translate }}
+              </small>
+            </div>
+          </div>
+          <div class="user-data">
+            <label for="float-input">{{'global.user.email' | translate}}: </label>
+            <input id="disabled-input" type="text" pInputText formControlName="email" [(ngModel)]="changeUser!.email!">
+            <div class="input-invalid-text" *ngIf="changeUserDataForm.get('email')!.invalid && (changeUserDataForm.get('email')!.dirty || changeUserDataForm.get('email')!.touched)">
+              <small *ngIf="changeUserDataForm.get('email')?.errors?.['required']">
+                {{'global.form.fieldRequired' | translate }}
+              </small>
+            </div>
+          </div>
+          <div class="user-data">
+            <label for="float-input">{{'global.user.date' | translate}}: </label>
+            <input type="text" pInputText formControlName="birthDay" [(ngModel)]="changeUser!.birthDay!">
+            <div class="input-invalid-text" *ngIf="changeUserDataForm.get('birthDay')!.invalid && (changeUserDataForm.get('birthDay')!.dirty || changeUserDataForm.get('birthDay')!.touched)">
+              <small *ngIf="changeUserDataForm.get('birthDay')?.errors?.['required']">
+                {{'global.form.fieldRequired' | translate }}
+              </small>
+            </div>
+          </div>
+          <div class="user-data">
+            <label for="float-input">{{'global.user.phonenumber' | translate}}: </label>
+            <input type="text" pInputText formControlName="phoneNumber" [(ngModel)]="changeUser!.phone!">
+            <div class="input-invalid-text" *ngIf="changeUserDataForm.get('phoneNumber')!.invalid && (changeUserDataForm.get('phoneNumber')!.dirty || changeUserDataForm.get('phoneNumber')!.touched)">
+              <small *ngIf="changeUserDataForm.get('phoneNumber')?.errors?.['required']">
+                {{'global.form.fieldRequired' | translate }}
+              </small>
+            </div>
+          </div>
+          <div class="user-data">
+            <label for="float-input">{{'global.user.role' | translate}}: </label>
+            <input type="text" pInputText formControlName="role" [(ngModel)]="changeUser!.role!">
+            <div class="input-invalid-text" *ngIf="changeUserDataForm.get('role')!.invalid && (changeUserDataForm.get('role')!.dirty || changeUserDataForm.get('role')!.touched)">
+              <small *ngIf="changeUserDataForm.get('role')?.errors?.['required']">
+                {{'global.form.fieldRequired' | translate }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <p-button id="changeUserData" name="changeUserData"
+              type="submit" [disabled]="changeUserDataForm.invalid === true"
+              label="{{'global.action.save' | translate}}">
+        </p-button>
+      </form>
+    <h2>Dane chronione</h2>
+      <div class="buttons-container">
+        <p-button id="changePassword" name="changePassword"
+          (onClick)="changePassword('changePassword')"
+          label="{{'global.action.changePassword' | translate}}">
+        </p-button>
+        <!-- <p-button id="changeEmail" name="changeEmail"
+          (onClick)="changePassword('changeEmail')"
+          label="{{'global.action.changeEmail' | translate}}">
+        </p-button> -->
+        <!-- <p-button id="changePhoneNumber" name="changeNumber"
+          (onClick)="changePassword('changePhoneNumber')"
+          label="{{'global.action.changePhoneNumber' | translate}}">
+        </p-button> -->
+      </div>
+      <h2>Język</h2>
+      <p>wybór języka</p>
     </div>
   </ng-template>
 </div>

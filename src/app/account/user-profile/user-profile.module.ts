@@ -10,7 +10,8 @@ import { AvatarModule } from 'primeng/avatar';
 import { UserProfileComponent } from './user-profile.component';
 import { MenuModule } from 'primeng/menu';
 import { TabMenuModule } from 'primeng/tabmenu';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { FormsModule } from '@angular/forms';
     TranslateModule,
     MenuModule,
     TabMenuModule,
-    FormsModule
+    FormsModule,
+    InputTextModule,
+    ReactiveFormsModule
   ],
   exports: [
     UserProfileComponent

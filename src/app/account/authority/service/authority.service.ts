@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { head } from 'lodash';
 import { Observable } from 'rxjs';
@@ -10,6 +10,9 @@ interface Jwt {
   role?: string;
   permissions?: string [];
 }
+
+export type EntityResponseType = HttpResponse<User>;
+export type EntityArrayResponseType = HttpResponse<User[]>;
 
 export var globalHeaders: any;
 
@@ -23,6 +26,7 @@ export class AuthorityService {
   SIGNUP_URL = this.resourceUrl + '/Account/sign-up';
   CHANGE_PASSWORD_URL = this.resourceUrl + '/Account/password-change';
   RESET_PASSWORD_URL = this.resourceUrl + '/Account/password-reset';
+  ACCOUNT_DETAILS_URL = this.resourceUrl + '/Account/details';
 
   jwt: Jwt | null = null;
 
@@ -44,12 +48,20 @@ export class AuthorityService {
     return this.http.post(this.SIGNUP_URL, user);
   }
 
+  getUserData(): Observable<EntityResponseType> {
+    return this.http.get<User>(this.ACCOUNT_DETAILS_URL, {headers: this.headers!, observe: 'response'});
+  }
+
   changePassword(currentPassword: string, newPassword: string): Observable<any> {
     return this.http.put(this.CHANGE_PASSWORD_URL, {currentPassword, newPassword}, {headers: this.headers!});
   }
 
   resetPassword(email: string): Observable<any> {
     return this.http.put(this.RESET_PASSWORD_URL, {email});
+  }
+
+  changeUserData(user: User): Observable<any> {
+    return this.http.put(this.ACCOUNT_DETAILS_URL, user, {headers: this.headers!});
   }
 
   checkJwt(): boolean {

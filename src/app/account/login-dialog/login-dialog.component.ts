@@ -41,8 +41,8 @@ export class LoginDialogComponent implements OnInit {
   })
 
   newAccountForm = this.fb.group({
-    name: ['', [Validators.required]],
-    surname: ['', [Validators.required]],
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    surname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
     birthDay: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     phoneNumber: ['', [Validators.required, Validators.pattern("[0-9 ]{11}")]],

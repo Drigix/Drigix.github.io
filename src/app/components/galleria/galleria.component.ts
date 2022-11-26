@@ -34,16 +34,22 @@ export class GalleriaComponent implements OnInit {
       //this.photoService.getImages().then(images => this.images = images);
       this.images = [
         {
-          previewImageSrc: "../../../assets/photos/galleria1.jpg",
+          previewImageSrc: "https://dokariery.pl/documents/20184/418923/fryzjer_ksi%C4%85%C5%BCki.png/0accfe52-64bd-4c06-a3d7-e71ab334688f?t=1601379393866",
           thumbnailImageSrc: ".../../../assets/photos/galleria1s.jpg",
-          alt: "Description for Image 1",
-          title: "Title 1"
+          alt: "W naszej aplikacji znajdziesz wiele specjalistów z podanych branż. Możesz zarezerwować termin w swojego ulubionego specjalisty z wyprzedzeniem i to wszystko zupełnie za darmo, wystarczy że założysz konto!",
+          title: "Specjaliści w zawodzie!"
         },
         {
-          previewImageSrc: "../../../assets/photos/galleria2.jpg",
+          previewImageSrc: "https://s3.egospodarka.pl/grafika2/badania-internautow/Opinie-klientow-nie-do-przecenienia-139114-900x900.jpg",
           thumbnailImageSrc: ".../../../assets/photos/galleria1s.jpg",
-          alt: "Description for Image 2",
-          title: "Title 2"
+          alt: "Dzięki naszemu systemowi możesz przeglądąć stronę firmy łącznie z opiniami klientów, którzy już wcześniej skorzystali z usług w danym miejscu. Umożliwi ci to łatwiejsze podjęcie dezycji w którym z salonów dokonać ostatecznie rezerwacji.",
+          title: "Opinie klientów!"
+        },
+        {
+          previewImageSrc: "https://mikroporady.pl/files/Porady/Zdjcia/foto_dobrane/Likwidacja_dziaalnoci_gospodarczej.jpg",
+          thumbnailImageSrc: ".../../../assets/photos/galleria1s.jpg",
+          alt: "Jeśli zechcesz możesz założyć stronę własnej firmy w naszej aplikacji. Założ konto z rolą usługodawcy i promój twój salon z naszą pomocą!",
+          title: "Własna firma"
         }
       ]
       console.log(this.images);
