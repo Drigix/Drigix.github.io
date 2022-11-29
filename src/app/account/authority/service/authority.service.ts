@@ -1,3 +1,4 @@
+import jwt_decode from 'jwt-decode';
 import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { head } from 'lodash';
@@ -27,6 +28,7 @@ export class AuthorityService {
   ACCOUNT_DETAILS_URL = this.resourceUrl + '/Account/details';
 
   jwt: Jwt | null = null;
+  decodeAccessToken: { [key: string]: string } = {};
 
   headers: HttpHeaders | null = null;
 
@@ -62,10 +64,26 @@ export class AuthorityService {
     return this.http.put(this.ACCOUNT_DETAILS_URL, user, {headers: this.headers!});
   }
 
+  checkIsEmployeed(): boolean {
+    const jsonJwt = localStorage.getItem('jwt');
+    if (jsonJwt) {
+      this.jwt = JSON.parse(jsonJwt!);
+      this.decodeAccessToken = jwt_decode(this.jwt!.accessToken!);
+    }
+    if (this.decodeAccessToken['isEmployeed'].toLocaleLowerCase() === 'false') {
+      return false;
+    } else if (this.decodeAccessToken['isEmployeed'] === 'true') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   getAccessToken(): string {
     const jsonJwt = localStorage.getItem('jwt');
     if (jsonJwt) {
       this.jwt = JSON.parse(jsonJwt!);
+      this.decodeAccessToken = jwt_decode(this.jwt!.accessToken!);
     }
     return this.jwt ? this.jwt!.accessToken! : '';
   }

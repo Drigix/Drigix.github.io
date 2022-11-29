@@ -1,7 +1,7 @@
 <div class="main">
-  <p-carousel [value]="listCompanies" [numVisible]="3">
+  <p-carousel #carousel [value]="listCompanies" [numVisible]="numberVisible">
     <ng-template let-listCompany class="list" pTemplate="item">
-      <div class="card" #element [style.transform]="getTransform()">
+      <div class="card" #element>
         <div class="card-content" routerLink="/company/{{companyName}}">
           <img src="https://d375139ucebi94.cloudfront.net/region2/pl/104637/biz_photo/c732831d4fdd4ca6a79ba95521b7e468.jpeg?size=640x427">
           <div class="data-company">

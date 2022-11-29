@@ -51,7 +51,6 @@ export class UserProfileComponent implements OnInit {
           this.user = res.body ?? null;
           this.changeUser = {...this.user};
           this.loading = false;
-          //
         });
     }
 

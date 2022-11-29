@@ -69,13 +69,13 @@ export class CreateCompanyDialog implements OnInit {
     // this.createdCompany!.photos = null;
     // this.createdCompany!.descrption = null;
     this.companyService.create(this.createdCompany!).subscribe(
-      (response) => {
-        this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.createCompanySuccess')});
-        this.ref.close();
-        this.authorityService.loguot();
-      },
-      (error) => {
-        this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.createCompanyError')});
+      {
+        next: () => {
+          this.ref.close();
+        },
+        error: () => {
+          this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.createCompanyError')});
+        }
       }
     )
 

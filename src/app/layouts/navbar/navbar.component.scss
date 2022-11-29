@@ -12,28 +12,82 @@
   position: absolute;
 }
 
-:host ::ng-deep .languages .p-button {
-  border-color: transparent;
-  height: 40px;
-  width: 45px;
-  margin-top:3px;
-  margin-right: 10px;
+@media only screen and (max-width: 700px) {
+  .search {
+    padding-top: 2px;
+    padding-right: 40px;
+  }
+
+  :host ::ng-deep .p-dropdown {
+    margin-right: 30px;
+    margin-top: 2px;
+    width: 90px;
+    height: 80%;
+    border-radius: 15px;
+  }
+
+  :host ::ng-deep .p-dropdown .p-dropdown-label {
+    padding-left: 10px;
+  }
+
+  :host ::ng-deep .p-autocomplete {
+    input {
+      border-radius: 15px;
+      width: 220px;
+    }
+  }
 }
 
-:host ::ng-deep .account .p-button {
-  background-color: lightgray;
-  color: var(--primary-color);
-  border-radius: 50%;
-  height: 50px;
-  width: 55px;
+@media only screen and (min-width: 700px){
+  .search {
+    padding-top: 2px;
+    padding-right: 40px;
+  }
+
+  :host ::ng-deep .p-dropdown {
+    margin-right: 30px;
+    margin-top: 2px;
+    width: 90px;
+    height: 80%;
+    border-radius: 15px;
+  }
+
+  :host ::ng-deep .p-dropdown .p-dropdown-label {
+    padding-left: 10px;
+  }
+
+  :host ::ng-deep .p-autocomplete {
+    input {
+      border-radius: 15px;
+      width: 250px;
+    }
+  }
 }
 
-:host ::ng-deep .notLoginAccount .p-button {
-  margin-top: 2px;
-  margin-right: 8px;
-  background-color: white;
-  color: var(--primary-color);
-  border-radius: 15px;
+@media only screen and (min-width: 1280px){
+  .search {
+    padding-top: 2px;
+    padding-right: 40px;
+  }
+
+  :host ::ng-deep .p-dropdown {
+    margin-right: 30px;
+    margin-top: 2px;
+    width: 100px;
+    height: 80%;
+    border-radius: 15px;
+  }
+
+  :host ::ng-deep .p-dropdown .p-dropdown-label {
+    padding-left: 10px;
+  }
+
+  :host ::ng-deep .p-autocomplete {
+    input {
+      border-radius: 15px;
+      width: 300px;
+    }
+  }
 }
 
 .pi-bell {
@@ -78,26 +132,18 @@
   display: flex;
 }
 
-.search {
-  padding-top: 2px;
-  padding-right: 40px;
+:host ::ng-deep .account .p-button {
+  background-color: lightgray;
+  color: var(--primary-color);
+  border-radius: 50%;
+  height: 50px;
+  width: 55px;
 }
 
-:host ::ng-deep .p-dropdown {
-  margin-right: 30px;
+:host ::ng-deep .notLoginAccount .p-button {
   margin-top: 2px;
-  width: 100px;
-  height: 80%;
+  margin-right: 8px;
+  background-color: white;
+  color: var(--primary-color);
   border-radius: 15px;
-}
-
-:host ::ng-deep .p-dropdown .p-dropdown-label {
-  padding-left: 10px;
-}
-
-:host ::ng-deep .p-autocomplete {
-  input {
-    border-radius: 15px;
-    width: 300px;
-  }
 }

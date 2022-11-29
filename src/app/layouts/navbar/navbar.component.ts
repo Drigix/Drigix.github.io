@@ -1,3 +1,5 @@
+import { TranslateService } from '@ngx-translate/core';
+import { AuthorityService } from './../../account/authority/service/authority.service';
 import { Company } from './../../entities/company/company.model';
 import { Language } from './../../entities/language/language.model';
 import { Router } from '@angular/router';
@@ -10,6 +12,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { AppComponent } from 'src/app/app.component';
 import { isUserLogin, USER_ROLE } from 'src/app/account/authority/authority.component';
 import { Authority } from 'src/app/account/authority/authority.model';
+import { phoneView, tabletView } from '../main/main.component';
 
 @Component({
   selector: 'app-navbar',
@@ -36,9 +39,11 @@ export class NavbarComponent implements OnInit {
     selectedLanguage: Language | null = new Language('pl', '/src/assets/photos/flags/flaga_polski.jpg');
     selectedLanguages: any;
     amoutOfNotification = 1;
+    phoneView = false;
 
     constructor(public dialogService: DialogService, public messageService: MessageService, public appComponent: AppComponent,
-      private servicesPageComponent: ServicesPageComponent, private router: Router, private cd: ChangeDetectorRef) {}
+      private servicesPageComponent: ServicesPageComponent, private router: Router, private cd: ChangeDetectorRef, private authorityService: AuthorityService,
+      private translateService: TranslateService) {}
 
     ngOnInit(): void {
       this.languages = [
@@ -118,12 +123,33 @@ export class NavbarComponent implements OnInit {
     }
 
     setEmployeeMenu(): void {
-      this.items = [
-        {
-          label: 'Home',
-          routerLink: '/'
-        }
-      ]
+      if(this.authorityService.checkIsEmployeed()) {
+        this.items = [
+          {
+            label: 'Home',
+            routerLink: '/'
+          },
+          {
+            label: 'Rezerwacje',
+            routerLink: 'manager/company-reservations'
+          },
+          {
+            label: 'Harmonogram rezerwacji',
+            routerLink: '/manager/company-schedule'
+          },
+          {
+            label: 'Harmonogram pracowników',
+            routerLink: '/manager/company-worker-schedule'
+          }
+        ];
+      } else {
+        this.items = [
+          {
+            label: 'Home',
+            routerLink: '/'
+          }
+        ];
+      }
     }
 
     setMenagerMenu(): void {
@@ -175,8 +201,8 @@ export class NavbarComponent implements OnInit {
 
     openLoginDialog(type: string): void {
       const ref = this.dialogService.open(LoginDialogComponent, {
-        header: 'Logowanie',
-        width: '25%',
+        header: this.translateService.instant('global.header.login'),
+        width: phoneView || tabletView ? '60%': '35%',
         data: {
           type: type
         }
@@ -185,12 +211,11 @@ export class NavbarComponent implements OnInit {
     }
 
     handleLoginDialogResponse(response: any): void {
-      if (response.result) {
-        this.logIn = true;
-        this.messageService.add({key: 'mainToast', severity: 'success', summary:'Sukces', detail:'Sukces'});
-      } else {
-        this.messageService.add({key: 'mainToast', severity: 'error', summary:'Błąd', detail:'Błąd'});
-    }
+      if(response) {
+        localStorage.setItem('jwt', response);
+        this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.loginSuccess')});
+        window.location.reload();
+      }
   }
 
   logoutAccount(): void {

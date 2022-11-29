@@ -1,3 +1,5 @@
+import { AuthorityService } from './../../account/authority/service/authority.service';
+import { MessageService } from 'primeng/api';
 import { USER_ROLE } from 'src/app/account/authority/authority.component';
 import { Authority } from './../../account/authority/authority.model';
 import { EditCompanyDialogComponent } from './edit-company-dialog/edit-company-dialog.component';
@@ -16,10 +18,12 @@ import { Company } from 'src/app/entities/company/company.model';
 export class ManagerHomeComponent implements OnInit {
 
   isCompanyExist = false;
+  isEmployeed = false;
 
   company: Company | null = null;
 
-  constructor(public router: Router, public dialogService: DialogService, public translateService: TranslateService) { }
+  constructor(private router: Router, private dialogService: DialogService, private translateService: TranslateService, private messageService: MessageService,
+    private authorityService: AuthorityService) { }
 
   ngOnInit(): void {
     if(Authority.OWNER === USER_ROLE) {
@@ -36,7 +40,7 @@ export class ManagerHomeComponent implements OnInit {
       header: this.translateService.instant('global.header.createCompany'),
       width: '80%',
     });
-    //ref.onClose.subscribe((response) => this.handleLoginDialogResponse(response))
+    ref.onClose.subscribe((response) => this.handleLoginDialogResponse(response))
   }
 
   openEditCompanyDialog(): void {
@@ -48,5 +52,14 @@ export class ManagerHomeComponent implements OnInit {
       }
     });
     //ref.onClose.subscribe((response) => this.handleLoginDialogResponse(response))
+  }
+
+  handleLoginDialogResponse(response: any): void {
+    if(response) {
+      if(response.result) {
+        this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.createCompanySuccess')});
+        this.authorityService.loguot();
+      }
+    }
   }
 }

@@ -1,4 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Carousel } from 'primeng/carousel';
+import { phoneView, tabletView } from 'src/app/layouts/main/main.component';
 
 @Component({
   selector: 'app-card',
@@ -8,6 +10,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class CardComponent implements OnInit {
 
   @ViewChild('element') element?: ElementRef;
+  @ViewChild('carousel', {static: true}) carousel?: Carousel;
 
   listCompanies = [1,2,3,4];
   rating = 3;
@@ -17,29 +20,47 @@ export class CardComponent implements OnInit {
   styleToCard = 'inner';
   slideNumber = 0;
   distanceX = 0 ;
+  numberVisible = 3;
   hideLeftArrow = false;
+  tabletView = false;
+  phoneView = false;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.onResize();
   }
 
-  handleClick(direction: string): void {
-    this.hideLeftArrow = false;
-    let distance = this.element?.nativeElement.getBoundingClientRect().x - 189 ;
-    console.log(distance);
-    console.log(this.element?.nativeElement);
-    if (direction === 'left' && this.slideNumber > 0) {
-        this.slideNumber = this.slideNumber - 1;
-        this.distanceX = distance + 527.7;
-    }
-    if (direction === 'right' && this.slideNumber < 5) {
-        this.slideNumber = this.slideNumber + 1;
-        this.distanceX = distance - 527.7;
+  @HostListener('window:resize')
+  onResize(): void {
+    if(phoneView) {
+      this.numberVisible = 1;
+      console.log(phoneView);
+    } else if(tabletView) {
+      this.numberVisible = 2;
+      console.log(tabletView);
+    } else {
+      this.numberVisible = 3;
     }
   }
 
-  getTransform(): string {
-    return `translateX(${this.distanceX}px)`;
-  }
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event: any): void {
+  //   if(event.target.innerWidth < 1280 && event.target.innerWidth > 700) {
+  //     //this.carousel!.numVisible = 2;
+  //     this.numberVisible = 2;
+  //     this.phoneView = false;
+  //     this.tabletView = true;
+  //   } else if ( event.target.innerWidth <= 700) {
+  //     //this.carousel!.numVisible = 1;
+  //     this.numberVisible = 1;
+  //     this.tabletView = false;
+  //     this.phoneView = true;
+  //   } else {
+  //     this.numberVisible = 3;
+  //     this.carousel!.numVisible = 3;
+  //     this.tabletView = false;
+  //     this.phoneView = false;
+  //   }
+  // }
 }

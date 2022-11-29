@@ -85,17 +85,14 @@ export class LoginDialogComponent implements OnInit {
       this.authorityService.login(this.user!.email!, this.user!.password!).subscribe(
         {
           next: (response) => {
-            localStorage.setItem('jwt', response);
-            window.location.reload();
             this.loading = false;
-            this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.emailActive')});
+            this.ref.close(response);
           },
           error: () => {
             this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.wrongEmailOrPassword')});
             this.loading = false;
           }
-        }
-        );
+        });
     }
 
     onSignUp(): void {
@@ -104,17 +101,19 @@ export class LoginDialogComponent implements OnInit {
         this.authorityService.signup(this.user!).subscribe(
           {
             next: () => {
+              this.loading = false;
               this.ref.close();
               this.messageService.add({key: 'mainToast', severity:'success', summary: 'Sukces', detail: this.translateService.instant('global.message.activatingEmail')});
-              this.loading = false;
             },
             error: () => {
+              this.loading = false;
               this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.signUpError')});
             }
           }
         );
       } else {
-        this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.emailActive')});
+        this.loading = false;
+        this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.differentPasswords')});
       }
     }
 

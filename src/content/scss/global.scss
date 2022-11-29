@@ -18,20 +18,57 @@ html {
   height: 100%;
 }
 
-.wrapper {
-  background-color: white;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin-left: auto;
-  margin-right: auto;
-  min-height: 100vh;
-  width: calc(100% - 20px);
-  max-width: 1280px;
-  position: relative;
-  img {
-    max-width: 1280px;
-    max-height: 660px;
+@media only screen and (max-width: 700px){
+  .wrapper {
+    background-color: white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100vh;
+    width: calc(100% - 20px);
+    max-width: 440px;
+    position: relative;
+    img {
+      max-width: 440px;
+      max-height: 320px;
+    }
   }
 }
+
+@media only screen and (min-width: 700px){
+  .wrapper {
+    background-color: white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100vh;
+    width: calc(100% - 20px);
+    max-width: 700px;
+    position: relative;
+    img {
+      max-width: 700px;
+      max-height: 360px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .wrapper {
+    background-color: white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100vh;
+    width: calc(100% - 20px);
+    max-width: 1280px;
+    position: relative;
+    img {
+      max-width: 1280px;
+      max-height: 660px;
+    }
+  }
+}
+
 
 
 .dialog-window {
@@ -91,3 +128,4 @@ html {
   display: flex;
   justify-content: center;
 }
+
