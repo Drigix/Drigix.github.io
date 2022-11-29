@@ -67,7 +67,14 @@
       "date": "Date",
       "serviceName": "Service name",
       "serviceTime": "Duration of the service",
-      "servicePrice": "Price of the service"
+      "servicePrice": "Price of the service",
+      "emailPattern": "Wrong email format!",
+      "passwordPattern": "Your password have to have at least 8 characters, 1 capital letter, 1 digit and 1 special character!",
+      "phonePattern": "Phonenumber has to have 11 digit(first 2 is area code)!",
+      "nameMinLength": "Name has to have at least 3 characters!",
+      "nameMaxLength": "Name can have at most 20 characters!",
+      "surnameMinLength": "Surname has to have at least 2 characters!",
+      "surnameMaxLength": "Surname can have at most 30 characters!"
     },
     "services": {
       "hairdresser": "Hairdresser",

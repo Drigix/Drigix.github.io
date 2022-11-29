@@ -74,7 +74,14 @@
       "id": "id",
       "serviceName": "Nazwa usługi",
       "serviceTime": "Czas trwania usługi",
-      "servicePrice": "Cena usługi"
+      "servicePrice": "Cena usługi",
+      "emailPattern": "Niewłaściwy format emaila!",
+      "passwordPattern": "Twoje hasło musi mieć co najmniej 8 znaków, dużą literę, 1 liczbę i 1 znak specjalny!",
+      "phonePattern": "Numer telefonu musi zawierać 11 liczb(2 pierwsze to kierunkowy)!",
+      "nameMinLength": "Imię musi mieć conajmniej 3 litery!",
+      "nameMaxLength": "Imię może mieć maksymalnie 20 liter!",
+      "surnameMinLength": "Nazwisko musi miec conajmniej 2 litery!",
+      "surnameMaxLength": "Nazwisko może mieć maksymalnie 30 liter!"
     },
     "services": {
       "hairdresser": "Fryzjer",

@@ -30,6 +30,7 @@ export class UserProfileComponent implements OnInit {
     isMenuSettings = false;
     user: User | null = null;
     changeUser: User | null = null;
+    loading = true;
 
     constructor(public dialogService: DialogService, public translateService: TranslateService, private authorityService: AuthorityService,
       private messageService: MessageService, private fb: UntypedFormBuilder) {}
@@ -44,12 +45,13 @@ export class UserProfileComponent implements OnInit {
     }
 
     loadUserData(): void {
+      this.loading = true;
       this.authorityService.getUserData().subscribe(
         (res: HttpResponse<User>) => {
           this.user = res.body ?? null;
-          this.changeUser = res.body ?? null;
-        }
-      )
+          this.changeUser = {...this.user};
+          this.loading = false;
+        });
     }
 
     changeMenu(menuOption: string): void {
@@ -70,12 +72,14 @@ export class UserProfileComponent implements OnInit {
 
     changeUserData(): void {
       this.authorityService.changeUserData(this.changeUser!).subscribe(
-        (response) => {
+       {
+        next: () => {
           this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.userDataChangeSuccess')});
         },
-        (error) => {
+        error: (error) => {
           this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.userDataChangeError')});
         }
+       }
       )
     }
 

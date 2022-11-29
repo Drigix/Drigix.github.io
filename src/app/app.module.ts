@@ -18,7 +18,7 @@ import { AppComponent } from './app.component';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { LayoutsModule } from './layouts/layouts.module';
@@ -26,6 +26,7 @@ import { AccountModule } from './account/account.,module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GalleriaComponent } from './components/galleria/galleria.component';
 import { ContactPageModule } from './pages/contact/contact-page.module';
+import { TokenInterceptor } from './config/token-interceptor.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -60,7 +61,8 @@ export function createTranslateLoader(http: HttpClient) {
     })
   ],
   providers: [
-    AuthorityComponent
+    AuthorityComponent,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

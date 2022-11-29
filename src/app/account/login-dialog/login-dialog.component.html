@@ -105,6 +105,9 @@
           <small *ngIf="loginForm.get('email')?.errors?.['required']">
             {{'global.form.fieldRequired' | translate }}
           </small>
+          <small *ngIf="loginForm.get('email')?.errors?.['email']">
+            {{'global.form.emailPattern' | translate }}
+          </small>
         </div>
 
         <p-password formControlName="password" placeholder="{{'global.user.password' | translate}}" [(ngModel)]="user.password"></p-password>
@@ -137,12 +140,24 @@
           <small *ngIf="newAccountForm.get('name')?.errors?.['required']">
             {{'global.form.fieldRequired' | translate }}
           </small>
+          <small *ngIf="newAccountForm.get('name')?.errors?.['minlength']">
+            {{'global.form.nameMinLength' | translate }}
+          </small>
+          <small *ngIf="newAccountForm.get('name')?.errors?.['maxlength']">
+            {{'global.form.nameMaxLength' | translate }}
+          </small>
         </div>
 
         <input type="text" pInputText formControlName="surname" placeholder="{{'global.user.surname' | translate}}" [(ngModel)]="user.lastName"/>
         <div class="input-invalid-text" *ngIf="newAccountForm.get('surname')!.invalid && (newAccountForm.get('surname')!.dirty || newAccountForm.get('surname')!.touched)">
           <small *ngIf="newAccountForm.get('surname')?.errors?.['required']">
             {{'global.form.fieldRequired' | translate }}
+          </small>
+          <small *ngIf="newAccountForm.get('surname')?.errors?.['minlength']">
+            {{'global.form.surnameMinLength' | translate }}
+          </small>
+          <small *ngIf="newAccountForm.get('surname')?.errors?.['maxlength']">
+            {{'global.form.surnameMaxLength' | translate }}
           </small>
         </div>
 
@@ -158,6 +173,9 @@
           <small *ngIf="newAccountForm.get('email')?.errors?.['required']">
             {{'global.form.fieldRequired' | translate }}
           </small>
+          <small *ngIf="newAccountForm.get('email')?.errors?.['email']">
+            {{'global.form.emailPattern' | translate }}
+          </small>
         </div>
 
         <input type="text" pInputText formControlName="phoneNumber" placeholder="{{'global.user.phonenumber' | translate}}" [(ngModel)]="user.phone" pKeyFilter="int"/>
@@ -165,12 +183,18 @@
           <small *ngIf="newAccountForm.get('phoneNumber')?.errors?.['required']">
             {{'global.form.fieldRequired' | translate }}
           </small>
+          <small *ngIf="newAccountForm.get('phoneNumber')?.errors?.['pattern']">
+            {{'global.form.phonePattern' | translate }}
+          </small>
         </div>
 
         <p-password formControlName="password" placeholder="{{'global.user.password' | translate}}" [(ngModel)]="user.password"></p-password>
         <div class="input-invalid-text" *ngIf="newAccountForm.get('password')!.invalid && (newAccountForm.get('password')!.dirty || newAccountForm.get('password')!.touched)">
           <small *ngIf="newAccountForm.get('password')?.errors?.['required']">
             {{'global.form.fieldRequired' | translate }}
+          </small>
+          <small class="form-text text-danger" *ngIf="newAccountForm.get('password')?.errors?.['pattern']">
+            {{'global.form.passwordPattern' | translate }}
           </small>
         </div>
 
@@ -206,6 +230,9 @@
         <div class="input-invalid-text" *ngIf="forgotPasswordForm.get('email')!.invalid && (forgotPasswordForm.get('email')!.dirty || forgotPasswordForm.get('email')!.touched)">
           <small *ngIf="forgotPasswordForm.get('email')?.errors?.['required']">
             {{'global.form.fieldRequired' | translate }}
+          </small>
+          <small *ngIf="forgotPasswordForm.get('email')?.errors?.['email']">
+            {{'global.form.emailPattern' | translate }}
           </small>
         </div>
 

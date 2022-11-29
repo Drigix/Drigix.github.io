@@ -1,6 +1,6 @@
 <div class="wrapper">
   <p-tabMenu [model]="items"></p-tabMenu>
-    <div class="profile" *ngIf="isMenuProfile; else menuHistory">
+    <div class="profile" *ngIf="isMenuProfile && !loading; else menuHistory">
       <div class="profile-content">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0m5Cy4lXCbuyG54L0vuo3i5-ALavHe9KmhWA_wDM&s">
       <h2>{{user!.firstName!}} {{user!.lastName!}}</h2>
@@ -21,18 +21,18 @@
       </div>
     </div>
   <ng-template #menuHistory>
-    <div class="history" *ngIf="isMenuHistory; else menuSettings">
+    <div class="history" *ngIf="isMenuHistory && !loading; else menuSettings">
       <h2>menuHistory</h2>
     </div>
   </ng-template>
   <ng-template #menuSettings>
-    <div class="settings" *ngIf="isMenuSettings">
+    <div class="settings" *ngIf="isMenuSettings && !loading; else spinner">
       <h2>Dane podstawowe</h2>
       <form #formChangeUserData="ngForm" (ngSubmit)="changeUserData()" [formGroup]="changeUserDataForm">
         <div class="account-data">
           <div class="user-data">
             <label for="float-input">{{'global.user.name' | translate}}: </label>
-            <input type="text" pInputText formControlName="name" [(ngModel)]="changeUser!.firstName!" (close)="temp()">
+            <input type="text" pInputText formControlName="name" [(ngModel)]="changeUser!.firstName!" (ngModelChange)="temp()">
             <div *ngIf="changeUserDataForm.get('name')!.invalid && (changeUserDataForm.get('name')!.dirty || changeUserDataForm.get('name')!.touched)">
               <small class="p-error block" *ngIf="changeUserDataForm.get('name')?.errors?.['required']">
                 {{'global.form.fieldRequired' | translate }}
@@ -115,6 +115,11 @@
       </div>
       <h2>Język</h2>
       <p>wybór języka</p>
+    </div>
+  </ng-template>
+  <ng-template #spinner>
+    <div class="spinner" *ngIf="loading === true">
+      <p-progressSpinner></p-progressSpinner>
     </div>
   </ng-template>
 </div>

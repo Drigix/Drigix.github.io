@@ -1,3 +1,4 @@
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TranslateModule } from '@ngx-translate/core';
 import { LoginDialogModule } from './../login-dialog/login-dialog.module';
 import { LoginDialogComponent } from './../login-dialog/login-dialog.component';
@@ -29,7 +30,8 @@ import {InputTextModule} from 'primeng/inputtext';
     TabMenuModule,
     FormsModule,
     InputTextModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ProgressSpinnerModule
   ],
   exports: [
     UserProfileComponent

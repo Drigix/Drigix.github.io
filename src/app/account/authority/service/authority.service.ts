@@ -14,8 +14,6 @@ interface Jwt {
 export type EntityResponseType = HttpResponse<User>;
 export type EntityArrayResponseType = HttpResponse<User[]>;
 
-export var globalHeaders: any;
-
 @Injectable({
   providedIn: 'root',
 })
@@ -49,7 +47,7 @@ export class AuthorityService {
   }
 
   getUserData(): Observable<EntityResponseType> {
-    return this.http.get<User>(this.ACCOUNT_DETAILS_URL, {headers: this.headers!, observe: 'response'});
+    return this.http.get<User>(this.ACCOUNT_DETAILS_URL, { observe: 'response'});
   }
 
   changePassword(currentPassword: string, newPassword: string): Observable<any> {
@@ -64,12 +62,18 @@ export class AuthorityService {
     return this.http.put(this.ACCOUNT_DETAILS_URL, user, {headers: this.headers!});
   }
 
+  getAccessToken(): string {
+    const jsonJwt = localStorage.getItem('jwt');
+    if (jsonJwt) {
+      this.jwt = JSON.parse(jsonJwt!);
+    }
+    return this.jwt ? this.jwt!.accessToken! : '';
+  }
+
   checkJwt(): boolean {
     const jsonJwt = localStorage.getItem('jwt');
     if (jsonJwt) {
       this.jwt = JSON.parse(jsonJwt!);
-      this.headers = new HttpHeaders({'Authorization': ' Bearer ' + this.jwt!.accessToken});
-      globalHeaders = this.headers;
     }
     return this.jwt ? true : false;
   }

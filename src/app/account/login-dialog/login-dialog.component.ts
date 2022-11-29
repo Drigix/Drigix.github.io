@@ -36,7 +36,7 @@ export class LoginDialogComponent implements OnInit {
   })
 
   loginForm = this.fb.group({
-    email: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]]
   })
 
@@ -46,13 +46,13 @@ export class LoginDialogComponent implements OnInit {
     birthDay: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     phoneNumber: ['', [Validators.required, Validators.pattern("[0-9 ]{11}")]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
-    confirmPassword: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
+    confirmPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
     role: ['', [Validators.required]]
   })
 
   forgotPasswordForm = this.fb.group({
-    email: ['', [Validators.required]]
+    email: ['', [Validators.required, Validators.email]]
   });
 
   currentPassword: string | null = null;
@@ -61,8 +61,6 @@ export class LoginDialogComponent implements OnInit {
 
   type: string | null = null;
   isReservation = false;
-
-  name: any;
 
   confirmPassword: any;
   loading = false;
@@ -85,15 +83,17 @@ export class LoginDialogComponent implements OnInit {
     onLogIn(): void {
       this.loading = true;
       this.authorityService.login(this.user!.email!, this.user!.password!).subscribe(
-        (response) => {
-          localStorage.setItem('jwt', response);
-          window.location.reload();
-          this.loading = false;
-          this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.emailActive')});
-        },
-        (error) => {
-          this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.wrongEmailOrPassword')});
-          this.loading = false;
+        {
+          next: (response) => {
+            localStorage.setItem('jwt', response);
+            window.location.reload();
+            this.loading = false;
+            this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.emailActive')});
+          },
+          error: () => {
+            this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.wrongEmailOrPassword')});
+            this.loading = false;
+          }
         }
         );
     }
@@ -102,13 +102,15 @@ export class LoginDialogComponent implements OnInit {
       this.loading = true;
       if(this.user.password === this.confirmPassword) {
         this.authorityService.signup(this.user!).subscribe(
-          (response) => {
-            this.ref.close();
-            this.messageService.add({key: 'mainToast', severity:'success', summary: 'Sukces', detail: this.translateService.instant('global.message.activatingEmail')});
-            this.loading = false;
-          },
-          (error) => {
-            this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.signUpError')});
+          {
+            next: () => {
+              this.ref.close();
+              this.messageService.add({key: 'mainToast', severity:'success', summary: 'Sukces', detail: this.translateService.instant('global.message.activatingEmail')});
+              this.loading = false;
+            },
+            error: () => {
+              this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.signUpError')});
+            }
           }
         );
       } else {
@@ -119,14 +121,16 @@ export class LoginDialogComponent implements OnInit {
     onPasswordChange(): void {
       this.loading = true;
       this.authorityService.changePassword(this.currentPassword!, this.newPassword!).subscribe(
-        (response) => {
-          this.loading = false;
-          this.ref.close();
-          this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.passwordChangeSuccess')});
-        },
-        (error) => {
-          this.loading = false;
-          this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.passwordChangeError')});
+        {
+          next: () => {
+            this.loading = false;
+            this.ref.close();
+            this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.passwordChangeSuccess')});
+          },
+          error: () => {
+            this.loading = false;
+            this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.passwordChangeError')});
+          }
         }
       )
     }
@@ -142,14 +146,16 @@ export class LoginDialogComponent implements OnInit {
     onPasswordForgot(): void {
       this.loading = true;
       this.authorityService.resetPassword(this.email!).subscribe(
-        (response) => {
-          this.loading = false;
-          this.ref.close();
-          this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.passwordForgotSuccess')});
-        },
-        (error) => {
-          this.loading = false;
-          this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.passwordForgotError')});
+        {
+          next: () => {
+            this.loading = false;
+            this.ref.close();
+            this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.passwordForgotSuccess')});
+          },
+          error: () => {
+            this.loading = false;
+            this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.passwordForgotError')});
+          }
         }
       )
     }

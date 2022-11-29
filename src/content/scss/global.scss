@@ -86,3 +86,8 @@ html {
   color:var(--primary-color-lighter);
   margin-top:-12px;
 }
+
+.spinner {
+  display: flex;
+  justify-content: center;
+}
