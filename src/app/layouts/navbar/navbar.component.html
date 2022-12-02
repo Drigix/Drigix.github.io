@@ -28,7 +28,7 @@
           </p-dropdown>
       </div>
     <div class="account" *ngIf="logIn; else notLogIn">
-      <div *ngIf="isClient">
+      <div *ngIf="isClient" style="margin: 20px 5px 0 0;">
         <div class="notification" *ngIf="amoutOfNotification === 0; else notificationExist">
           <i class="pi pi-bell" severity="success" (click)="op.toggle($event)"></i>
         </div>
@@ -38,7 +38,7 @@
           </div>
         </ng-template>
       </div>
-      <p-button (onClick)="showUserMenu()">
+      <p-button (onClick)="userMenuOverlay.toggle($event)">
         <p-avatar icon="pi pi-user">
         </p-avatar>
       </p-button>
@@ -63,22 +63,26 @@
   </ng-template>
 </p-menubar>
 
-<div class="user-menu" *ngIf="showMenu">
-  <ul>
-    <li>
-      <i class="pi pi-user-edit"></i>
-      <a routerLink="/user-profile">
-        <span>
-          {{'global.action.account' | translate}}
-        </span>
-      </a>
-    </li>
-    <li (click)="logoutAccount()" style="cursor: pointer;">
-      <i class="pi pi-power-off"></i>
-      {{'global.action.logout' | translate}}
-    </li>
-  </ul>
-</div>
+<p-overlayPanel #userMenuOverlay>
+  <ng-template pTemplate>
+    <div class="user-menu">
+      <ul>
+        <li>
+          <i class="pi pi-user-edit"></i>
+          <a routerLink="/user-profile">
+            <span>
+              {{'global.action.account' | translate}}
+            </span>
+          </a>
+        </li>
+        <li (click)="logoutAccount()" style="cursor: pointer;">
+          <i class="pi pi-power-off"></i>
+          {{'global.action.logout' | translate}}
+        </li>
+      </ul>
+    </div>
+  </ng-template>
+</p-overlayPanel>
 
 <p-overlayPanel #op>
   <ng-template pTemplate>

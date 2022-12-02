@@ -127,19 +127,16 @@
   font-size: 20px;
 }
 
+.account {
+  display: flex;
+}
+
 .notification {
   display: inline;
   padding-right: 20px;
 }
 
 .user-menu {
-  position: absolute;
-  right: 5px;
-  top: 60px;
-  background-color: var(--primary-color);
-  color:white;
-  border-radius: 5px;
-
   ul {
     list-style-type: none;
     margin-left: -20px;
@@ -148,7 +145,7 @@
   li {
     margin: 0;
     padding: 20px 30px;
-    color: white;
+    color: var(--primary-color);
     font-weight: 700;
     border-top-right-radius: 0;
     border-top-left-radius: 0;

@@ -62,7 +62,6 @@ export class CreateCompanyDialog implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.createdCompany);
     this.createdCompany!.categoryId = this.createdCompanyCategory?.code;
     this.createdCompany!.address = this.createdCompanyAddress;
     this.createdCompany!.logo = 'https://d375139ucebi94.cloudfront.net/region2/pl/104637/biz_photo/c732831d4fdd4ca6a79ba95521b7e468.jpeg?size=640x427';

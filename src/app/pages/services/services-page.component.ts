@@ -37,11 +37,10 @@ export class ServicesPageComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.typeId = this.route.snapshot.paramMap.get('type');
     this.loadIndustries();
-    this.filterByIndustry();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+    console.log(2);
   }
 
   loadIndustries(): void {
@@ -52,6 +51,7 @@ export class ServicesPageComponent implements OnInit, OnChanges {
           if(item.code === this.typeId) {
             this.selectedIndustry = item;
             this.filterByIndustry();
+            this.cd.detectChanges();
           }
         })
       });

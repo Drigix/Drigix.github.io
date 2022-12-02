@@ -1,16 +1,16 @@
 <div class="company-services">
   <div class="wrapper">
       <div class="table-with-buttons full-height">
-        <app-table [columns]="servicesColumns" [values]="services" (selected)="onWorkerSelect($event)"
+        <app-table [columns]="servicesColumns" [values]="services" (selected)="onServiceSelect($event)"
           [showTableName]="true" tableName="{{'global.header.services' | translate }}">
         </app-table>
 
         <div class="button-container">
           <p-button icon="pi pi-plus" styleClass="button-width"
-           label="{{'global.action.add' | translate }}" (onClick)="openCompanyWorkerDialog()">
+           label="{{'global.action.add' | translate }}" (onClick)="openCompanyServiceDialog()">
           </p-button>
           <p-button icon="pi pi-pencil" styleClass="button-width" [disabled]="selectedService === null"
-           label="{{'global.action.edit' | translate }}" (onClick)="openCompanyWorkerDialog(true)">
+           label="{{'global.action.edit' | translate }}" (onClick)="openCompanyServiceDialog(true)">
           </p-button>
           <p-button icon="pi pi-trash" styleClass="button-width" [disabled]="selectedService === null"
            label="{{'global.action.delete' | translate }}" (onClick)="openDeleteDialog()">

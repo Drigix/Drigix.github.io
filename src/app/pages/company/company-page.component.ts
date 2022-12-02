@@ -8,7 +8,7 @@ import { ReservationDialogComponent } from './reservation/reservation-dialog/res
 import { DialogService } from 'primeng/dynamicdialog';
 import { Company } from './../../entities/company/company.model';
 import { TranslateService } from '@ngx-translate/core';
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MenuItem, MessageService } from "primeng/api";
 import { Address } from 'src/app/entities/company/address.model';
 
@@ -20,6 +20,7 @@ import { Address } from 'src/app/entities/company/address.model';
 export class CompanyPageComponent implements OnInit {
 
   @Output() company =  new EventEmitter<Company>();
+  @Input() actualCompanyId?: string;
 
   companyId: string | null = null;
 
@@ -31,6 +32,7 @@ export class CompanyPageComponent implements OnInit {
 
   companyOpinions: any = [];
 
+  servicePage = 0;
   opinionPage = 0;
 
   constructor(private translateService: TranslateService, private dialogService: DialogService, private messageService: MessageService,
@@ -45,8 +47,11 @@ export class CompanyPageComponent implements OnInit {
       {label: this.translateService.instant('global.company.header.localization'), icon: 'pi pi-fw pi-map-marker', command: ()=> this.changeMenuItem('lokalization')},
       {label: this.translateService.instant('global.company.header.opinions'), icon: 'pi pi-fw pi-comment', command: ()=> this.changeMenuItem('opinions')}
     ];
+    console.log(this.actualCompanyId);
+    if(this.actualCompanyId) {
+      this.companyId = this.actualCompanyId;
+    }
     this.loadCompany();
-    this.loadDataCompany();
   }
 
   exportCompany(): void {
@@ -57,37 +62,8 @@ export class CompanyPageComponent implements OnInit {
     this.companyService.findCompanyById(this.companyId!).subscribe(
       (res: HttpResponse<Company>) => {
         this.currentCompany = res.body ?? null;
-        console.log(this.currentCompany);
       }
     )
-  }
-
-  loadDataCompany(): void {
-    // this.industry = new Category('1', 'hairdresser');
-    // this.currentCompany = new Company();
-    // this.exportCompany();
-    // this.companyOpinions = [
-    //   {
-    //     name: 'Michał',
-    //     rating: 4,
-    //     description: 'Było ok'
-    //   },
-    //   {
-    //     name: 'Michał',
-    //     rating: 4,
-    //     description: 'Było ok'
-    //   },
-    //   {
-    //     name: 'Michał',
-    //     rating: 4,
-    //     description: 'Było ok'
-    //   },
-    //   {
-    //     name: 'Michał',
-    //     rating: 4,
-    //     description: 'Było ok'
-    //   }
-    // ]
   }
 
   changeMenuItem(view: string): void {
@@ -132,6 +108,10 @@ export class CompanyPageComponent implements OnInit {
       } else {
         this.messageService.add({key: 'mainToast', severity: 'error', summary:'Błąd', detail:'Błąd'});
     }
+  }
+
+  changePageService(event: any): void {
+    this.servicePage = event.page;
   }
 
   changePage(event: any): void {

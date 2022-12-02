@@ -1,3 +1,5 @@
+import { HttpResponse } from '@angular/common/http';
+import { CompanyService } from 'src/app/entities/company/service/company.service';
 import { AuthorityService } from './../../account/authority/service/authority.service';
 import { MessageService } from 'primeng/api';
 import { USER_ROLE } from 'src/app/account/authority/authority.component';
@@ -21,14 +23,26 @@ export class ManagerHomeComponent implements OnInit {
   isEmployeed = false;
 
   company: Company | null = null;
+  companyId: string | null = null;
+  loading = false;
 
   constructor(private router: Router, private dialogService: DialogService, private translateService: TranslateService, private messageService: MessageService,
-    private authorityService: AuthorityService) { }
+    private authorityService: AuthorityService, private companyService: CompanyService) { }
 
   ngOnInit(): void {
+    this.loading = true;
     if(Authority.OWNER === USER_ROLE) {
       this.isCompanyExist = true;
+      this.loadActualCompany();
     }
+  }
+
+  loadActualCompany(): void {
+    this.companyService.findActualCompany().subscribe(
+      (res: HttpResponse<string>) => {
+        this.companyId = res.body ?? null;
+        this.loading = false;
+      });
   }
 
   setCompany(event: any): void {
@@ -40,7 +54,7 @@ export class ManagerHomeComponent implements OnInit {
       header: this.translateService.instant('global.header.createCompany'),
       width: '80%',
     });
-    ref.onClose.subscribe((response) => this.handleLoginDialogResponse(response))
+    ref.onClose.subscribe((response) => this.handleLoginDialogResponse(response));
   }
 
   openEditCompanyDialog(): void {

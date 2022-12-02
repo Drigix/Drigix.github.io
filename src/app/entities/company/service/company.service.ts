@@ -13,6 +13,7 @@ export class CompanyService {
 
   private resourceUrl = 'https://reservio.azurewebsites.net';
   private COMPANY_URL = this.resourceUrl + '/Companies';
+  private ACTUAL_COMPANY_URL = this.resourceUrl + '/Employees';
 
   constructor(private http: HttpClient) {}
 
@@ -26,5 +27,9 @@ export class CompanyService {
 
   findCompanyById(companyId: string): Observable<EntityResponseType> {
     return this.http.get<Company>(`${this.COMPANY_URL}/${companyId}/details`, { observe: 'response' })
+  }
+
+  findActualCompany(): Observable<HttpResponse<string>> {
+    return this.http.get<string>(`${this.ACTUAL_COMPANY_URL}/actualCompany`, { observe: 'response' })
   }
 }

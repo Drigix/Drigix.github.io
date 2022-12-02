@@ -1,9 +1,12 @@
+import { HttpResponse } from '@angular/common/http';
+import { Services } from './../../entities/services/services.model';
 import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { DialogService } from "primeng/dynamicdialog";
 import { UniversalTableColumn } from "src/app/components/table/column.model";
 import { ManagerCompanyServicesDialogComponent } from "./manager-company-services-dialog/manager-company-services-dialog.component";
+import { ServicesService } from 'src/app/entities/services/service/services.service';
 
 @Component({
   selector: 'app-manager-company-services',
@@ -13,23 +16,7 @@ import { ManagerCompanyServicesDialogComponent } from "./manager-company-service
 export class ManagerCompanyServicesComponent implements OnInit{
 
   servicesColumns: UniversalTableColumn[] = [];
-  services = [
-    {
-      name: 'Strzyżenie męskie',
-      time: '40min',
-      price: '60zł'
-    },
-    {
-      name: 'Strzyżenie damskie',
-      time: '60min',
-      price: '80zł'
-    },
-    {
-      name: 'Strzyżenie dziecięce',
-      time: '30min',
-      price: '30zł'
-    }
-  ];
+  services: Services[] = [];
 
   selectedService: any | null = null;
 
@@ -37,27 +24,36 @@ export class ManagerCompanyServicesComponent implements OnInit{
     private dialogService: DialogService,
     private translateService: TranslateService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private servicesService: ServicesService
   ) {}
 
   ngOnInit(): void {
+    this.loadServices();
     this.loadColumns();
+  }
+
+  loadServices(): void {
+    this.servicesService.findAll().subscribe(
+      (res: HttpResponse<Services[]>) => {
+        this.services = res.body ?? [];
+      });
   }
 
   loadColumns(): void {
     this.servicesColumns = [
       { field: 'name', header: 'Nazwa' },
-      { field: 'time', header: 'Czas' },
+      { field: 'duration', header: 'Czas' },
       { field: 'price', header: 'Cena' },
     ];
   }
 
-  onWorkerSelect(event: any): void {
+  onServiceSelect(event: any): void {
     this.selectedService = event;
     console.log(this.selectedService);
   }
 
-  openCompanyWorkerDialog(edit = false): void {
+  openCompanyServiceDialog(edit = false): void {
     const ref = this.dialogService.open(ManagerCompanyServicesDialogComponent, {
       header: this.translateService.instant((edit) ? 'global.header.editService' : 'global.header.addService'),
       width: '80%',
@@ -65,7 +61,7 @@ export class ManagerCompanyServicesComponent implements OnInit{
         edit: edit,
       },
     });
-    ref.onClose.subscribe((response) => this.handleCompanyWorkerDialogResponse(response));
+    ref.onClose.subscribe((response) => this.handleCompanyServiceDialogResponse(response));
   }
 
   openDeleteDialog(): void {
@@ -77,12 +73,14 @@ export class ManagerCompanyServicesComponent implements OnInit{
     });
   }
 
-  handleCompanyWorkerDialogResponse(response: any): void {
-    if (response.result) {
-      this.messageService.add({key: 'mainToast', severity: 'success', summary:'Sukces', detail:'Sukces'});
-    } else {
-      this.messageService.add({key: 'mainToast', severity: 'error', summary:'Błąd', detail:'Błąd'});
-    }
+  handleCompanyServiceDialogResponse(response: any): void {
+    this.loadServices();
+    // if (response.result) {
+    //   this.loadServices();
+    //   this.messageService.add({key: 'mainToast', severity: 'success', summary:'Sukces', detail:'Sukces'});
+    // } else {
+    //   this.messageService.add({key: 'mainToast', severity: 'error', summary:'Błąd', detail:'Błąd'});
+    // }
   }
 
   handleDeleteDialogResponse(): void {

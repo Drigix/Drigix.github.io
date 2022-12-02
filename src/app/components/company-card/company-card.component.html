@@ -11,15 +11,13 @@
          </div>
          <p>{{item.address!.street!}}, {{item.address!.zipCode!}}, {{item.address!.city!}}</p>
          <div class="open-close-time">
-          <ng-container *ngFor="let day of item.workingDays">
-            <p>{{day.dayName }} {{day.startAt}} - {{day.endAt}} </p>
-            <div *ngIf="currentTime! < timeToNumber(day.startAt!) || currentTime! >= timeToNumber(day.endAt!); else companyOpen">
+            <p>{{item.workingDays![0].dayName! }} {{item.workingDays![0].startAt}} - {{item.workingDays![0].endAt}} </p>
+            <div *ngIf="currentTime! < timeToNumber(item.workingDays![0].startAt!) || currentTime! >= timeToNumber(item.workingDays![0].endAt!); else companyOpen">
               <p style="font-weight: bold; color: red; padding-left: 10px;">ZAMKNIĘTE</p>
             </div>
             <ng-template #companyOpen>
             <p style="font-weight: bold; color: forestgreen; padding-left: 10px;">OTWARTE</p>
           </ng-template>
-          </ng-container>
          </div>
           <p-button label="Sprawdź" style="display: flex; justify-content: center;" (onClick)="onCompanySelect(item.id!, item.name!)"></p-button>
        </div>

@@ -1,8 +1,10 @@
 <div class="home">
   <div class="wrapper">
     <div *ngIf="isCompanyExist; else createCompany">
-      <p-button label="{{'global.action.edit' | translate }}" (onClick)="openEditCompanyDialog()"></p-button>
-      <app-company-page (company)="setCompany($event)"></app-company-page>
+      <div *ngIf="!loading">
+        <p-button label="{{'global.action.edit' | translate }}" (onClick)="openEditCompanyDialog()"></p-button>
+        <app-company-page [actualCompanyId]="companyId!"></app-company-page>
+      </div>
 
     </div>
     <ng-template #createCompany>

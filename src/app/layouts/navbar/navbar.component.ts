@@ -96,6 +96,7 @@ export class NavbarComponent implements OnInit {
       ];
       this.logIn = isUserLogin;
       this.role = USER_ROLE;
+      console.log(this.role);
       this.phoneView = phoneView;
       this.loadIndustries();
       if(this.role !== Authority.EMPLOYEE && this.role !== Authority.OWNER) {
@@ -204,16 +205,6 @@ export class NavbarComponent implements OnInit {
       } else {
         this.phoneView = phoneView;
       }
-    }
-
-    showUserMenu(): void {
-      this.languagesMenu = false;
-      this.showMenu = !this.showMenu;
-    }
-
-    showLanguageMenu(): void {
-      this.showMenu = false;
-      this.languagesMenu = !this.languagesMenu;
     }
 
     changeLanguage(): void {

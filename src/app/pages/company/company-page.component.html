@@ -37,16 +37,17 @@
           <h2>{{'global.company.header.companyServices' | translate}}</h2>
           <div class="rounded"></div>
         </div>
-        <ng-container *ngFor="let item of currentCompany!.services">
+        <ng-container *ngFor="let item of currentCompany!.services| slice:servicePage!*5:servicePage!*5 + 5;">
           <div class="company-service-info">
             <p>{{item.name}}</p>
-            <P>{{item.time}}</P>
+            <P>{{item.duration}}min</P>
             <p>{{item.price}}zł</p>
             <div style="padding-top: 10px;">
               <p-button label="{{'global.action.book' | translate}}" (onClick)="checkIsLogged()"></p-button>
             </div>
           </div>
         </ng-container>
+        <p-paginator [rows]="5" [totalRecords]="currentCompany!.services!.length" (onPageChange)="changePageService($event)"></p-paginator>
       </div>
 
       <div class="company-gallery" #galleryView id="gallery">
