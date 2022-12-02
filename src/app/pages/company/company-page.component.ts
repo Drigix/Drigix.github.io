@@ -1,3 +1,6 @@
+import { HttpResponse } from '@angular/common/http';
+import { CompanyService } from 'src/app/entities/company/service/company.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { isUserLogin } from './../../account/authority/authority.component';
 import { LoginDialogComponent } from './../../account/login-dialog/login-dialog.component';
 import { Category } from '../../entities/industry/category.model';
@@ -18,25 +21,23 @@ export class CompanyPageComponent implements OnInit {
 
   @Output() company =  new EventEmitter<Company>();
 
+  companyId: string | null = null;
+
   isAccountLogged = false;
   address: Address = new Address(1, 'Katowice', 'Zwycięstwa 10', '42-600', 'Poland');
   items: MenuItem[] = [];
 
   currentCompany: Company | null = null;
 
-  industry: Category | null = null;
-
-  amountOfRating = 120;
-
-  companyServices = [1,2,3,4];
-
   companyOpinions: any = [];
 
   opinionPage = 0;
 
-  constructor(private translateService: TranslateService, private dialogService: DialogService, private messageService: MessageService) {}
+  constructor(private translateService: TranslateService, private dialogService: DialogService, private messageService: MessageService,
+    private router: Router, private route: ActivatedRoute, private companyService: CompanyService) {}
 
   ngOnInit(): void {
+    this.companyId = this.route.snapshot.paramMap.get('companyName');
     this.isAccountLogged = isUserLogin;
     this.items = [
       {label: this.translateService.instant('global.company.header.home'), icon: 'pi pi-fw pi-home', command: ()=> this.changeMenuItem('home')},
@@ -44,6 +45,7 @@ export class CompanyPageComponent implements OnInit {
       {label: this.translateService.instant('global.company.header.localization'), icon: 'pi pi-fw pi-map-marker', command: ()=> this.changeMenuItem('lokalization')},
       {label: this.translateService.instant('global.company.header.opinions'), icon: 'pi pi-fw pi-comment', command: ()=> this.changeMenuItem('opinions')}
     ];
+    this.loadCompany();
     this.loadDataCompany();
   }
 
@@ -51,32 +53,41 @@ export class CompanyPageComponent implements OnInit {
     this.company.emit(this.currentCompany!);
   }
 
-  loadDataCompany(): void {
-    this.industry = new Category('1', 'hairdresser');
-    this.currentCompany = new Company();
-    this.exportCompany();
-    this.companyOpinions = [
-      {
-        name: 'Michał',
-        rating: 4,
-        description: 'Było ok'
-      },
-      {
-        name: 'Michał',
-        rating: 4,
-        description: 'Było ok'
-      },
-      {
-        name: 'Michał',
-        rating: 4,
-        description: 'Było ok'
-      },
-      {
-        name: 'Michał',
-        rating: 4,
-        description: 'Było ok'
+  loadCompany(): void {
+    this.companyService.findCompanyById(this.companyId!).subscribe(
+      (res: HttpResponse<Company>) => {
+        this.currentCompany = res.body ?? null;
+        console.log(this.currentCompany);
       }
-    ]
+    )
+  }
+
+  loadDataCompany(): void {
+    // this.industry = new Category('1', 'hairdresser');
+    // this.currentCompany = new Company();
+    // this.exportCompany();
+    // this.companyOpinions = [
+    //   {
+    //     name: 'Michał',
+    //     rating: 4,
+    //     description: 'Było ok'
+    //   },
+    //   {
+    //     name: 'Michał',
+    //     rating: 4,
+    //     description: 'Było ok'
+    //   },
+    //   {
+    //     name: 'Michał',
+    //     rating: 4,
+    //     description: 'Było ok'
+    //   },
+    //   {
+    //     name: 'Michał',
+    //     rating: 4,
+    //     description: 'Było ok'
+    //   }
+    // ]
   }
 
   changeMenuItem(view: string): void {

@@ -14,7 +14,8 @@
         <p-dropdown [options]="filterBy"
          placeholder="{{'global.placeholder.chooseFilter' | translate}}" [autoDisplayFirst]="false">
         </p-dropdown>
-        <p-dropdown #serviceType id="serviceType" name="serviceType" [options]="industries" [(ngModel)]="selectedServiceType"
+        <p-dropdown #serviceType id="serviceType" name="serviceType"
+          [options]="industries" [(ngModel)]="selectedIndustry" optionLabel="name"
           (onChange)="filterByIndustry()"
           placeholder="{{'global.placeholder.chooseFilter' | translate}}" [autoDisplayFirst]="false">
         </p-dropdown>

@@ -1,3 +1,6 @@
+import { CompanyService } from './../../entities/company/service/company.service';
+import { HttpResponse } from '@angular/common/http';
+import { CategoryService } from 'src/app/entities/industry/category.service';
 import { Address } from './../../entities/company/address.model';
 import { Company } from './../../entities/company/company.model';
 import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
@@ -13,43 +16,27 @@ import { Dropdown } from 'primeng/dropdown';
 export class ServicesPageComponent implements OnInit, OnChanges {
 
   @ViewChild('serviceType', { static: true }) serviceTypeDropdown: Dropdown | undefined;
+
+  typeId: string | null = null;
+
   showFilter = true;
-
-  industry: Category[] = [new Category('1', 'hairdresser'), new Category('2', 'barber'), new Category('3', 'tatoo')];
-  address: Address = new Address(1, 'Katowice', 'Zwycięstwa 10', '42-600', 'Poland');
-
-  // companies: Company[] = [new Company(1, 'Nazwa 1', this.industry[0],),
-  // new Company(2, 'Nazwa 2', this.industry[1], 'Katowice', 'Zwycięstwa 10', '42-100', 4, '9', '20'),
-  // new Company(3, 'Nazwa 3', this.industry[2], 'Warszawa', 'Zwycięstwa 10', '42-100', 5, '8', '17'),
-  // new Company(4, 'Nazwa 1', this.industry[0], 'Gliwice', 'Zwycięstwa 10', '42-100', 3, '9', '18'),
-  // new Company(5, 'Nazwa 2', this.industry[1], 'Katowice', 'Zwycięstwa 10', '42-100', 4, '9', '17'),
-  // new Company(6, 'Nazwa 3', this.industry[2], 'Warszawa', 'Zwycięstwa 10', '42-100', 5, '9', '20'),
-  // new Company(7, 'Nazwa 1', this.industry[0], 'Gliwice', 'Zwycięstwa 10', '42-100', 3, '9', '20'),
-  // new Company(8, 'Nazwa 2', this.industry[1], 'Katowice', 'Zwycięstwa 10', '42-100', 4, '9', '20'),
-  // new Company(9, 'Nazwa 3', this.industry[2], 'Warszawa', 'Zwycięstwa 10', '42-100', 5, '9', '20'),
-  // new Company(10, 'Nazwa 1', this.industry[0], 'Gliwice', 'Zwycięstwa 10', '42-100', 3, '10', '21'),
-  // new Company(11, 'Nazwa 2', this.industry[1], 'Katowice', 'Zwycięstwa 10', '42-100', 1, '9', '19'),
-  // new Company(12, 'Nazwa 3', this.industry[2], 'Warszawa', 'Zwycięstwa 10', '42-100', 1, '8', '18')];
-
-  companies: Company[] = [new Company()];
-
-  tempList: Company[] = this.companies;
+  industries: Category[] = [];
+  companies: Company[] = [];
+  tempList: Company[] = [];
 
   cities = ['Gliwice', 'Katowice', 'Zabrze'];
-  industries = ['hairdresser', 'barber', 'tatoo', 'beautician', 'spa', 'piercing'];
   selectedCity: string[] = [];
   passedServiceType: any;
-  selectedServiceType: string = '';
+  selectedIndustry: Category | null = null;
   companyPage = 0;
-
   filterBy = ['Najlepsze oceny', 'Najgorsze oceny', 'Od najtańszych', 'Od najdroższych'];
 
-  constructor(private route: ActivatedRoute, private cd: ChangeDetectorRef) { }
+  constructor(private route: ActivatedRoute, private cd: ChangeDetectorRef, private categoryService: CategoryService,
+    private companyService: CompanyService) { }
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(v => this.passedServiceType = window.history.state);
-    this.tempList = this.companies;
-    this.selectedServiceType = this.passedServiceType.type;
+    this.typeId = this.route.snapshot.paramMap.get('type');
+    this.loadIndustries();
     this.filterByIndustry();
   }
 
@@ -57,29 +44,46 @@ export class ServicesPageComponent implements OnInit, OnChanges {
     console.log(changes);
   }
 
+  loadIndustries(): void {
+    this.categoryService.findAll().subscribe(
+      (res: HttpResponse<Category[]>) => {
+        this.industries = res.body ?? [];
+        this.industries.forEach((item) => {
+          if(item.code === this.typeId) {
+            this.selectedIndustry = item;
+            this.filterByIndustry();
+          }
+        })
+      });
+  }
+
   onShowFilter(): void {
     this.showFilter = !this.showFilter;
   }
 
   filterByIndustry(): void {
-    this.companies = this.tempList;
-    if(this.selectedServiceType !== null && this.selectedServiceType !== undefined) {
-      this.companies = this.companies.filter((item) => item.categoryId === this.selectedServiceType);
-    }
+    // this.companies = this.tempList;
+    // if(this.selectedServiceType !== null && this.selectedServiceType !== undefined) {
+    //   this.companies = this.companies.filter((item) => item.categoryId === this.selectedServiceType);
+    // }
+    this.companyService.findWithIndustryId(this.selectedIndustry!.code!).subscribe(
+      (res: HttpResponse<Company[]>) => {
+        this.companies = res.body ?? [];
+      });
   }
 
   filterByCities(): void {
     this.filterByIndustry();
-    if(this.selectedCity.length !== 0) {
-      this.companies = this.companies.filter((item) =>
-        this.selectedServiceType ? item.address!.city === this.selectedCity[0] && item.categoryId === this.selectedServiceType
-        :item.address!.city === this.selectedCity[0]);
-    }
+    // if(this.selectedCity.length !== 0) {
+    //   this.companies = this.companies.filter((item) =>
+    //     this.selectedServiceType ? item.address!.city === this.selectedCity[0] && item.categoryId === this.selectedServiceType
+    //     :item.address!.city === this.selectedCity[0]);
+    // }
   }
 
   changeServiceType(type: string): void {
-    this.selectedServiceType = type;
-    this.filterByIndustry();
+    this.typeId = type;
+    this.loadIndustries();
   }
 
   changePage(event: any): void {

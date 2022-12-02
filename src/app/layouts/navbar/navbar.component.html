@@ -1,6 +1,8 @@
 <p-menubar [model]="items">
   <ng-template pTemplate="start">
-    <img src="../../../assets/photos/logo.png" height="40" class="mr-2">
+    <div *ngIf="!phoneView">
+      <img src="../../../assets/photos/logo.png" height="40" class="mr-2">
+    </div>
   </ng-template>
   <ng-template pTemplate="end">
     <div class="items-to-users">
@@ -43,10 +45,18 @@
     </div>
     <ng-template #notLogIn>
       <div class="notLoginAccount">
-        <p-button id="login" name="login"
-          (onClick)="openLoginDialog('login')"
-          label="{{'global.action.login' | translate}}">
-      </p-button>
+        <div *ngIf="phoneView; else caption">
+          <p-button id="login" name="login"
+            (onClick)="openLoginDialog('login')"
+            icon="pi pi-user">
+          </p-button>
+        </div>
+        <ng-template #caption>
+          <p-button id="login" name="login"
+            (onClick)="openLoginDialog('login')"
+            label="{{'global.action.login' | translate}}">
+          </p-button>
+        </ng-template>
       </div>
     </ng-template>
     </div>

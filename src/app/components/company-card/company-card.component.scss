@@ -2,28 +2,162 @@
   align-items: center;
 }
 
-.card {
-  display: grid;
-  grid-template-columns: auto auto;
-  margin: 20px;
-  margin-bottom: 70px;
-  border: 4px solid var(--primary-color);
-  border-radius: 25px;
-  max-width: 1000px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  p {
-    font-size: 15px;
-    color: gray;
-  }
-  img {
-    height: 272px;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+@media only screen and (max-width: 700px) {
+  .card {
+    display: grid;
+    grid-template-rows: auto auto;
+    margin: 10px;
+    margin-bottom: 70px;
+    border: 4px solid var(--primary-color);
+    border-radius: 25px;
+    max-width: 400px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    h2 {
+      font-size: 20px;
+    }
+    p {
+      font-size: 12px;
+      color: gray;
+    }
+    img {
+      height: 262px;
+      max-width: 400px;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
+    a {
+      position: fixed;
+      bottom: 20px;
+    }
   }
 
-  a {
-    position: fixed;
-    bottom: 20px;
+  .rating{
+    display: flex;
+    margin-left: -8px;
+    p {
+      font-size: 18px;
+      margin: 0;
+      padding-left: 10px;
+      padding-right: 5px;
+    }
+  }
+
+  :host ::ng-deep .p-button {
+    width: 200px;
+  }
+
+  :host ::ng-deep .pi-star {
+    font-size: 20px;
+  }
+
+  :host ::ng-deep .pi-star-fill {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .card {
+    display: grid;
+    grid-template-columns: 300px auto;
+    margin: 10px;
+    margin-bottom: 70px;
+    border: 4px solid var(--primary-color);
+    border-radius: 25px;
+    max-width: 650px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    h2 {
+      font-size: 20px;
+    }
+    p {
+      font-size: 12px;
+      color: gray;
+    }
+    img {
+      height: 250px;
+      max-width: 300px;
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
+
+    a {
+      position: fixed;
+      bottom: 20px;
+    }
+  }
+
+  .rating{
+    display: flex;
+    margin-left: -8px;
+    p {
+      font-size: 18px;
+      margin: 0;
+      padding-left: 10px;
+      padding-right: 5px;
+    }
+  }
+
+  :host ::ng-deep .p-button {
+    width: 200px;
+  }
+
+  :host ::ng-deep .pi-star {
+    font-size: 17px;
+  }
+
+  :host ::ng-deep .pi-star-fill {
+    font-size: 17px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .card {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: 20px;
+    margin-bottom: 70px;
+    border: 4px solid var(--primary-color);
+    border-radius: 25px;
+    max-width: 1000px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    p {
+      font-size: 15px;
+      color: gray;
+    }
+    img {
+      height: 272px;
+      max-width: 400px;
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
+
+    a {
+      position: fixed;
+      bottom: 20px;
+    }
+  }
+
+  .rating{
+    display: flex;
+    margin-left: -8px;
+    p {
+      font-size: 25px;
+      margin: 0;
+      padding-left: 10px;
+      padding-right: 5px;
+    }
+  }
+
+  :host ::ng-deep .p-button {
+    width: 250px;
+  }
+
+  :host ::ng-deep .pi-star {
+    font-size: 30px;
+  }
+
+  :host ::ng-deep .pi-star-fill {
+    font-size: 30px;
   }
 }
 
@@ -35,34 +169,10 @@
   }
 }
 
-.rating{
-  display: flex;
-  margin-left: -8px;
-  p {
-    font-size: 25px;
-    margin: 0;
-    padding-left: 10px;
-    padding-right: 5px;
-  }
-}
-
 .open-close-time {
   display: flex;
   p {
     margin: 0;
   }
-}
-
-
-:host ::ng-deep .p-button {
-  width: 250px;
-}
-
-:host ::ng-deep .pi-star {
-  font-size: 30px;
-}
-
-:host ::ng-deep .pi-star-fill {
-  font-size: 30px;
 }
 

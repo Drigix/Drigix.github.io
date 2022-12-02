@@ -3,17 +3,24 @@
     <p-tabMenu [model]="items"></p-tabMenu>
     <div class="company" #homeView id="home">
       <div class="company-content">
-        <img src="https://d375139ucebi94.cloudfront.net/region2/pl/104637/biz_photo/c732831d4fdd4ca6a79ba95521b7e468.jpeg?size=640x427">
+        <img [src]="currentCompany!.logo">
         <div class="data-company">
           <h2>{{currentCompany?.name}}</h2>
           <div class="rounded"></div>
           <div class="rating">
-            <!-- <p-rating [readonly]="true" [(ngModel)]="currentCompany!.rating!">
-            </p-rating> -->
-            <p>({{amountOfRating}})</p>
+            <p-rating [readonly]="true" [(ngModel)]="currentCompany!.opinions!.average">
+            </p-rating>
+            <p>({{currentCompany!.opinions!.count}})</p>
           </div>
           <div class="rounded"></div>
           <p>{{currentCompany?.address?.street}} {{currentCompany?.address?.zipCode}} {{currentCompany?.address?.city}}</p>
+          <div>
+            <div class="rounded" style="width: 100%;"></div>
+            <h2>Godziny otwarcia</h2>
+            <ng-container *ngFor="let item of currentCompany!.workingDays">
+              <p>{{item.dayName }} {{item.startAt}} - {{item.endAt}}</p>
+            </ng-container>
+          </div>
        </div>
       </div>
 
@@ -22,7 +29,7 @@
           <h2>{{'global.company.header.description' | translate}}</h2>
           <div class="rounded"></div>
         </div>
-        <p>Krótki opis firmy</p>
+        <p>{{currentCompany!.description}}</p>
       </div>
 
       <div class="company-services" #servicesView id="services">
@@ -30,11 +37,11 @@
           <h2>{{'global.company.header.companyServices' | translate}}</h2>
           <div class="rounded"></div>
         </div>
-        <ng-container *ngFor="let item of companyServices">
+        <ng-container *ngFor="let item of currentCompany!.services">
           <div class="company-service-info">
-            <p>Nazwa usługi</p>
-            <P>Czas</P>
-            <p>Cena</p>
+            <p>{{item.name}}</p>
+            <P>{{item.time}}</P>
+            <p>{{item.price}}zł</p>
             <div style="padding-top: 10px;">
               <p-button label="{{'global.action.book' | translate}}" (onClick)="checkIsLogged()"></p-button>
             </div>

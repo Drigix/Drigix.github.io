@@ -14,7 +14,8 @@
 }
 
 .company-content {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
 }
 
 .company-description {
@@ -78,4 +79,8 @@
 
 .company-opinions {
   padding-bottom: 50px;
+}
+
+.rounded {
+  border-top: 3px solid rgb(232, 231, 231);
 }

@@ -5,21 +5,23 @@
         <div class="data-company">
          <h2>{{item.name}}</h2>
          <div class="rating">
-            <!-- <p-rating [readonly]="true" [(ngModel)]="item.rating">
-            </p-rating> -->
-            <p>({{amountOfRating}})</p>
+            <p-rating [readonly]="true" [(ngModel)]="item.opinions!.average">
+            </p-rating>
+            <p>({{item.opinions!.count}})</p>
          </div>
          <p>{{item.address!.street!}}, {{item.address!.zipCode!}}, {{item.address!.city!}}</p>
          <div class="open-close-time">
-          <!-- <p>{{item.openingTime}}:00 - {{item.closingTime}}:00 </p>
-          <div *ngIf="currentTime! < timeToNumber(item.openingTime!) || currentTime! >= timeToNumber(item.closingTime!); else companyOpen">
-            <p style="font-weight: bold; color: red; padding-left: 10px;">ZAMKNIĘTE</p>
-          </div> -->
-          <ng-template #companyOpen>
+          <ng-container *ngFor="let day of item.workingDays">
+            <p>{{day.dayName }} {{day.startAt}} - {{day.endAt}} </p>
+            <div *ngIf="currentTime! < timeToNumber(day.startAt!) || currentTime! >= timeToNumber(day.endAt!); else companyOpen">
+              <p style="font-weight: bold; color: red; padding-left: 10px;">ZAMKNIĘTE</p>
+            </div>
+            <ng-template #companyOpen>
             <p style="font-weight: bold; color: forestgreen; padding-left: 10px;">OTWARTE</p>
           </ng-template>
+          </ng-container>
          </div>
-          <p-button label="Sprawdź" routerLink="/company/{{item.name}}"></p-button>
+          <p-button label="Sprawdź" style="display: flex; justify-content: center;" (onClick)="onCompanySelect(item.id!, item.name!)"></p-button>
        </div>
     </div>
   </ng-container>
