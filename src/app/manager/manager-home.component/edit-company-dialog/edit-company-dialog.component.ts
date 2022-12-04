@@ -19,10 +19,12 @@ export class EditCompanyDialogComponent implements OnInit {
     industry: ['', [Validators.required]],
     city: ['', [Validators.required]],
     address: ['', [Validators.required]],
-    postalCode: ['', [Validators.required]]
+    postalCode: ['', [Validators.required]],
+    country: ['', [Validators.required]]
   });
 
   industries: Category[] = [];
+  selectedIndustry: Category | null = null;
   company: Company | null = null;
 
   constructor(private fb: UntypedFormBuilder, public ref: DynamicDialogRef, private messageService: MessageService,
@@ -30,17 +32,23 @@ export class EditCompanyDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.company = this.config.data.company;
+    this.loadCategories();
   }
 
   loadCategories(): void {
     this.categoryService.findAll().subscribe(
       (res: HttpResponse<Category[]>) => {
         this.industries = res.body ?? [];
-      }
-    )
+        this.industries.forEach((item) => {
+          if(item.code === this.company?.categoryId) {
+            this.selectedIndustry = item;
+          }
+        })
+      });
   }
 
   onSubmit(): void {
+    this.company!.categoryId = this.selectedIndustry?.code;
   }
 
   onClose(): void {

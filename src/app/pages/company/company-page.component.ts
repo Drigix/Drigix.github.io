@@ -20,6 +20,7 @@ import { Address } from 'src/app/entities/company/address.model';
 export class CompanyPageComponent implements OnInit {
 
   @Output() company =  new EventEmitter<Company>();
+  @Input() isEmployee = false;
   @Input() actualCompanyId?: string;
 
   companyId: string | null = null;
@@ -62,6 +63,7 @@ export class CompanyPageComponent implements OnInit {
     this.companyService.findCompanyById(this.companyId!).subscribe(
       (res: HttpResponse<Company>) => {
         this.currentCompany = res.body ?? null;
+        this.exportCompany();
       }
     )
   }

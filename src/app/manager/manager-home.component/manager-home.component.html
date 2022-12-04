@@ -3,7 +3,7 @@
     <div *ngIf="isCompanyExist; else createCompany">
       <div *ngIf="!loading">
         <p-button label="{{'global.action.edit' | translate }}" (onClick)="openEditCompanyDialog()"></p-button>
-        <app-company-page [actualCompanyId]="companyId!"></app-company-page>
+        <app-company-page (company)="setCompany($event)" [actualCompanyId]="companyId!" [isEmployee]="true"></app-company-page>
       </div>
 
     </div>
@@ -14,6 +14,8 @@
       <p>Jedyne co musisz zrobić to kliknąć w przycisk poniżej i uzupelnić pola formularzu.</p>
       <p>Pamiętaj jednak, że jeśli staniesz się pracownikiem jakiejkolwiek firmy to opcja założenia własnej firmy z tego konto przestanie istnieć.</p>
       <p-button label="{{'global.action.createCompany' | translate }}" (onClick)="openCreateCompanyDialog()"></p-button>
+
+      <p-button label="{{'global.action.createWorkerId' | translate }}" (onClick)="openCreateWorkerId()"></p-button>
     </ng-template>
   </div>
 </div>

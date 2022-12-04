@@ -17,11 +17,6 @@ import { phoneView, tabletView } from '../main/main.component';
 import { HttpResponse } from '@angular/common/http';
 import { Category } from 'src/app/entities/industry/category.model';
 
-interface IndustryMenu{
-  label?: string | null;
-  routerLink?: string | null;
-}
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -43,37 +38,37 @@ export class NavbarComponent implements OnInit {
       label: 'Fryzjer',
       routerLink: '/services/7228be80-f7f2-4977-a1f5-770ff986537a',
       state: {type: 'hairdresser'},
-      command: () => this.onServiceChange('7228be80-f7f2-4977-a1f5-770ff986537a')
+      command: () => this.onServiceChange('/services/7228be80-f7f2-4977-a1f5-770ff986537a', '7228be80-f7f2-4977-a1f5-770ff986537a' )
     },
     {
       label: 'Barber',
       routerLink: '/services/barber',
       state: {type: 'barber'},
-      command: () => this.onServiceChange('barber')
+      command: () => this.onServiceChange('barber', '7228be80-f7f2-4977-a1f5-770ff986537a')
     },
     {
       label: 'Kosmetyka',
       routerLink: '/services/beautician',
       state: {type: 'beautician'},
-      command: () => this.onServiceChange('beautician')
+      command: () => this.onServiceChange('beautician', '7228be80-f7f2-4977-a1f5-770ff986537a')
     },
     {
       label: 'Salony tatuażu',
       routerLink: '/services/d67cdf00-c65a-44ad-8f17-b4580f79e5b0',
       state: {type: 'tatoo'},
-      command: () => this.onServiceChange('d67cdf00-c65a-44ad-8f17-b4580f79e5b0')
+      command: () => this.onServiceChange('/services/d67cdf00-c65a-44ad-8f17-b4580f79e5b0', 'd67cdf00-c65a-44ad-8f17-b4580f79e5b0')
     },
     {
       label: 'SPA',
       routerLink: '/services/spa',
       state: {type: 'spa'},
-      command: () => this.onServiceChange('spa')
+      command: () => this.onServiceChange('/services/d67cdf00-c65a-44ad-8f17-b4580f79e5b0', 'd67cdf00-c65a-44ad-8f17-b4580f79e5b0')
     },
     {
       label: 'Piercing',
       routerLink: '/services/piercing',
       state: {type: 'piercing'},
-      command: () => this.onServiceChange('piercing')
+      command: () => this.onServiceChange('/services/d67cdf00-c65a-44ad-8f17-b4580f79e5b0', 'd67cdf00-c65a-44ad-8f17-b4580f79e5b0')
     }];
     items: MenuItem[] = [];
     languages: Language[] = [];
@@ -90,13 +85,9 @@ export class NavbarComponent implements OnInit {
       private translateService: TranslateService, private categoryService: CategoryService) {}
 
     ngOnInit(): void {
-      this.languages = [
-        new Language('pl', '../../../assets/photos/flags/flaga_polski.jpg'),
-        new Language('en', '../../../assets/photos/flags/flaga_wielkiejbrytani.jpg')
-      ];
+      this.setLanguages();
       this.logIn = isUserLogin;
       this.role = USER_ROLE;
-      console.log(this.role);
       this.phoneView = phoneView;
       this.loadIndustries();
       if(this.role !== Authority.EMPLOYEE && this.role !== Authority.OWNER) {
@@ -116,6 +107,13 @@ export class NavbarComponent implements OnInit {
         (res: HttpResponse<Category[]>) => {
           this.industries = res.body ?? [];
         });
+    }
+
+    setLanguages(): void {
+      this.languages = [
+        new Language('pl', '../../../assets/photos/flags/flaga_polski.jpg'),
+        new Language('en', '../../../assets/photos/flags/flaga_wielkiejbrytani.jpg')
+      ];
     }
 
     setUserMenu(): void {
@@ -245,7 +243,7 @@ export class NavbarComponent implements OnInit {
     console.log(event.query);
   }
 
-  onServiceChange(type: string): void {
-    this.servicesPageComponent.changeServiceType(type);
+  onServiceChange(url: string, type: string): void {
+    this.router.navigate([url], {queryParams: {type: type}})
   }
 }

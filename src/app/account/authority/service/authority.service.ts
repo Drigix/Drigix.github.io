@@ -41,7 +41,7 @@ export class AuthorityService {
 
   loguot(): void {
     localStorage.setItem('jwt', '');
-    window.location.reload();
+    window.location.replace('');
   }
 
   signup(user: User): Observable<any> {
@@ -72,7 +72,7 @@ export class AuthorityService {
     }
     if (this.decodeAccessToken['isEmployeed'].toLocaleLowerCase() === 'false') {
       return false;
-    } else if (this.decodeAccessToken['isEmployeed'] === 'true') {
+    } else if (this.decodeAccessToken['isEmployeed'].toLocaleLowerCase() === 'true') {
       return true;
     } else {
       return false;

@@ -22,8 +22,12 @@
       </div>
     </div>
 
-    <div class="service-page-content">
+    <div *ngIf="loading === false" class="service-page-content">
       <app-company-card [listOfCompanies]="companies" [page]="companyPage"></app-company-card>
+    </div>
+
+    <div class="spinner" *ngIf="loading">
+      <p-progressSpinner></p-progressSpinner>
     </div>
 
     <p-paginator [rows]="9" [totalRecords]="companies.length" (onPageChange)="changePage($event)"></p-paginator>

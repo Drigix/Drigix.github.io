@@ -1,3 +1,4 @@
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DropdownModule } from 'primeng/dropdown';
 import { ComponentModule } from './../../components/component.module';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +25,8 @@ import { PaginatorModule } from 'primeng/paginator';
     FormsModule,
     ComponentModule,
     DropdownModule,
-    PaginatorModule
+    PaginatorModule,
+    ProgressSpinnerModule
   ],
   exports: [
     ServicesPageComponent

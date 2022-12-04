@@ -11,7 +11,7 @@
 
         <div class="industry">
           <p-dropdown id="industry" name="industry" placeholder="{{'global.company.industry' | translate}}"
-          [options]="industries" [(ngModel)]="company!.categoryId" optionLabel="name" formControlName="industry">
+          [options]="industries" [(ngModel)]="selectedIndustry" optionLabel="name" formControlName="industry">
          </p-dropdown>
         </div>
 
@@ -22,7 +22,7 @@
           </small>
         </div>
 
-        <input type="text" pInputText formControlName="address" placeholder="{{'global.company.address' | translate}}" [(ngModel)]="company!.address"/>
+        <input type="text" pInputText formControlName="address" placeholder="{{'global.company.address' | translate}}" [(ngModel)]="company!.address!.street"/>
         <div class="input-invalid-text" *ngIf="newCompanyForm.get('address')!.invalid && (newCompanyForm.get('address')!.dirty || newCompanyForm.get('address')!.touched)">
           <small *ngIf="newCompanyForm.get('address')?.errors?.['required']">
             {{'global.form.fieldRequired' | translate }}
@@ -32,6 +32,13 @@
         <input type="text" pInputText formControlName="postalCode" placeholder="{{'global.company.postalCode' | translate}}" [(ngModel)]="company!.address!.zipCode"/>
         <div class="input-invalid-text" *ngIf="newCompanyForm.get('postalCode')!.invalid && (newCompanyForm.get('postalCode')!.dirty || newCompanyForm.get('postalCode')!.touched)">
           <small *ngIf="newCompanyForm.get('postalCode')?.errors?.['required']">
+            {{'global.form.fieldRequired' | translate }}
+          </small>
+        </div>
+
+        <input type="text" pInputText formControlName="country" placeholder="{{'global.company.country' | translate}}" [(ngModel)]="company!.address!.country"/>
+        <div class="input-invalid-text" *ngIf="newCompanyForm.get('country')!.invalid && (newCompanyForm.get('country')!.dirty || newCompanyForm.get('country')!.touched)">
+          <small *ngIf="newCompanyForm.get('country')?.errors?.['required']">
             {{'global.form.fieldRequired' | translate }}
           </small>
         </div>

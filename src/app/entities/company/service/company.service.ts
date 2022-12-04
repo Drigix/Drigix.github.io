@@ -6,6 +6,10 @@ import { Injectable } from "@angular/core";
 export type EntityResponseType = HttpResponse<Company>;
 export type EntityArrayResponseType = HttpResponse<Company[]>;
 
+interface WorkerId {
+  result?: string | null;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +23,14 @@ export class CompanyService {
 
   create(company: Company): Observable<any> {
     return this.http.post(this.COMPANY_URL, company);
+  }
+
+  generateWorkerId(): Observable<any> {
+    return this.http.post(this.ACTUAL_COMPANY_URL, { responseType: 'text' });
+  }
+
+  addWorker(id: string): Observable<any> {
+    return this.http.put(`${this.COMPANY_URL}/${id}`, id);
   }
 
   findWithIndustryId(categoryId: string): Observable<EntityArrayResponseType> {

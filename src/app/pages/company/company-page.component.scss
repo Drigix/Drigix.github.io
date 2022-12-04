@@ -15,7 +15,7 @@
 
 .company-content {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 50% auto;
 }
 
 .company-description {
@@ -43,6 +43,9 @@
 }
 
 .data-company {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-weight: bold;
   margin-left: 5px;
   p {
@@ -83,4 +86,18 @@
 
 .rounded {
   border-top: 3px solid rgb(232, 231, 231);
+}
+
+//EMPLOYEE-COMPANY-PAGE
+
+.employee-company-services {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.employee-company-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

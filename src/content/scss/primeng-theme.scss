@@ -5776,7 +5776,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-width: 0 0 0 var(--border-radius);
 }
 .p-toast .p-toast-message .p-toast-message-content .p-toast-message-text {
-  margin: 0 0 0 1rem;
+  margin: 0 0 0 0.5rem;
 }
 .p-toast .p-toast-message .p-toast-message-content .p-toast-message-icon {
   font-size: 2rem;
@@ -5789,7 +5789,9 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-toast .p-toast-message .p-toast-icon-close {
   width: 2rem;
-  height: 2rem;
+  height: 1.5rem;
+  padding: 15px;
+  margin-top: -10px;
   border-radius: 50%;
   transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
   border: none;

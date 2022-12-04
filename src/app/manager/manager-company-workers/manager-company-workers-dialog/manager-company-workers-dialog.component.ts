@@ -1,3 +1,6 @@
+import { MessageService } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
+import { CompanyService } from 'src/app/entities/company/service/company.service';
 import { Component, OnInit } from "@angular/core";
 import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
@@ -10,20 +13,17 @@ import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
 export class ManagerCompanyWorkersDialogComponent implements OnInit {
 
   addCompanyWorkerForm = this.fb.group({
-    name: ['', Validators.required],
-    surname: ['', Validators.required],
     id: ['', Validators.required]
   });
 
-  name: any;
-  surname: any;
   id: any;
 
   edit: any;
 
   workers: any[] = [];
 
-  constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig, private fb: UntypedFormBuilder) {}
+  constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig, private fb: UntypedFormBuilder,
+    private companyService: CompanyService, private translateService: TranslateService, private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.edit = this.config.data.edit;
@@ -31,10 +31,16 @@ export class ManagerCompanyWorkersDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const temp = {name: this.name, surname: this.surname, id: this.id};
-    //this.workers.push(temp);
-    this.config.data.workers = [...this.config.data.workers, temp];
-    console.log(this.config.data.workers);
+   this.companyService.addWorker(this.id).subscribe(
+    {
+      next: () => {
+        this.ref.close();
+      },
+      error: () => {
+        this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.createCompanySuccess')});
+      }
+    }
+   )
   }
 
   onClose(): void {

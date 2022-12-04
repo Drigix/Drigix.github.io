@@ -69,8 +69,8 @@ export class CreateCompanyDialog implements OnInit {
     // this.createdCompany!.descrption = null;
     this.companyService.create(this.createdCompany!).subscribe(
       {
-        next: () => {
-          this.ref.close();
+        next: (response) => {
+          this.ref.close(response);
         },
         error: () => {
           this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.createCompanyError')});

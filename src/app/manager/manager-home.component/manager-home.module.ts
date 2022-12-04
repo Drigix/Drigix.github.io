@@ -11,10 +11,12 @@ import { ManagerHomeComponent } from './manager-home.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
+import { CreateWorkerIdDialogComponent } from './create-worker-id-dialog/create-worker-id-dialog.component';
 
 @NgModule({
   declarations: [
-    ManagerHomeComponent
+    ManagerHomeComponent,
+    CreateWorkerIdDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { DropdownModule } from 'primeng/dropdown';
     CompanyPageModule
   ],
   exports: [
-    ManagerHomeComponent
+    ManagerHomeComponent,
+    CreateWorkerIdDialogComponent
   ]
 })
 export class ManagerHomeModule { }

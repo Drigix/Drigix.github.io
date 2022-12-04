@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CreateCompanyDialog } from 'src/app/account/create-company-dialog/create-company-dialog.component';
 import { Company } from 'src/app/entities/company/company.model';
+import { CreateWorkerIdDialogComponent } from './create-worker-id-dialog/create-worker-id-dialog.component';
 
 @Component({
   selector: 'app-manager-home',
@@ -31,7 +32,7 @@ export class ManagerHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    if(Authority.OWNER === USER_ROLE) {
+    if(Authority.OWNER === USER_ROLE || this.authorityService.checkIsEmployeed()) {
       this.isCompanyExist = true;
       this.loadActualCompany();
     }
@@ -68,12 +69,17 @@ export class ManagerHomeComponent implements OnInit {
     //ref.onClose.subscribe((response) => this.handleLoginDialogResponse(response))
   }
 
+  openCreateWorkerId(): void {
+    const ref = this.dialogService.open(CreateWorkerIdDialogComponent, {
+      header: this.translateService.instant('global.header.createWorkerId'),
+      width: '80%',
+    });
+  }
+
   handleLoginDialogResponse(response: any): void {
     if(response) {
-      if(response.result) {
-        this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.createCompanySuccess')});
-        this.authorityService.loguot();
-      }
+      this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.createCompanySuccess')});
+      this.authorityService.loguot();
     }
   }
 }

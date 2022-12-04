@@ -3,7 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 import { CategoryService } from 'src/app/entities/industry/category.service';
 import { Address } from './../../entities/company/address.model';
 import { Company } from './../../entities/company/company.model';
-import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/entities/industry/category.model';
 import { Dropdown } from 'primeng/dropdown';
@@ -23,6 +23,7 @@ export class ServicesPageComponent implements OnInit, OnChanges {
   industries: Category[] = [];
   companies: Company[] = [];
   tempList: Company[] = [];
+  loading = false;
 
   cities = ['Gliwice', 'Katowice', 'Zabrze'];
   selectedCity: string[] = [];
@@ -32,11 +33,15 @@ export class ServicesPageComponent implements OnInit, OnChanges {
   filterBy = ['Najlepsze oceny', 'Najgorsze oceny', 'Od najtańszych', 'Od najdroższych'];
 
   constructor(private route: ActivatedRoute, private cd: ChangeDetectorRef, private categoryService: CategoryService,
-    private companyService: CompanyService) { }
+    private companyService: CompanyService, private ngZone: NgZone) {
+      this.route.queryParams.subscribe(
+        params => {
+          this.typeId = params['type'];
+          this.loadIndustries();
+        });
+  }
 
   ngOnInit(): void {
-    this.typeId = this.route.snapshot.paramMap.get('type');
-    this.loadIndustries();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -44,6 +49,7 @@ export class ServicesPageComponent implements OnInit, OnChanges {
   }
 
   loadIndustries(): void {
+    this.loading = true;
     this.categoryService.findAll().subscribe(
       (res: HttpResponse<Category[]>) => {
         this.industries = res.body ?? [];
@@ -62,13 +68,11 @@ export class ServicesPageComponent implements OnInit, OnChanges {
   }
 
   filterByIndustry(): void {
-    // this.companies = this.tempList;
-    // if(this.selectedServiceType !== null && this.selectedServiceType !== undefined) {
-    //   this.companies = this.companies.filter((item) => item.categoryId === this.selectedServiceType);
-    // }
     this.companyService.findWithIndustryId(this.selectedIndustry!.code!).subscribe(
       (res: HttpResponse<Company[]>) => {
+        //setTimeout(()=> {this.ngZone.run(() => {this.companies = res.body ?? []}), 1000});
         this.companies = res.body ?? [];
+        this.loading = false;
       });
   }
 
@@ -79,11 +83,6 @@ export class ServicesPageComponent implements OnInit, OnChanges {
     //     this.selectedServiceType ? item.address!.city === this.selectedCity[0] && item.categoryId === this.selectedServiceType
     //     :item.address!.city === this.selectedCity[0]);
     // }
-  }
-
-  changeServiceType(type: string): void {
-    this.typeId = type;
-    this.loadIndustries();
   }
 
   changePage(event: any): void {
