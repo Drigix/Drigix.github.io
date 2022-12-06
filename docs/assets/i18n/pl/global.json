@@ -13,6 +13,7 @@
       "logout": "Wyloguj",
       "book": "Rezerwuj",
       "createCompany": "Stwórz stronę firmy",
+      "createWorkerId": "Wygeneruj identyfikator pracowniczy",
       "filter": "Filter",
       "account": "Konto",
       "yourCompany": "Twoja firma",
@@ -27,6 +28,7 @@
       "changePhoneNumber": "Zmiana numeru telefonu",
       "login": "Logowanie",
       "createCompany": "Tworzenie strony firmy",
+      "createWorkerId": "Generowanie identyfiaktora pracowniczego",
       "confirmDelete": "Powierdź usunięcie",
       "companyWorkers": "Pracownicy firmy",
       "addCompanyWorker": "Dodanie nowego pracownika",
@@ -57,7 +59,9 @@
       "passwordChangeSuccess": "Zmiana hasła powiodła się!",
       "passwordChangeError": "Zmiana hasła nie powiodła się",
       "userDataChangeSuccess": "Twoje dane zostały zmienione!",
-      "userDataChangeError": "Wystąpił błąd podczas zmiany danych, spróbuj jeszcze raz!"
+      "userDataChangeError": "Wystąpił błąd podczas zmiany danych, spróbuj jeszcze raz!",
+      "addWorkerSuccess": "Dodano nowego pracownika!",
+      "addWorkerError": "Wystąpił błąd podczas dodawania nowego pracownika, spróbuj ponownie!"
     },
     "form": {
       "fieldRequired": "To pole jest wymagane",
@@ -84,6 +88,10 @@
       "nameMaxLength": "Imię może mieć maksymalnie 20 liter!",
       "surnameMinLength": "Nazwisko musi miec conajmniej 2 litery!",
       "surnameMaxLength": "Nazwisko może mieć maksymalnie 30 liter!"
+    },
+    "home": {
+      "categoryServices": "Kategorie usług",
+      "recommendedCompany": "Polecane salony"
     },
     "services": {
       "hairdresser": "Fryzjer",
@@ -118,6 +126,7 @@
     "company": {
       "header": {
         "home": "Ogólne",
+        "openHours": "Godziny otwarcia",
         "description": "Opis",
         "companyServices": "Usługi firmy",
         "gallery": "Galeria",
