@@ -45,9 +45,8 @@ export class ManagerCompanyWorkersComponent implements OnInit {
 
   loadColumns(): void {
     this.workersColumns = [
-      { field: 'name', header: 'Imie' },
-      { field: 'surname', header: 'Nazwisko' },
-      { field: 'id', header: 'Id pracownika' },
+      { field: 'name', header: this.translateService.instant('global.user.name') },
+      { field: 'surname', header: this.translateService.instant('global.user.surname') },
     ];
   }
 
@@ -78,10 +77,12 @@ export class ManagerCompanyWorkersComponent implements OnInit {
   }
 
   handleCompanyWorkerDialogResponse(response: any): void {
-    if (response.result) {
-      this.messageService.add({key: 'mainToast', severity: 'success', summary:'Sukces', detail:'Sukces'});
+    if (response) {
+      this.messageService.add({key: 'mainToast', severity: 'success', summary: this.translateService.instant('global.message.success'),
+       detail: this.translateService.instant('global.message.addWorkerSuccess')});
     } else {
-      this.messageService.add({key: 'mainToast', severity: 'error', summary:'Błąd', detail:'Błąd'});
+      this.messageService.add({key: 'mainToast', severity: 'error', summary: this.translateService.instant('global.message.error'),
+       detail: this.translateService.instant('global.message.addWorkerSuccess')});
     }
   }
 

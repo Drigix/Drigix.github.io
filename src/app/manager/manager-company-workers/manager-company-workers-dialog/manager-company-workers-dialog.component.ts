@@ -33,8 +33,8 @@ export class ManagerCompanyWorkersDialogComponent implements OnInit {
   onSubmit(): void {
    this.companyService.addWorker(this.id).subscribe(
     {
-      next: () => {
-        this.ref.close();
+      next: (response) => {
+        this.ref.close(response);
       },
       error: () => {
         this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.createCompanySuccess')});

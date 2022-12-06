@@ -2,7 +2,7 @@
   <div class="wrapper">
     <app-galleria [showText]="true"></app-galleria>
 
-    <label name="category">Kategorie usług</label>
+    <label name="category">{{ 'global.home.categoryServices' | translate }}</label>
     <hr class="rounded">
     <div class="category">
       <a routerLink="/services/hairdresser" [state]="{type: 'hairdresser'}">
@@ -50,7 +50,7 @@
     </div>
 
     <div class="recommended">
-      <label name="category">Polecane salony</label>
+      <label name="recommended">{{ 'global.home.recommendedCompany' | translate }}</label>
       <hr class="rounded">
       <app-card></app-card>
     </div>
