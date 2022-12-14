@@ -27,6 +27,7 @@ export class TableComponent implements OnChanges {
   @Input() showCaption = true;
   @Input() showTableName = false;
   @Input() tableName: string | null = null;
+  @Input() expanded = false;
 
 
   @Input() selectMode: 'single' | 'multiple' = 'single';

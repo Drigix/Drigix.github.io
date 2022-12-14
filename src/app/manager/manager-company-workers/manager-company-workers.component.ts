@@ -1,9 +1,12 @@
+import { EmployeeService } from 'src/app/entities/employees/service/employee.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ManagerCompanyWorkersDialogComponent } from './manager-company-workers-dialog/manager-company-workers-dialog.component';
 import { UniversalTableColumn } from './../../components/table/column.model';
 import { Component, OnInit } from '@angular/core';
+import { Employee } from 'src/app/entities/employees/employee.model';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-manager-company-workers',
@@ -12,23 +15,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagerCompanyWorkersComponent implements OnInit {
   workersColumns: UniversalTableColumn[] = [];
-  workers = [
-    {
-      name: 'Michał',
-      surname: 'Ławinski',
-      id: '111',
-    },
-    {
-      name: 'Michał',
-      surname: 'Ławinski',
-      id: '222',
-    },
-    {
-      name: 'Michał',
-      surname: 'Ławinski',
-      id: '333',
-    },
-  ];
+  // workers = [
+  //   {
+  //     name: 'Michał',
+  //     surname: 'Ławinski',
+  //     id: '111',
+  //   },
+  //   {
+  //     name: 'Michał',
+  //     surname: 'Ławinski',
+  //     id: '222',
+  //   },
+  //   {
+  //     name: 'Michał',
+  //     surname: 'Ławinski',
+  //     id: '333',
+  //   },
+  // ];
+  workers: Employee[] = [];
 
   selectedWorker: any | null = null;
 
@@ -36,17 +40,26 @@ export class ManagerCompanyWorkersComponent implements OnInit {
     private dialogService: DialogService,
     private translateService: TranslateService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private employeeSercice: EmployeeService
   ) {}
 
   ngOnInit(): void {
+    this.loadWorkers();
     this.loadColumns();
+  }
+
+  loadWorkers(): void {
+    this.employeeSercice.getWokers().subscribe(
+      (res: HttpResponse<Employee[]>) => {
+        this.workers = res.body ?? [];
+      });
   }
 
   loadColumns(): void {
     this.workersColumns = [
-      { field: 'name', header: this.translateService.instant('global.user.name') },
-      { field: 'surname', header: this.translateService.instant('global.user.surname') },
+      { field: 'firstName', header: this.translateService.instant('global.user.name') },
+      { field: 'lastName', header: this.translateService.instant('global.user.surname') },
     ];
   }
 
@@ -77,13 +90,13 @@ export class ManagerCompanyWorkersComponent implements OnInit {
   }
 
   handleCompanyWorkerDialogResponse(response: any): void {
-    if (response) {
-      this.messageService.add({key: 'mainToast', severity: 'success', summary: this.translateService.instant('global.message.success'),
-       detail: this.translateService.instant('global.message.addWorkerSuccess')});
-    } else {
-      this.messageService.add({key: 'mainToast', severity: 'error', summary: this.translateService.instant('global.message.error'),
-       detail: this.translateService.instant('global.message.addWorkerSuccess')});
-    }
+    // if (response) {
+    //   this.messageService.add({key: 'mainToast', severity: 'success', summary: this.translateService.instant('global.message.success'),
+    //    detail: this.translateService.instant('global.message.addWorkerSuccess')});
+    // } else {
+    //   this.messageService.add({key: 'mainToast', severity: 'error', summary: this.translateService.instant('global.message.error'),
+    //    detail: this.translateService.instant('global.message.addWorkerSuccess')});
+    // }
   }
 
   handleDeleteDialogResponse(): void {

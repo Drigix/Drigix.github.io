@@ -3,14 +3,12 @@ import { CompanyService } from 'src/app/entities/company/service/company.service
 import { Router, ActivatedRoute } from '@angular/router';
 import { isUserLogin } from './../../account/authority/authority.component';
 import { LoginDialogComponent } from './../../account/login-dialog/login-dialog.component';
-import { Category } from '../../entities/industry/category.model';
 import { ReservationDialogComponent } from './reservation/reservation-dialog/reservation-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Company } from './../../entities/company/company.model';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MenuItem, MessageService } from "primeng/api";
-import { Address } from 'src/app/entities/company/address.model';
 
 @Component({
   selector: 'app-company-page',
@@ -26,7 +24,6 @@ export class CompanyPageComponent implements OnInit {
   companyId: string | null = null;
 
   isAccountLogged = false;
-  address: Address = new Address(1, 'Katowice', 'Zwycięstwa 10', '42-600', 'Poland');
   items: MenuItem[] = [];
 
   currentCompany: Company | null = null;
@@ -118,5 +115,9 @@ export class CompanyPageComponent implements OnInit {
 
   changePage(event: any): void {
     this.opinionPage = event.page;
+  }
+
+  goToCompanyServices(): void {
+    this.router.navigate(['manager/company-services']);
   }
 }

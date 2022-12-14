@@ -67,12 +67,12 @@
           </div>
           <div class="user-data">
             <label for="float-input">{{'global.user.date' | translate}}: </label>
-            <input type="text" pInputText formControlName="birthDay" [(ngModel)]="changeUser!.birthDay!">
-            <div class="input-invalid-text" *ngIf="changeUserDataForm.get('birthDay')!.invalid && (changeUserDataForm.get('birthDay')!.dirty || changeUserDataForm.get('birthDay')!.touched)">
-              <small *ngIf="changeUserDataForm.get('birthDay')?.errors?.['required']">
-                {{'global.form.fieldRequired' | translate }}
-              </small>
-            </div>
+            <p-calendar formControlName="birthDay" dateFormat="yy-mm-dd" [maxDate]="maxDateValue" [(ngModel)]="changeUserBirthday" placeholder="{{'global.user.date' | translate}}"></p-calendar>
+              <div class="input-invalid-text" *ngIf="changeUserDataForm.get('birthDay')!.invalid && (changeUserDataForm.get('birthDay')!.dirty || changeUserDataForm.get('birthDay')!.touched)">
+                <small *ngIf="changeUserDataForm.get('birthDay')?.errors?.['required']">
+                  {{'global.form.fieldRequired' | translate }}
+                </small>
+              </div>
           </div>
           <div class="user-data">
             <label for="float-input">{{'global.user.phonenumber' | translate}}: </label>

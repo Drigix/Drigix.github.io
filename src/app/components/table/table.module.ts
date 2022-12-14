@@ -1,3 +1,4 @@
+import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from "@angular/core";
 import { NgModel } from "@angular/forms";
@@ -21,6 +22,7 @@ import { DialogModule } from 'primeng/dialog';
     TranslateModule,
     TooltipModule,
     DialogModule,
+    ButtonModule
   ],
   exports: [
     TableComponent

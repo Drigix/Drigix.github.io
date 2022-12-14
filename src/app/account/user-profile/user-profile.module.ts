@@ -1,3 +1,4 @@
+import { CalendarModule } from 'primeng/calendar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TranslateModule } from '@ngx-translate/core';
 import { LoginDialogModule } from './../login-dialog/login-dialog.module';
@@ -31,7 +32,8 @@ import {InputTextModule} from 'primeng/inputtext';
     FormsModule,
     InputTextModule,
     ReactiveFormsModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    CalendarModule
   ],
   exports: [
     UserProfileComponent

@@ -25,14 +25,6 @@ export class CompanyService {
     return this.http.post(this.COMPANY_URL, company);
   }
 
-  generateWorkerId(): Observable<any> {
-    return this.http.post(this.ACTUAL_COMPANY_URL, { responseType: 'text' });
-  }
-
-  addWorker(id: string): Observable<any> {
-    return this.http.put(`${this.COMPANY_URL}/${id}`, id);
-  }
-
   findWithIndustryId(categoryId: string): Observable<EntityArrayResponseType> {
     return this.http.get<Company[]>(`${this.COMPANY_URL}/${categoryId}`, {observe: 'response'});
   }

@@ -36,7 +36,7 @@ export class ManagerCompanyServicesDialogComponent implements OnInit {
     this.servicesService.create(this.service).subscribe(
       {
         next: () => {
-          this.messageService.add({key: 'mainToast', severity:'error', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.createCompanyServiceSuccess')});
+          this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.createCompanyServiceSuccess')});
           this.ref.close();
         },
         error: () => {

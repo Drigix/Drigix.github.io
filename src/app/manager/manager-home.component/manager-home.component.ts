@@ -16,10 +16,9 @@ import { CreateWorkerIdDialogComponent } from './create-worker-id-dialog/create-
 @Component({
   selector: 'app-manager-home',
   templateUrl: './manager-home.component.html',
-  styleUrls: ['./manager-home.component.scss']
+  styleUrls: ['./manager-home.component.scss'],
 })
 export class ManagerHomeComponent implements OnInit {
-
   isCompanyExist = false;
   isEmployeed = false;
 
@@ -27,20 +26,30 @@ export class ManagerHomeComponent implements OnInit {
   companyId: string | null = null;
   loading = false;
 
-  constructor(private router: Router, private dialogService: DialogService, private translateService: TranslateService, private messageService: MessageService,
-    private authorityService: AuthorityService, private companyService: CompanyService) { }
+  constructor(
+    private router: Router,
+    private dialogService: DialogService,
+    private translateService: TranslateService,
+    private messageService: MessageService,
+    private authorityService: AuthorityService,
+    private companyService: CompanyService
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;
-    if(Authority.OWNER === USER_ROLE || this.authorityService.checkIsEmployeed()) {
+    if (
+      Authority.OWNER === USER_ROLE ||
+      this.authorityService.checkIsEmployeed()
+    ) {
       this.isCompanyExist = true;
       this.loadActualCompany();
     }
   }
 
   loadActualCompany(): void {
-    this.companyService.findActualCompany().subscribe(
-      (res: HttpResponse<string>) => {
+    this.companyService
+      .findActualCompany()
+      .subscribe((res: HttpResponse<string>) => {
         this.companyId = res.body ?? null;
         this.loading = false;
       });
@@ -55,7 +64,9 @@ export class ManagerHomeComponent implements OnInit {
       header: this.translateService.instant('global.header.createCompany'),
       width: '80%',
     });
-    ref.onClose.subscribe((response) => this.handleLoginDialogResponse(response));
+    ref.onClose.subscribe((response) =>
+      this.handleLoginDialogResponse(response)
+    );
   }
 
   openEditCompanyDialog(): void {
@@ -63,8 +74,8 @@ export class ManagerHomeComponent implements OnInit {
       header: this.translateService.instant('global.header.editCompany'),
       width: '80%',
       data: {
-        company: this.company
-      }
+        company: this.company,
+      },
     });
     //ref.onClose.subscribe((response) => this.handleLoginDialogResponse(response))
   }
@@ -77,8 +88,15 @@ export class ManagerHomeComponent implements OnInit {
   }
 
   handleLoginDialogResponse(response: any): void {
-    if(response) {
-      this.messageService.add({key: 'mainToast', severity:'success', summary: this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.createCompanySuccess')});
+    if (response) {
+      this.messageService.add({
+        key: 'mainToast',
+        severity: 'success',
+        summary: this.translateService.instant('global.message.success'),
+        detail: this.translateService.instant(
+          'global.message.createCompanySuccess'
+        ),
+      });
       this.authorityService.loguot();
     }
   }
