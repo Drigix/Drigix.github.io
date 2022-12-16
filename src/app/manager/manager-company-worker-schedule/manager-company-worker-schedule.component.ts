@@ -3,6 +3,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { DialogService } from "primeng/dynamicdialog";
 import { UniversalTableColumn } from "src/app/components/table/column.model";
+import { CompanySchedule } from "src/app/entities/company-schedule/company-schedule.model";
 import { ManagerCompanyWorkerScheduleDialogComponent } from "./manager-company-worker-schedule-dialog/manager-company-worker-schedule-dialog.component";
 
 @Component({
@@ -36,6 +37,7 @@ export class ManagerCompanyWorkerScheduleComponent implements OnInit {
       endTime: '20:00'
     }
   ];
+  workerSchedules: CompanySchedule[] = [];
 
   selectedWorker: any | null = null;
 

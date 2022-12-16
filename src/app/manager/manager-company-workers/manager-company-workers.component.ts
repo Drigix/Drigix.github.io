@@ -15,23 +15,6 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class ManagerCompanyWorkersComponent implements OnInit {
   workersColumns: UniversalTableColumn[] = [];
-  // workers = [
-  //   {
-  //     name: 'Michał',
-  //     surname: 'Ławinski',
-  //     id: '111',
-  //   },
-  //   {
-  //     name: 'Michał',
-  //     surname: 'Ławinski',
-  //     id: '222',
-  //   },
-  //   {
-  //     name: 'Michał',
-  //     surname: 'Ławinski',
-  //     id: '333',
-  //   },
-  // ];
   workers: Employee[] = [];
 
   selectedWorker: any | null = null;

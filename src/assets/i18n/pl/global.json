@@ -133,6 +133,10 @@
         "localization": "Lokalizacja",
         "opinions": "Opinie"
       },
+      "schedule": {
+        "createScheduleSuccess": "Pomyślnie dodano nowy harmonogram!",
+        "createScheduleFail": "Dodanie nowego harmonogramu nie powiodło się!"
+      },
       "name": "Nazwa firmy",
       "nip": "NIP",
       "industry": "Branża firmy",

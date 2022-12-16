@@ -1,25 +1,26 @@
 <div class="dialog-widnow">
     <form #formWorkerSchedule="ngForm" (ngSubmit)="onSubmit()" [formGroup]="workerScheduleForm">
       <div class="worker-schedule-dialog">
-        <p-calendar [inline]="true"></p-calendar>
+        <p-calendar [inline]="true" [(ngModel)]="selectedDate" formControlName="date">
+        </p-calendar>
         <div class="right-side">
-          <input type="text" pInputText formControlName="worker" placeholder="{{'global.form.serviceName' | translate}}" [(ngModel)]="name"/>
-          <div class="input-invalid-text" *ngIf="workerScheduleForm.get('worker')!.invalid && (workerScheduleForm.get('worker')!.dirty || workerScheduleForm.get('worker')!.touched)">
-            <small *ngIf="workerScheduleForm.get('worker')?.errors?.['required']">
+          <p-dropdown [options]="workers" optionLabel="firstName" [(ngModel)]="selectedWoker" formControlName="worker">
+          </p-dropdown>
+
+          <p-calendar [showTime]="true" [timeOnly]="true" inputId="timeonly" formControlName="startTime" appendTo="body"
+            [(ngModel)]="startTime" formControlName="startTime" placeholder="Godzina rozpoczęcia">
+          </p-calendar>
+          <div class="input-invalid-text" *ngIf="workerScheduleForm.get('startTime')!.invalid && (workerScheduleForm.get('startTime')!.dirty || workerScheduleForm.get('startTime')!.touched)">
+            <small *ngIf="workerScheduleForm.get('startTime')?.errors?.['required']">
               {{'global.form.fieldRequired' | translate }}
             </small>
           </div>
 
-          <p-calendar [showTime]="true" [timeOnly]="true" inputId="timeonly" formControlName="startTime" appendTo="body"></p-calendar>
+          <p-calendar [showTime]="true" [timeOnly]="true" inputId="timeonly" formControlName="endTime" appendTo="body"
+            [(ngModel)]="endTime" formControlName="endTime" [disabled]="startTime === null" placeholder="Godzina zakończenia" [minDate]="startTime!">
+          </p-calendar>
           <div class="input-invalid-text" *ngIf="workerScheduleForm.get('endTime')!.invalid && (workerScheduleForm.get('endTime')!.dirty || workerScheduleForm.get('endTime')!.touched)">
             <small *ngIf="workerScheduleForm.get('endTime')?.errors?.['required']">
-              {{'global.form.fieldRequired' | translate }}
-            </small>
-          </div>
-
-          <p-calendar [showTime]="true" [timeOnly]="true" inputId="timeonly" formControlName="endTime" appendTo="body"></p-calendar>
-          <div class="input-invalid-text" *ngIf="workerScheduleForm.get('startTime')!.invalid && (workerScheduleForm.get('startTime')!.dirty || workerScheduleForm.get('startTime')!.touched)">
-            <small *ngIf="workerScheduleForm.get('startTime')?.errors?.['startTime']">
               {{'global.form.fieldRequired' | translate }}
             </small>
           </div>

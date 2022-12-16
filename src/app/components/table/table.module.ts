@@ -9,6 +9,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TranslateModule } from '@ngx-translate/core';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [
@@ -22,10 +23,11 @@ import { DialogModule } from 'primeng/dialog';
     TranslateModule,
     TooltipModule,
     DialogModule,
-    ButtonModule
+    ButtonModule,
+    RadioButtonModule
   ],
   exports: [
     TableComponent
-  ]
+  ],
 })
 export class UniversalTableModule{}

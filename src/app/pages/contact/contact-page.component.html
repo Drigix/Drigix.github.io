@@ -2,7 +2,11 @@
   <div class="wrapper">
     <label name="header1">{{ 'global.faq.header1' | translate }}</label>
     <label name="header2">{{ 'global.faq.header2' | translate }}</label>
-    <hr class="rounded">
+
+    <div style="display: flex; justify-content: center;">
+      <div class="rounded"></div>
+    </div>
+
     <form #contactForm (onSubmit)="onSubmit()" [formGroup]="helpForm">
       <div class="contact-input">
         <input type="text" pInputText formControlName="name" placeholder="{{'global.user.name' | translate}}"/>
@@ -20,9 +24,12 @@
       <p>doubledebil@gmail.com</p>
     </div>
 
+    <div style="display: flex; justify-content: center;">
+      <div class="rounded"></div>
+    </div>
+
     <div class="faq">
       <label name="category">{{ 'global.faq.oftenQuestions' | translate }}</label>
-      <hr class="rounded">
       <p-accordion>
         <p-accordionTab header="Header I">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation

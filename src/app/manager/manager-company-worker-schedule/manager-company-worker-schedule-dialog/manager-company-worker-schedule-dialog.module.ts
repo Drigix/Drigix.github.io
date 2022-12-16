@@ -1,5 +1,6 @@
+import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from "@angular/core";
 import { ComponentModule } from 'src/app/components/component.module';
@@ -19,7 +20,9 @@ import { ManagerCompanyWorkerScheduleDialogComponent } from './manager-company-w
     TranslateModule,
     ConfirmDialogModule,
     ReactiveFormsModule,
-    CalendarModule
+    CalendarModule,
+    DropdownModule,
+    FormsModule
   ],
   exports: [
     ManagerCompanyWorkerScheduleDialogComponent

@@ -124,6 +124,10 @@
         "localization": "Localization",
         "opinions": "Opinions"
       },
+      "schedule": {
+        "createScheduleSuccess": "Company schedule has been added!",
+        "createScheduleFail": "Company schedule has been not added!"
+      },
       "name": "Company name",
       "nip": "NIP",
       "industry": "Company industry",

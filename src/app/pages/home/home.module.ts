@@ -1,3 +1,4 @@
+import { ButtonModule } from 'primeng/button';
 import { ManagerModule } from './../../manager/manager.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentModule } from './../../components/component.module';
@@ -17,7 +18,8 @@ import {CardModule} from 'primeng/card';
     ComponentModule,
     CardModule,
     TranslateModule,
-    ManagerModule
+    ManagerModule,
+    ButtonModule
   ],
   exports: [
     HomeComponent

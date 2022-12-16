@@ -1,9 +1,12 @@
 <div *ngIf="isManagerLogged !== 'employee' && isManagerLogged !== 'owner'; else homeManager" class="home">
   <div class="wrapper">
-    <app-galleria [showText]="true"></app-galleria>
-
+    <div class="gallery">
+      <app-galleria [showText]="true"></app-galleria>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <div class="rounded"></div>
+    </div>
     <label name="category">{{ 'global.home.categoryServices' | translate }}</label>
-    <hr class="rounded">
     <div class="category">
       <a routerLink="services/7228be80-f7f2-4977-a1f5-770ff986537a" [queryParams]="{type: '7228be80-f7f2-4977-a1f5-770ff986537a'}">
         <p-card header="{{'global.services.hairdresser' | translate}}" >
@@ -49,10 +52,17 @@
       </a>
     </div>
 
+    <div style="display: flex; justify-content: center;">
+      <div class="rounded"></div>
+    </div>
+
     <div class="recommended">
       <label name="recommended">{{ 'global.home.recommendedCompany' | translate }}</label>
-      <hr class="rounded">
       <app-card></app-card>
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+      <div class="rounded"></div>
     </div>
 
     <div class="text-with-photo">
