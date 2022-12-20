@@ -18,10 +18,25 @@ html {
   height: 100%;
 }
 
+@font-face {
+  font-family: quicksand;
+  src: url("../../assets/font/Quicksand-VariableFont_wght.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: oswald;
+  src: url("../../assets/font/Oswald-VariableFont_wght.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: patuaone;
+  src: url("../../assets/font/PatuaOne-Regular.ttf") format("opentype");
+}
+
 @media only screen and (max-width: 700px){
   .wrapper {
     background-color: white;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'quicksand';
     margin-left: auto;
     margin-right: auto;
     min-height: 100vh;
@@ -38,7 +53,7 @@ html {
 @media only screen and (min-width: 700px){
   .wrapper {
     background-color: white;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'quicksand';
     margin-left: auto;
     margin-right: auto;
     min-height: 100vh;
@@ -55,7 +70,7 @@ html {
 @media only screen and (min-width: 1280px) {
   .wrapper {
     background-color: white;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'quicksand';
     margin-left: auto;
     margin-right: auto;
     min-height: 100vh;
