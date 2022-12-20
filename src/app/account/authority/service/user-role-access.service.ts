@@ -1,4 +1,4 @@
-import { isUserLogin, USER_ROLE } from './../authority.component';
+import { isUserLogin, USER_PERMISSIONS, USER_ROLE } from './../authority.component';
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 export class UserRouteAccessService implements CanActivate {
 
   roleAuthority: any[] = [];
+  permissionsAuthority: any[] = [];
 
   constructor(private router: Router, private _location: Location) {}
 
@@ -39,7 +40,16 @@ export class UserRouteAccessService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if(isUserLogin) {
       this.roleAuthority = route.data['authorities'];
-      return this.roleAuthority.includes(USER_ROLE);
+      this.permissionsAuthority = route.data['permissions'];
+      var isCheck = false;
+      if(this.roleAuthority.includes(USER_ROLE)) {
+        USER_PERMISSIONS.forEach((element: string) => {
+          if(this.permissionsAuthority.includes(element)) {
+            isCheck = true;
+          }
+        });
+      }
+      return isCheck;
     } else {
       this.router.navigate(['/']);
       return false;

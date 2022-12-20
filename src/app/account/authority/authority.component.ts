@@ -4,6 +4,7 @@ import { AuthorityService } from "./service/authority.service";
 
 export var isUserLogin: boolean;
 export var USER_ROLE: any;
+export var USER_PERMISSIONS: any;
 
 @Component({
   selector: 'app-authority-component',
@@ -29,6 +30,7 @@ export class AuthorityComponent implements OnInit {
   decodeJwtToken(): void {
     const token = localStorage.getItem('jwt');
     this.decodedToken = jwt_decode(token!);
+    USER_PERMISSIONS = this.decodedToken['permissions'];
     USER_ROLE = this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
   }
 

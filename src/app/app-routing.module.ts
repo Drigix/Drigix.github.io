@@ -13,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ContactPageComponent } from './pages/contact/contact-page.component';
 import { ManagerCompanyServicesComponent } from './manager/manager-company-services/manager-company-services.component';
+import { GlobalPermission } from './account/authority/permission.model';
 
 
 
@@ -51,7 +52,10 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       {
         path: 'manager/company-workers',
         data: {
-          authorities: [Authority.OWNER]
+          authorities: [Authority.OWNER, Authority.EMPLOYEE],
+          permissions: [
+            GlobalPermission.EMPLOYEES_EDIT
+          ]
         },
         canActivate: [UserRouteAccessService],
         component: ManagerCompanyWorkersComponent
@@ -59,7 +63,10 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       {
         path: 'manager/company-reservations',
         data: {
-          authorities: [Authority.OWNER]
+          authorities: [Authority.OWNER, Authority.EMPLOYEE],
+          permissions: [
+            GlobalPermission.RESERVATIONS_READ
+          ]
         },
         canActivate: [UserRouteAccessService],
         component: ManagerCompanyReservationsComponent
@@ -67,7 +74,10 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       {
         path: 'manager/company-services',
         data: {
-          authorities: [Authority.OWNER]
+          authorities: [Authority.OWNER, Authority.EMPLOYEE],
+          permissions: [
+            GlobalPermission.SERVICES_READ
+          ]
         },
         canActivate: [UserRouteAccessService],
         component: ManagerCompanyServicesComponent
@@ -75,7 +85,10 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       {
         path: 'manager/company-schedule',
         data: {
-          authorities: [Authority.OWNER]
+          authorities: [Authority.OWNER, Authority.EMPLOYEE],
+          permissions: [
+            GlobalPermission.SCHEDULES_READ
+          ]
         },
         canActivate: [UserRouteAccessService],
         component: ManagerCompanyScheduleComponent
@@ -83,7 +96,10 @@ import { ManagerCompanyServicesComponent } from './manager/manager-company-servi
       {
         path: 'manager/company-worker-schedule',
         data: {
-          authorities: [Authority.OWNER]
+          authorities: [Authority.OWNER, Authority.EMPLOYEE],
+          permissions: [
+            GlobalPermission.SCHEDULES_READ
+          ]
         },
         canActivate: [UserRouteAccessService],
         component: ManagerCompanyWorkerScheduleComponent
