@@ -1,5 +1,4 @@
-<ng-template #normalTemplate>
-  <p-galleria [value]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="5"
+<p-galleria [value]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="5"
     [circular]="true" [showItemNavigators]="true" [showThumbnails]="false">
     <ng-template pTemplate="item" let-item>
         <img [src]="item.previewImageSrc" style="width: 100%; display: block;" />
@@ -13,7 +12,6 @@
             <img [src]="item.thumbnailImageSrc" style="display: block;" />
         </div>
     </ng-template>
-  </p-galleria>
-</ng-template>
+</p-galleria>
 
 
