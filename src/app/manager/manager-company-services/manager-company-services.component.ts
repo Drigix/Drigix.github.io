@@ -1,3 +1,4 @@
+import { PermissionService } from './../../account/authority/service/permission.service';
 import { HttpResponse } from '@angular/common/http';
 import { Services } from './../../entities/services/services.model';
 import { Component, OnInit } from "@angular/core";
@@ -17,6 +18,7 @@ export class ManagerCompanyServicesComponent implements OnInit{
 
   servicesColumns: UniversalTableColumn[] = [];
   services: Services[] = [];
+  permission = false;
 
   selectedService: any | null = null;
 
@@ -25,10 +27,12 @@ export class ManagerCompanyServicesComponent implements OnInit{
     private translateService: TranslateService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private servicesService: ServicesService
+    private servicesService: ServicesService,
+    private permissionService: PermissionService
   ) {}
 
   ngOnInit(): void {
+    this.permissionService.checkSerivcePermission() ? this.permission = true : this.permission = false;
     this.loadServices();
     this.loadColumns();
   }

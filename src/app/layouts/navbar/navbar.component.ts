@@ -119,7 +119,7 @@ export class NavbarComponent implements OnInit {
     setUserMenu(): void {
       this.items = [
         {
-            label: 'Home',
+            label: 'Główna',
             routerLink: '/'
         },
         {

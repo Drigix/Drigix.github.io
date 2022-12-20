@@ -7,6 +7,7 @@ import { UniversalTableColumn } from './../../components/table/column.model';
 import { Component, OnInit } from '@angular/core';
 import { Employee } from 'src/app/entities/employees/employee.model';
 import { HttpResponse } from '@angular/common/http';
+import { PermissionService } from 'src/app/account/authority/service/permission.service';
 
 @Component({
   selector: 'app-manager-company-workers',
@@ -16,6 +17,7 @@ import { HttpResponse } from '@angular/common/http';
 export class ManagerCompanyWorkersComponent implements OnInit {
   workersColumns: UniversalTableColumn[] = [];
   workers: Employee[] = [];
+  permission = false;
 
   selectedWorker: any | null = null;
 
@@ -24,10 +26,12 @@ export class ManagerCompanyWorkersComponent implements OnInit {
     private translateService: TranslateService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private employeeSercice: EmployeeService
+    private employeeSercice: EmployeeService,
+    private permissionService: PermissionService
   ) {}
 
   ngOnInit(): void {
+    this.permissionService.checkWorkersPermission() ? this.permission = true : this.permission = false;
     this.loadWorkers();
     this.loadColumns();
   }

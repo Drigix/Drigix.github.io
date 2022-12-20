@@ -7,17 +7,24 @@
   </div>
   <div class="right-side">
     <div class="workers">
-      <p-dropdown id="bookWorkers" name="bookWorkers" placeholder="{{'global.reservation.chooseWorker' | translate}}"
-       appendTo="body">
+      <p-dropdown id="bookWorkers" name="bookWorkers"
+        [options]="availableWorkers" optionLabel="employeeName"
+        (onChange)="onEmployeeSelect($event)"
+        placeholder="{{'global.reservation.chooseWorker' | translate}}"
+        appendTo="body">
       </p-dropdown>
+    </div>
+    <div class="terms">
+      <!-- <p-dropdown id="bookWorkers" name="bookWorkers"
+        [options]="selectedEmployee?.terms!" optionLabel="employeeName"
+        placeholder="{{'global.reservation.chooseWorker' | translate}}" [disabled]="selectedEmployee == null"
+        appendTo="body">
+      </p-dropdown> -->
+      <app-card [availableTermsTemplate]="true" [availableTerms]="selectedEmployee?.terms!"></app-card>
     </div>
     <div class="remarks">
       <textarea rows="5" cols="30" pInputTextarea placeholder="Dodatkowe uwagi"></textarea>
     </div>
-    <div class="select-option">
-      <p>Wybrana data: {{reservationDate}}</p>
-      <p>Wybrany pracownik: losowy</p>
-    </div>
-    <p-button label="{{'global.action.book' | translate}}"></p-button>
+    <p-button label="{{'global.action.book' | translate}}" (onClick)="findAvailableTerms()"></p-button>
   </div>
 </div>

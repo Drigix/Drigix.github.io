@@ -3,7 +3,7 @@
     <div class="card" #element>
         <img src="https://d375139ucebi94.cloudfront.net/region2/pl/104637/biz_photo/c732831d4fdd4ca6a79ba95521b7e468.jpeg?size=640x427">
         <div class="data-company">
-         <h2>{{item.name}}</h2>
+         <label for="name">{{item.name}}</label>
          <div class="rating">
             <p-rating [readonly]="true" [(ngModel)]="item.opinions!.average">
             </p-rating>
@@ -19,7 +19,7 @@
             <p style="font-weight: bold; color: forestgreen; padding-left: 10px;">OTWARTE</p>
           </ng-template>
          </div>
-          <p-button label="Sprawdź" style="display: flex; justify-content: center;" (onClick)="onCompanySelect(item.id!, item.name!)"></p-button>
+          <p-button label="{{'global.action.check' | translate }}" style="display: flex; justify-content: center;" (onClick)="onCompanySelect(item.id!, item.name!)"></p-button>
        </div>
     </div>
   </ng-container>

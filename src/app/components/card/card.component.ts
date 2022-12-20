@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { Carousel } from 'primeng/carousel';
 import { phoneView, tabletView } from 'src/app/layouts/main/main.component';
 
@@ -11,6 +11,11 @@ export class CardComponent implements OnInit {
 
   @ViewChild('element') element?: ElementRef;
   @ViewChild('carousel', {static: true}) carousel?: Carousel;
+  @Input() availableTermsTemplate = false;
+  @Input() availableTerms?: string[];
+
+  selectedTerm: string | null = null;
+
 
   listCompanies = [1,2,3,4];
   rating = 3;
@@ -42,6 +47,10 @@ export class CardComponent implements OnInit {
     } else {
       this.numberVisible = 3;
     }
+  }
+
+  onTermSelect(event: any): void {
+    this.selectedTerm = event;
   }
 
   // @HostListener('window:resize', ['$event'])

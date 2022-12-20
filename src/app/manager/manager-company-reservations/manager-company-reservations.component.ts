@@ -1,3 +1,4 @@
+import { PermissionService } from './../../account/authority/service/permission.service';
 import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { ConfirmationService, MessageService } from "primeng/api";
@@ -36,6 +37,7 @@ export class ManagerCompanyReservationsComponent implements OnInit{
       service: "Strzyżenie męskie"
     }
   ];
+  permission = false;
   filteredReservations: any[] = [];
   currentDate: Date = new Date();
   reservationsDate: Date | null = null;
@@ -45,10 +47,12 @@ export class ManagerCompanyReservationsComponent implements OnInit{
     private dialogService: DialogService,
     private translateService: TranslateService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private permissionService: PermissionService
   ) {}
 
   ngOnInit(): void {
+    this.permissionService.checkReservationsPermission() ? this.permission = true : this.permission = false;
     this.filteredReservations = this.reservations;
     this.loadColumns();
   }

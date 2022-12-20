@@ -6,6 +6,7 @@
       "delete": "Usuń",
       "save": "Zapisz",
       "search": "Szukaj",
+      "check": "Sprawdź",
       "confirm": "Potwierdź",
       "close": "Anuluj",
       "send": "Wyślij",
@@ -23,6 +24,10 @@
       "changePhoneNumber": "Zmień numer telefonu"
     },
     "header": {
+      "home": "Główna",
+      "services": "Usługi",
+      "aboutUs": "O nas",
+      "contact": "Kontakt",
       "changePassword": "Zmiana hasła",
       "changeEmail": "Zmiana emailu",
       "changePhoneNumber": "Zmiana numeru telefonu",
@@ -36,7 +41,6 @@
       "reservations": "Rezerwacje",
       "addReservation": "Dodanie rezerwacji",
       "editReservation": "Edycja rezerwacji",
-      "services": "Usługi",
       "addService": "Dodanie usługi",
       "editService": "Edycja usługi",
       "addWorkerSchedule": "Dodanie harmonogramu pracownika",

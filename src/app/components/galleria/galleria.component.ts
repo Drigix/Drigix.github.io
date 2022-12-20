@@ -11,6 +11,7 @@ export class GalleriaComponent implements OnInit {
   @Input() bodyTemplate = 'default';
   @Input() showText = false;
 
+
   images: any[] = [];
 
   constructor(private photoService: PhotoService) { }

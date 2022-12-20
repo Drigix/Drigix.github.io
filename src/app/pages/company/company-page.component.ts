@@ -69,7 +69,7 @@ export class CompanyPageComponent implements OnInit {
     document.getElementById(view)?.scrollIntoView();
   }
 
-  checkIsLogged(): void {
+  checkIsLogged(serviceId: string): void {
     if (!this.isAccountLogged) {
       const ref = this.dialogService.open(LoginDialogComponent, {
         header: this.translateService.instant('global.action.book'),
@@ -79,24 +79,27 @@ export class CompanyPageComponent implements OnInit {
           reservation: true
         }
       });
-      ref.onClose.subscribe((response) => this.handleReservationDialogAfterLogin(response));
+      ref.onClose.subscribe((response) => this.handleReservationDialogAfterLogin(response, serviceId));
     } else {
-      this.openReservationDialog();
+      this.openReservationDialog(serviceId);
     }
   }
 
-  handleReservationDialogAfterLogin(response: any): void {
+  handleReservationDialogAfterLogin(response: any, serviceId: string): void {
     if(response.result) {
-      this.openReservationDialog();
+      this.openReservationDialog(serviceId);
     } else {
       this.messageService.add({key: 'mainToast', severity: 'error', summary:'Błąd', detail:'Błąd'});
     }
   }
 
-  openReservationDialog(): void {
+  openReservationDialog(serviceId: string): void {
     const ref = this.dialogService.open(ReservationDialogComponent, {
       header: this.translateService.instant('global.action.book'),
-      width: '60%'
+      width: '60%',
+      data: {
+        serviceId: serviceId
+      }
     });
     ref.onClose.subscribe((response) => this.handleReservationDialog(response));
   }

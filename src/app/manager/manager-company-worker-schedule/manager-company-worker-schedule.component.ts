@@ -1,3 +1,4 @@
+import { PermissionService } from './../../account/authority/service/permission.service';
 import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { ConfirmationService, MessageService } from "primeng/api";
@@ -37,6 +38,7 @@ export class ManagerCompanyWorkerScheduleComponent implements OnInit {
       endTime: '20:00'
     }
   ];
+  permission = false;
   workerSchedules: CompanySchedule[] = [];
 
   selectedWorker: any | null = null;
@@ -45,10 +47,12 @@ export class ManagerCompanyWorkerScheduleComponent implements OnInit {
     private dialogService: DialogService,
     private translateService: TranslateService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private permissionService: PermissionService
   ) {}
 
   ngOnInit(): void {
+    this.permissionService.checkSchedulesPermission() ? this.permission = true : this.permission = false;
     this.loadColumns();
   }
 

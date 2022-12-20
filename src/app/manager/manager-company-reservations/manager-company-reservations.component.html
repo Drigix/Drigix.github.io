@@ -12,7 +12,7 @@
         [showTableName]="true" tableName="{{'global.header.reservations' | translate }}">
       </app-table>
 
-      <div class="button-container">
+      <div *ngIf="permission" class="button-container">
         <p-button icon="pi pi-plus" styleClass="button-width"
           label="{{'global.action.add' | translate }}" (onClick)="openCompanyReservationDialog()">
         </p-button>

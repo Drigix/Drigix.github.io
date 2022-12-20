@@ -1,20 +1,31 @@
 <div class="main">
-  <p-carousel #carousel [value]="listCompanies" [numVisible]="numberVisible">
-    <ng-template let-listCompany class="list" pTemplate="item">
-      <div class="card" #element>
-        <div class="card-content" routerLink="/company/{{companyName}}">
-          <img src="https://d375139ucebi94.cloudfront.net/region2/pl/104637/biz_photo/c732831d4fdd4ca6a79ba95521b7e468.jpeg?size=640x427">
-          <div class="data-company">
-          <h2>{{companyName}}</h2>
-          <div class="rating">
-            <p-rating [readonly]="true" [(ngModel)]="rating">
-            </p-rating>
-            <p>({{amountOfRating}})</p>
-          </div>
-          <p>{{companyAddress}}</p>
+  <div class="avaiableTerms" *ngIf="availableTermsTemplate; else normalTemplate">
+    <p-carousel #carousel [value]="availableTerms!" [numVisible]="numberVisible">
+      <ng-template let-term class="list" pTemplate="item">
+        <div (click)="onTermSelect(term)" class="listTerm" [ngClass]="{'selectedTerm': term === selectedTerm}">
+          {{term}}
         </div>
-       </div>
-      </div>
-    </ng-template>
-  </p-carousel>
+      </ng-template>
+    </p-carousel>
+  </div>
+  <ng-template #normalTemplate>
+    <p-carousel #carousel [value]="listCompanies" [numVisible]="numberVisible">
+      <ng-template let-listCompany class="list" pTemplate="item">
+        <div class="card" #element>
+          <div class="card-content" routerLink="/company/{{companyName}}">
+            <img src="https://d375139ucebi94.cloudfront.net/region2/pl/104637/biz_photo/c732831d4fdd4ca6a79ba95521b7e468.jpeg?size=640x427">
+            <div class="data-company">
+            <h2>{{companyName}}</h2>
+            <div class="rating">
+              <p-rating [readonly]="true" [(ngModel)]="rating">
+              </p-rating>
+              <p>({{amountOfRating}})</p>
+            </div>
+            <p>{{companyAddress}}</p>
+          </div>
+         </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </ng-template>
 </div>

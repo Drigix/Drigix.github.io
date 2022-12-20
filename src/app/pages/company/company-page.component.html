@@ -16,7 +16,7 @@
           <p>{{currentCompany?.address?.street}} {{currentCompany?.address?.zipCode}} {{currentCompany?.address?.city}}</p>
           <div class="rounded" style="width: 100%;"></div>
           <div>
-            <label for="openHours">{{'global.company.header.openHours' | translate}}</label>
+            <label for="openHours" style="font-size: 30px;">{{'global.company.header.openHours' | translate}}</label>
             <ng-container *ngFor="let item of currentCompany!.workingDays">
               <p>{{item.dayName }} {{item.startAt}} - {{item.endAt}}</p>
             </ng-container>
@@ -43,7 +43,7 @@
               <P>{{item.duration}}min</P>
               <p>{{item.price}}zł</p>
               <div style="padding-top: 10px;">
-                <p-button label="{{'global.action.book' | translate}}" (onClick)="checkIsLogged()"></p-button>
+                <p-button label="{{'global.action.book' | translate}}" (onClick)="checkIsLogged(item.id!)"></p-button>
               </div>
             </div>
           </ng-container>

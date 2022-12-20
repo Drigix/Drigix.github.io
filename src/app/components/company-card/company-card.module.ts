@@ -5,6 +5,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import {RatingModule} from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { CompanyCardComponent } from './company-card.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CompanyCardComponent } from './company-card.component';
     AppRoutingModule,
     RatingModule,
     ButtonModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ],
   exports: [
     CompanyCardComponent
