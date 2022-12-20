@@ -1,0 +1,151 @@
+{
+  "global": {
+    "action": {
+      "add": "Add",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "search": "Search",
+      "check": "Sprawdź",
+      "confirm": "Confirm",
+      "close": "Close",
+      "send": "Send",
+      "login": "Login",
+      "logout": "Logout",
+      "book": "Book",
+      "createCompany": "Create company website",
+      "createWorkerId": "Create worker id",
+      "filter": "Filter",
+      "account": "Account",
+      "yourCompany": "Your company",
+      "history": "History",
+      "changePassword": "Change password",
+      "changeEmail": "Change email",
+      "changePhoneNumber": "Change phone number"
+    },
+    "header": {
+      "changePassword": "Password change",
+      "changeEmail": "Email change",
+      "changePhoneNumber": "Phonenumber change",
+      "login": "Login",
+      "createCompany": "Create company website",
+      "createWorkerId": "Generate worker id",
+      "confirmDelete": "Confirm delete",
+      "companyWorkers": "Company workers",
+      "addCompanyWorker": "Add new worker",
+      "editCompanyWorker": "Edit worker",
+      "reservations": "Reservations",
+      "addReservation": "Add reservation",
+      "editReservation": "Edit reservation"
+    },
+    "message": {
+      "success": "Success",
+      "error": "Error",
+      "activatingEmail": "Activating email was send for served email",
+      "confirmDelete": "Are you sure to delete this element?",
+      "emailActive": "Active email was send to a your address email",
+      "differentPasswords": "Password field and confirm password field is different!",
+      "wrongEmailOrPassword": "Address email or password are wrong!",
+      "wrongPassword": "Password is wrong!",
+      "passwordForgotSuccess": "Password has been reset. New password has been send to served email.",
+      "passwordForgotError": "Password has not been reser! Try again!",
+      "passwordChangeSuccess": "Password has been change.",
+      "passwordChangeError": "Password has not been change!",
+      "userDataChangeSuccess": "Your data has been change!",
+      "userDataChangeError": "Error occured, try again!",
+      "addWorkerSuccess": "New employee has been added!",
+      "addWorkerError": "Something went wrong, please try again!"
+    },
+    "form": {
+      "fieldRequired": "This field is required",
+      "createAccount": "Create account",
+      "forgotPassword": "Forgot your password?",
+      "oldPassword": "New password",
+      "newPassword": "Old password",
+      "confirmPassword": "Confirm password",
+      "oldEmail": "Old email",
+      "newEmail": "New email",
+      "oldPhonenumber": "Old phonenumber",
+      "newPhonenumber": "New phonenumber",
+      "name": "Name",
+      "surname": "Surname",
+      "date": "Date",
+      "serviceName": "Service name",
+      "serviceTime": "Duration of the service",
+      "servicePrice": "Price of the service",
+      "emailPattern": "Wrong email format!",
+      "passwordPattern": "Your password have to have at least 8 characters, 1 capital letter, 1 digit and 1 special character!",
+      "phonePattern": "Phonenumber has to have 11 digit(first 2 is area code)!",
+      "nameMinLength": "Name has to have at least 3 characters!",
+      "nameMaxLength": "Name can have at most 20 characters!",
+      "surnameMinLength": "Surname has to have at least 2 characters!",
+      "surnameMaxLength": "Surname can have at most 30 characters!"
+    },
+    "home": {
+      "categoryServices": "Category services",
+      "recommendedCompany": "Recommended companies"
+    },
+    "services": {
+      "hairdresser": "Hairdresser",
+      "barber": "Barber",
+      "beautician": "Beautician",
+      "tatoo": "Tatoo",
+      "spa": "Spa",
+      "piercing": "Piercing"
+    },
+    "placeholder": {
+      "chooseCities": "Choose cities",
+      "chooseFilter": "Choose sort by",
+      "search": "Search"
+    },
+    "account": {
+      "menu": {
+        "profile": "Profile",
+        "history": "Reservations history",
+        "setting": "Settings"
+      }
+    },
+    "user": {
+      "name": "Name",
+      "surname": "Surname",
+      "email": "Email",
+      "password": "Password",
+      "phonenumber": "Phonenumber",
+      "date": "Date of birthday",
+      "role": "User role",
+      "information": "User information"
+    },
+    "company": {
+      "header": {
+        "home": "General",
+        "openHours": "Open hours",
+        "description": "Description",
+        "companyServices": "Company services",
+        "gallery": "Gallery",
+        "localization": "Localization",
+        "opinions": "Opinions"
+      },
+      "schedule": {
+        "createScheduleSuccess": "Company schedule has been added!",
+        "createScheduleFail": "Company schedule has been not added!"
+      },
+      "name": "Company name",
+      "nip": "NIP",
+      "industry": "Company industry",
+      "city": "City",
+      "address": "Address",
+      "postalCode": "Postal code",
+      "country": "Country"
+    },
+    "reservation": {
+      "chooseDate": "Choose meeting date",
+      "chooseWorker": "Choose worker",
+      "chooseService": "Choose service"
+    },
+    "faq": {
+      "header1": "You need help?",
+      "header2": "Contact with us",
+      "oftenQuestions": "The most often questions"
+    }
+  }
+}
