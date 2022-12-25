@@ -1,6 +1,7 @@
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 import { CompanyScheduleService } from 'src/app/entities/company-schedule/service/company-schedule.service';
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { CompanySchedule } from 'src/app/entities/company-schedule/company-schedule.model';
 import { CompanyAvailableSchedule, CompanyAvailableScheduleEmployee } from 'src/app/entities/company-schedule/company-available-schedule.model';
@@ -12,18 +13,27 @@ import { CompanyAvailableSchedule, CompanyAvailableScheduleEmployee } from 'src/
 })
 export class ReservationDialogComponent implements OnInit {
 
+  reservationFormBuilder = this.fb.group({
+    date: ['', [Validators.required]],
+    employee: ['', [Validators.required]],
+    term: ['', [Validators.required]],
+    description: ['']
+  })
+
   currentDate: Date = new Date();
   availableSchedule: CompanyAvailableSchedule | null = new CompanyAvailableSchedule();
   availableWorkers: CompanyAvailableScheduleEmployee[] = [];
   availableTerms: string[] | null = null;
   selectedEmployee: CompanyAvailableScheduleEmployee | null = null;
+  seledtedTerm: string | null = null;
   serviceId: string | null = null;
   date: Date = new Date(2022,11,23);
   tempDates: Date[] = [];
 
   reservationDate: Date | null = null;
 
-  constructor(private companyScheduleService: CompanyScheduleService, public config: DynamicDialogConfig) {}
+  constructor(private companyScheduleService: CompanyScheduleService, public config: DynamicDialogConfig, private fb: UntypedFormBuilder,
+    private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     //this.serviceId = this.config.data.serviceId;
@@ -45,5 +55,20 @@ export class ReservationDialogComponent implements OnInit {
 
   onEmployeeSelect(event: any): void {
     this.selectedEmployee = event.value;
+  }
+
+  setTerm(event: any): void {
+    this.seledtedTerm = event;
+    if(this.seledtedTerm) {
+      this.reservationFormBuilder.get('term')?.setValidators(Validators.nullValidator);
+    }
+    this.cd.detectChanges();
+    // this.reservationFormBuilder.get('term')?.valueChanges.subscribe(() => {
+    //   this.reservationFormBuilder.get('term')?.setValidators(Validators.nullValidator);
+    // })
+  }
+
+  onSubmit(): void {
+    console.log(2);
   }
 }

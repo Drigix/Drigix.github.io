@@ -8,7 +8,7 @@
     </div>
     <label name="category">{{ 'global.home.categoryServices' | translate }}</label>
     <div class="category">
-      <a routerLink="services/7228be80-f7f2-4977-a1f5-770ff986537a" [queryParams]="{type: '7228be80-f7f2-4977-a1f5-770ff986537a'}">
+      <!-- <a routerLink="services/7228be80-f7f2-4977-a1f5-770ff986537a" [queryParams]="{type: '7228be80-f7f2-4977-a1f5-770ff986537a'}">
         <p-card header="{{'global.services.hairdresser' | translate}}" >
           <ng-template pTemplate="header">
               <img alt="Card" src="https://piotrsierpinski.pl/wp-content/uploads/2021/06/fryzjer-poznan.jpg">
@@ -49,7 +49,8 @@
               <img alt="Card" src="https://images.squarespace-cdn.com/content/v1/584c5737ebbd1a316fc7faf1/1635192643527-Y3IVZ5C09GEL6S9CV029/industrial.png?format=1000w">
           </ng-template>
         </p-card>
-      </a>
+      </a> -->
+      <app-card [industriesTemplate]="true"></app-card>
     </div>
 
     <div style="display: flex; justify-content: center;">

@@ -1,5 +1,6 @@
 <div class="main">
-  <div class="avaiableTerms" *ngIf="availableTermsTemplate; else normalTemplate">
+
+  <div class="avaiableTerms" *ngIf="availableTermsTemplate; else industries">
     <p-carousel #carousel [value]="availableTerms!" [numVisible]="numberVisible">
       <ng-template let-term class="list" pTemplate="item">
         <div (click)="onTermSelect(term)" class="listTerm" [ngClass]="{'selectedTerm': term === selectedTerm}">
@@ -8,6 +9,24 @@
       </ng-template>
     </p-carousel>
   </div>
+
+  <ng-template #industries>
+    <div *ngIf="industriesTemplate; else normalTemplate">
+      <p-carousel #carousel [value]="categoryCardList" [numVisible]="numberVisible">
+        <ng-template let-industry class="list" pTemplate="item">
+          <div class="industry-item">
+            <div class="photo">
+              <img [src]="industry.img">
+            </div>
+            <div class="name">
+              {{industry.name}}
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </ng-template>
+
   <ng-template #normalTemplate>
     <p-carousel #carousel [value]="listCompanies" [numVisible]="numberVisible">
       <ng-template let-listCompany class="list" pTemplate="item">

@@ -4,7 +4,7 @@ import { GalleriaComponent } from './../../components/galleria/galleria.componen
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ButtonModule } from 'primeng/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RatingModule } from 'primeng/rating';
 import { MenubarModule } from 'primeng/menubar';
 import { NgModule } from "@angular/core";
@@ -39,7 +39,8 @@ import {PaginatorModule} from 'primeng/paginator';
     CalendarModule,
     DropdownModule,
     InputTextareaModule,
-    PaginatorModule
+    PaginatorModule,
+    ReactiveFormsModule
   ],
   exports: [
     CompanyPageComponent,
