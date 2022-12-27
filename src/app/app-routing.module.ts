@@ -42,7 +42,7 @@ import { GlobalPermission } from './account/authority/permission.model';
         component: UserProfileComponent
       },
       {
-        path: 'services/:type',
+        path: 'services',
         component: ServicesPageComponent
       },
       {

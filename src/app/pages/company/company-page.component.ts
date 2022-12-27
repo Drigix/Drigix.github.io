@@ -9,6 +9,7 @@ import { Company } from './../../entities/company/company.model';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MenuItem, MessageService } from "primeng/api";
+import { Services } from 'src/app/entities/services/services.model';
 
 @Component({
   selector: 'app-company-page',
@@ -69,7 +70,7 @@ export class CompanyPageComponent implements OnInit {
     document.getElementById(view)?.scrollIntoView();
   }
 
-  checkIsLogged(serviceId: string): void {
+  checkIsLogged(service: Services): void {
     if (!this.isAccountLogged) {
       const ref = this.dialogService.open(LoginDialogComponent, {
         header: this.translateService.instant('global.action.book'),
@@ -79,26 +80,26 @@ export class CompanyPageComponent implements OnInit {
           reservation: true
         }
       });
-      ref.onClose.subscribe((response) => this.handleReservationDialogAfterLogin(response, serviceId));
+      ref.onClose.subscribe((response) => this.handleReservationDialogAfterLogin(response, service));
     } else {
-      this.openReservationDialog(serviceId);
+      this.openReservationDialog(service);
     }
   }
 
-  handleReservationDialogAfterLogin(response: any, serviceId: string): void {
+  handleReservationDialogAfterLogin(response: any, service: Services): void {
     if(response.result) {
-      this.openReservationDialog(serviceId);
+      this.openReservationDialog(service);
     } else {
       this.messageService.add({key: 'mainToast', severity: 'error', summary:'Błąd', detail:'Błąd'});
     }
   }
 
-  openReservationDialog(serviceId: string): void {
+  openReservationDialog(service: Services): void {
     const ref = this.dialogService.open(ReservationDialogComponent, {
       header: this.translateService.instant('global.action.book'),
       width: '60%',
       data: {
-        serviceId: serviceId
+        service: service
       }
     });
     ref.onClose.subscribe((response) => this.handleReservationDialog(response));

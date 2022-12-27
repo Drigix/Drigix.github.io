@@ -72,3 +72,7 @@
 :host ::ng-deep .p-button {
   margin: 20px
 }
+
+:host ::ng-deep .filter .p-button {
+  border-radius: 25px;
+}

@@ -5,14 +5,14 @@
       <div class="company-content">
         <img [src]="currentCompany!.logo">
         <div class="data-company">
-          <h2>{{currentCompany?.name}}</h2>
-          <div class="rounded"></div>
+          <label for="name" style="font-size: 30px;">{{currentCompany?.name}}</label>
+          <div class="rounded" style="margin: 20px;"></div>
           <div class="rating">
             <p-rating [readonly]="true" [(ngModel)]="currentCompany!.opinions!.average">
             </p-rating>
             <p>({{currentCompany!.opinions!.count}})</p>
           </div>
-          <div class="rounded"></div>
+          <div class="rounded" style="margin: 20px;"></div>
           <p>{{currentCompany?.address?.street}} {{currentCompany?.address?.zipCode}} {{currentCompany?.address?.city}}</p>
           <div class="rounded" style="width: 100%;"></div>
           <div>
@@ -35,15 +35,15 @@
       <div class="company-services" #servicesView id="services">
         <div class="header">
           <label for="services">{{'global.company.header.companyServices' | translate}}</label>
-          <div class="rounded"></div>
         </div>
+        <div class="rounded"></div>
           <ng-container *ngFor="let item of currentCompany!.services| slice:servicePage!*5:servicePage!*5 + 5;">
             <div class="company-service-info">
               <p>{{item.name}}</p>
               <P>{{item.duration}}min</P>
               <p>{{item.price}}zł</p>
               <div style="padding-top: 10px;">
-                <p-button label="{{'global.action.book' | translate}}" (onClick)="checkIsLogged(item.id!)"></p-button>
+                <p-button label="{{'global.action.book' | translate}}" (onClick)="checkIsLogged(item)"></p-button>
               </div>
             </div>
           </ng-container>

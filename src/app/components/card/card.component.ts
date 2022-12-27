@@ -1,6 +1,8 @@
+import { Router } from '@angular/router';
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Carousel } from 'primeng/carousel';
-import { categoryCardList, ICategoryCard } from 'src/app/entities/industry/category-card.model';
+import { ICategoryCard } from 'src/app/entities/industry/category-card.model';
 import { phoneView, tabletView } from 'src/app/layouts/main/main.component';
 
 @Component({
@@ -12,12 +14,12 @@ export class CardComponent implements OnInit {
 
   @ViewChild('element') element?: ElementRef;
   @ViewChild('carousel', {static: true}) carousel?: Carousel;
+  @Input() formName?: FormGroup;
   @Input() availableTermsTemplate = false;
   @Input() industriesTemplate = false;
   @Input() availableTerms?: string[];
+  @Input() selectedTerm: string | null = null;
   @Output() term = new EventEmitter<any | any[]>();
-
-  selectedTerm: string | null = null;
 
   categoryCardList: ICategoryCard[] = [];
 
@@ -35,7 +37,7 @@ export class CardComponent implements OnInit {
   tabletView = false;
   phoneView = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     if(this.industriesTemplate) {
@@ -64,6 +66,10 @@ export class CardComponent implements OnInit {
 
   exportCompany(): void {
     this.term.emit(this.selectedTerm!);
+  }
+
+  onServiceChange(type: string): void {
+    this.router.navigate(['/services'], {queryParams: {type: type}});
   }
 
   setIndustries(): void {

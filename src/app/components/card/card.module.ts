@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import {RatingModule} from 'primeng/rating';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {CarouselModule} from 'primeng/carousel';
 
 @NgModule({
@@ -17,7 +17,8 @@ import {CarouselModule} from 'primeng/carousel';
     RatingModule,
     ButtonModule,
     FormsModule,
-    CarouselModule
+    CarouselModule,
+    ReactiveFormsModule
   ],
   exports: [
     CardComponent

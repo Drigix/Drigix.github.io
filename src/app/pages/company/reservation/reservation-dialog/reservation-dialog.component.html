@@ -1,4 +1,4 @@
-
+<div *ngIf="!isConfirm; else confirm">
   <form #form [formGroup]="reservationFormBuilder" (ngSubmit)="onSubmit()">
     <div class="reservation-dialog">
       <div class="calendar">
@@ -13,20 +13,42 @@
           <p-dropdown id="bookWorkers" name="bookWorkers"
             [options]="availableWorkers" optionLabel="employeeName" formControlName="employee"
             [(ngModel)]="selectedEmployee"
+            (onChange)="onEmployeeChange()"
             placeholder="{{'global.reservation.chooseWorker' | translate}}"
             appendTo="body">
           </p-dropdown>
         </div>
-        <div *ngIf="selectedEmployee" class="terms" formControlName="term">
-          <app-card (term)="setTerm($event)" [availableTermsTemplate]="true" [availableTerms]="selectedEmployee?.terms!">
+        <div *ngIf="selectedEmployee" class="terms">
+          <app-card (term)="setTerm($event)" [selectedTerm]="selectedTerm" [availableTermsTemplate]="true" [availableTerms]="selectedEmployee.terms!">
           </app-card>
-          <input type="text" formControlName="term" [(ngModel)]="seledtedTerm" [hidden]="true">
         </div>
         <div class="remarks">
           <textarea rows="5" cols="30" pInputTextarea placeholder="Dodatkowe uwagi" formControlName="description"></textarea>
         </div>
-        <p-button label="{{'global.action.book' | translate}}" type="submit" [disabled]="reservationFormBuilder.invalid === true"></p-button>
+        <p-button styleClass="button-width" label="{{'global.action.book' | translate}}" type="submit" [disabled]="reservationFormBuilder.invalid === true">
+        </p-button>
       </div>
     </div>
   </form>
+</div>
 
+<ng-template #confirm>
+  <div class="confirm-dialog">
+    <div class="confirm-info">
+      <label for="service">Usługa: {{service?.name}}</label>
+      <label for="price">Cena: {{service?.price}}zł</label>
+      <label for="price">Czas trwania: {{service?.duration}}min</label>
+      <label for="date">Data: {{reservationDate | date: 'yyyy-MM-dd'}}</label>
+      <label for="employee">Pracownik: {{selectedEmployee?.employeeName}}</label>
+      <label for="term">Termin: {{selectedTerm}}</label>
+    </div>
+    <div class="button-container">
+      <p-button styleClass="button-width" label="{{'global.action.back' | translate}}" [disabled]="reservationFormBuilder.invalid === true"
+      (onClick)="goToReservation()">
+      </p-button>
+      <p-button styleClass="button-width" label="{{'global.action.confirm' | translate}}" [disabled]="reservationFormBuilder.invalid === true"
+      (onClick)="confirmReservation()">
+      </p-button>
+    </div>
+  </div>
+</ng-template>

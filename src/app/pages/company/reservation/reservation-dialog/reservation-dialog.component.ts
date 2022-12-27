@@ -5,6 +5,7 @@ import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { CompanySchedule } from 'src/app/entities/company-schedule/company-schedule.model';
 import { CompanyAvailableSchedule, CompanyAvailableScheduleEmployee } from 'src/app/entities/company-schedule/company-available-schedule.model';
+import { Services } from 'src/app/entities/services/services.model';
 
 @Component({
   selector: 'app-reservation-dialog',
@@ -16,7 +17,7 @@ export class ReservationDialogComponent implements OnInit {
   reservationFormBuilder = this.fb.group({
     date: ['', [Validators.required]],
     employee: ['', [Validators.required]],
-    term: ['', [Validators.required]],
+    term: [''],
     description: ['']
   })
 
@@ -25,10 +26,12 @@ export class ReservationDialogComponent implements OnInit {
   availableWorkers: CompanyAvailableScheduleEmployee[] = [];
   availableTerms: string[] | null = null;
   selectedEmployee: CompanyAvailableScheduleEmployee | null = null;
-  seledtedTerm: string | null = null;
+  selectedTerm: string | null = null;
+  service: Services | null = null;
   serviceId: string | null = null;
   date: Date = new Date(2022,11,23);
   tempDates: Date[] = [];
+  isConfirm = false;
 
   reservationDate: Date | null = null;
 
@@ -36,7 +39,7 @@ export class ReservationDialogComponent implements OnInit {
     private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    //this.serviceId = this.config.data.serviceId;
+    this.service = this.config.data.service;
     this.serviceId = '1c079bfc-7b45-449a-bc8a-b14c6aed67d2';
     this.tempDates = [new Date(2022,10,10), new Date(2022,10,11), new Date(2022,10,12)];
   }
@@ -53,13 +56,18 @@ export class ReservationDialogComponent implements OnInit {
       });
   }
 
-  onEmployeeSelect(event: any): void {
-    this.selectedEmployee = event.value;
+  onEmployeeChange(): void {
+    this.reservationFormBuilder.get('term')?.valueChanges.subscribe(() => {
+      this.reservationFormBuilder.get('term')?.setValidators(Validators.required);
+    })
+    //this.reservationFormBuilder.get('term')?.setValidators(Validators.required);
+    this.cd.detectChanges();
   }
 
   setTerm(event: any): void {
-    this.seledtedTerm = event;
-    if(this.seledtedTerm) {
+    this.selectedTerm = event;
+    if(this.selectedTerm) {
+      console.log('wchodzi');
       this.reservationFormBuilder.get('term')?.setValidators(Validators.nullValidator);
     }
     this.cd.detectChanges();
@@ -69,6 +77,14 @@ export class ReservationDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.isConfirm = true;
+  }
+
+  goToReservation(): void {
+    this.isConfirm = false;
+  }
+
+  confirmReservation(): void {
     console.log(2);
   }
 }

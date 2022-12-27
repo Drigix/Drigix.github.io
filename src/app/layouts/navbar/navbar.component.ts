@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
       label: 'Fryzjer',
       routerLink: '/services/7228be80-f7f2-4977-a1f5-770ff986537a',
       state: {type: 'hairdresser'},
-      command: () => this.onServiceChange('/services/7228be80-f7f2-4977-a1f5-770ff986537a', '7228be80-f7f2-4977-a1f5-770ff986537a' )
+      command: () => this.onServiceChange('/services', '7228be80-f7f2-4977-a1f5-770ff986537a' )
     },
     {
       label: 'Barber',
@@ -56,19 +56,19 @@ export class NavbarComponent implements OnInit {
       label: 'Salony tatuażu',
       routerLink: '/services/d67cdf00-c65a-44ad-8f17-b4580f79e5b0',
       state: {type: 'tatoo'},
-      command: () => this.onServiceChange('/services/d67cdf00-c65a-44ad-8f17-b4580f79e5b0', 'd67cdf00-c65a-44ad-8f17-b4580f79e5b0')
+      command: () => this.onServiceChange('/services', 'd67cdf00-c65a-44ad-8f17-b4580f79e5b0')
     },
     {
       label: 'SPA',
       routerLink: '/services/spa',
       state: {type: 'spa'},
-      command: () => this.onServiceChange('/services/d67cdf00-c65a-44ad-8f17-b4580f79e5b0', 'd67cdf00-c65a-44ad-8f17-b4580f79e5b0')
+      command: () => this.onServiceChange('/services', 'd67cdf00-c65a-44ad-8f17-b4580f79e5b0')
     },
     {
       label: 'Piercing',
       routerLink: '/services/piercing',
       state: {type: 'piercing'},
-      command: () => this.onServiceChange('/services/d67cdf00-c65a-44ad-8f17-b4580f79e5b0', 'd67cdf00-c65a-44ad-8f17-b4580f79e5b0')
+      command: () => this.onServiceChange('/services', 'd67cdf00-c65a-44ad-8f17-b4580f79e5b0')
     }];
     items: MenuItem[] = [];
     languages: Language[] = [];
