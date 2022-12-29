@@ -23,7 +23,7 @@
           </app-card>
         </div>
         <div class="remarks">
-          <textarea rows="5" cols="30" pInputTextarea placeholder="Dodatkowe uwagi" formControlName="description"></textarea>
+          <textarea rows="5" cols="30" pInputTextarea placeholder="Dodatkowe uwagi" formControlName="description" [(ngModel)]="reservation.note"></textarea>
         </div>
         <p-button styleClass="button-width" label="{{'global.action.book' | translate}}" type="submit" [disabled]="reservationFormBuilder.invalid === true">
         </p-button>

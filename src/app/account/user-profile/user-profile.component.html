@@ -32,7 +32,7 @@
         <div class="account-data">
           <div class="user-data">
             <label for="float-input">{{'global.user.name' | translate}}: </label>
-            <input type="text" pInputText formControlName="name" [(ngModel)]="changeUser!.firstName!" (ngModelChange)="temp()">
+            <input type="text" pInputText formControlName="name" [(ngModel)]="changeUser!.firstName!">
             <div *ngIf="changeUserDataForm.get('name')!.invalid && (changeUserDataForm.get('name')!.dirty || changeUserDataForm.get('name')!.touched)">
               <small class="p-error block" *ngIf="changeUserDataForm.get('name')?.errors?.['required']">
                 {{'global.form.fieldRequired' | translate }}

@@ -40,9 +40,14 @@ export class UserRouteAccessService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if(isUserLogin) {
       this.roleAuthority = route.data['authorities'];
+      console.log(this.roleAuthority);
       this.permissionsAuthority = route.data['permissions'];
       var isCheck = false;
-      if(this.roleAuthority.includes(USER_ROLE)) {
+      if(this.permissionsAuthority === null || this.permissionsAuthority === undefined) {
+        if(this.roleAuthority.includes(USER_ROLE)) {
+          isCheck = true;
+        }
+      }else if(this.roleAuthority.includes(USER_ROLE)) {
         USER_PERMISSIONS.forEach((element: string) => {
           if(this.permissionsAuthority.includes(element)) {
             isCheck = true;

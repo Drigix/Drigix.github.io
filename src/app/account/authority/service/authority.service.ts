@@ -5,6 +5,7 @@ import { head } from 'lodash';
 import { Observable } from 'rxjs';
 import { webSocket } from "rxjs/webSocket";
 import { User } from 'src/app/entities/user/user.model';
+import { Permission } from 'src/app/entities/permission/permission.model';
 
 interface Jwt {
   accessToken?: string;
@@ -14,6 +15,9 @@ interface Jwt {
 
 export type EntityResponseType = HttpResponse<User>;
 export type EntityArrayResponseType = HttpResponse<User[]>;
+
+export type PermissionEntityResponseType = HttpResponse<Permission>;
+export type PermissionEntityArrayResponseType = HttpResponse<Permission[]>;
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +30,7 @@ export class AuthorityService {
   CHANGE_PASSWORD_URL = this.resourceUrl + '/Account/password-change';
   RESET_PASSWORD_URL = this.resourceUrl + '/Account/password-reset';
   ACCOUNT_DETAILS_URL = this.resourceUrl + '/Account/details';
+  ALL_PERMISSIONS_URL = this.resourceUrl + '/Account/all-permissions'
 
   jwt: Jwt | null = null;
   decodeAccessToken: { [key: string]: string } = {};
@@ -62,6 +67,10 @@ export class AuthorityService {
 
   changeUserData(user: User): Observable<any> {
     return this.http.put(this.ACCOUNT_DETAILS_URL, user, {headers: this.headers!});
+  }
+
+  getAllPermisions(): Observable<PermissionEntityArrayResponseType> {
+    return this.http.get<Permission[]>(this.ALL_PERMISSIONS_URL, {observe: 'response'})
   }
 
   checkIsEmployeed(): boolean {

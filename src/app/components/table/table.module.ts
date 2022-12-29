@@ -10,6 +10,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,11 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     TooltipModule,
     DialogModule,
     ButtonModule,
-    RadioButtonModule
+    RadioButtonModule,
+    ConfirmDialogModule
+  ],
+  providers: [
+    ConfirmationService
   ],
   exports: [
     TableComponent

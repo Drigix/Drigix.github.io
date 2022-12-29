@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from 'src/app/entities/employees/employee.model';
 import { HttpResponse } from '@angular/common/http';
 import { PermissionService } from 'src/app/account/authority/service/permission.service';
+import { AuthorityService } from 'src/app/account/authority/service/authority.service';
+import { Permission } from 'src/app/entities/permission/permission.model';
 
 @Component({
   selector: 'app-manager-company-workers',
@@ -17,6 +19,7 @@ import { PermissionService } from 'src/app/account/authority/service/permission.
 export class ManagerCompanyWorkersComponent implements OnInit {
   workersColumns: UniversalTableColumn[] = [];
   workers: Employee[] = [];
+  permissions: Permission[] = [];
   permission = false;
 
   selectedWorker: any | null = null;
@@ -27,7 +30,8 @@ export class ManagerCompanyWorkersComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private employeeSercice: EmployeeService,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private authorityService: AuthorityService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +44,7 @@ export class ManagerCompanyWorkersComponent implements OnInit {
     this.employeeSercice.getWokers().subscribe(
       (res: HttpResponse<Employee[]>) => {
         this.workers = res.body ?? [];
+        this.loadAllPermissions();
       });
   }
 
@@ -48,6 +53,13 @@ export class ManagerCompanyWorkersComponent implements OnInit {
       { field: 'firstName', header: this.translateService.instant('global.user.name') },
       { field: 'lastName', header: this.translateService.instant('global.user.surname') },
     ];
+  }
+
+  loadAllPermissions(): void {
+    this.authorityService.getAllPermisions().subscribe(
+      (res: HttpResponse<Permission[]>) => {
+        this.permissions = res.body ?? [];
+      });
   }
 
   onWorkerSelect(event: any): void {

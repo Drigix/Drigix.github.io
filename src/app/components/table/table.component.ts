@@ -1,9 +1,11 @@
+import { TranslateService } from '@ngx-translate/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, TemplateRef, ViewChild } from "@angular/core";
-import { LazyLoadEvent, SortEvent } from "primeng/api";
+import { ConfirmationService, LazyLoadEvent, SortEvent } from "primeng/api";
 import { Table } from "primeng/table";
 import { UniversalTableColumn } from "./column.model";
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { Permission } from "src/app/entities/permission/permission.model";
 
 @Component({
   selector: 'app-table',
@@ -27,8 +29,9 @@ export class TableComponent implements OnChanges {
   @Input() showCaption = true;
   @Input() showTableName = false;
   @Input() tableName: string | null = null;
-  @Input() expanded = false;
 
+  @Input() expanded = false;
+  @Input() permissions: Permission[] = [];
 
   @Input() selectMode: 'single' | 'multiple' = 'single';
   @Output() selected = new EventEmitter<any | any[]>();
@@ -55,6 +58,8 @@ export class TableComponent implements OnChanges {
   filterInitialised = false;
   img: HTMLElement | null = null;
 
+  tableWithUnablePermissions: Permission[] = [];
+
   filterGlobal = _.debounce((filterString: string) => {
     this.searchText = filterString;
     const filteredData = this.storagedData.filter((data) => this.filterFunction(data));
@@ -68,7 +73,8 @@ export class TableComponent implements OnChanges {
     this.cd.detectChanges();
   }, 500, { trailing: true });
 
-  constructor(private cd: ChangeDetectorRef, private renderer: Renderer2) { }
+  constructor(private cd: ChangeDetectorRef, private renderer: Renderer2, private confirmationService: ConfirmationService,
+    private translateService: TranslateService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/prefer-optional-chain
@@ -206,6 +212,43 @@ export class TableComponent implements OnChanges {
       this.totalRecords = 0;
       this.lazyValues = [];
     }
+  }
+
+  changePermissions(event: any): void {
+    this.tableWithUnablePermissions = this.permissions;
+    event.forEach((element: Permission) => {
+      this.tableWithUnablePermissions.forEach((item, index) => {
+        if(element.id === item.id) {
+          this.tableWithUnablePermissions.splice(index, 1);
+        }
+      })
+    });
+  }
+
+  addPermission(): void {
+    this.confirmationService.confirm({
+      key: 'addPermissionDialog',
+      header: this.translateService.instant('global.header.confirmAdd'),
+      message: this.translateService.instant('global.message.confirmAdd'),
+      accept: () => this.handleAddPermissionDialogResponse()
+    });
+  }
+
+  deletePermission(): void {
+    this.confirmationService.confirm({
+      key: 'deletePermissionDialog',
+      header: this.translateService.instant('global.header.confirmDelete'),
+      message: this.translateService.instant('global.message.confirmDelete'),
+      accept: () => this.handleDeletePermissionDialogResponse()
+    });
+  }
+
+  handleAddPermissionDialogResponse(): void {
+
+  }
+
+  handleDeletePermissionDialogResponse(): void {
+
   }
 
 }

@@ -1,7 +1,7 @@
 <div class="company-workers">
   <div class="wrapper">
       <div class="table-with-buttons full-height">
-        <app-table [columns]="workersColumns" [values]="workers" (selected)="onWorkerSelect($event)"
+        <app-table [columns]="workersColumns" [values]="workers" [permissions]="permissions" (selected)="onWorkerSelect($event)"
           [expanded]="true"
           [showTableName]="true" tableName="{{'global.header.companyWorkers' | translate }}">
         </app-table>

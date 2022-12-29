@@ -24,7 +24,7 @@
       <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
         <tr>
           <td>
-            <button type="button" pButton pRipple [pRowToggler]="rowData"
+            <button type="button" pButton pRipple [pRowToggler]="rowData" (click)="changePermissions(rowData.permissions)"
               class="p-button-text p-button-rounded p-button-plain"
               [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
           </td>
@@ -54,8 +54,14 @@
                 <div class="p-3 ticket-list">
                   <div *ngFor="let permission of employee.permissions" style="padding: 10px;">
                     {{permission.name}}
-                    <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded" [disabled]="true"
+                    <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded" (click)="deletePermission()"
                       style="background-color: green; height: 30px; width: 30px; margin-top: 5px;">
+                    </button>
+                  </div>
+                  <div *ngFor="let permission of tableWithUnablePermissions " style="padding: 10px;">
+                    {{permission.name}}
+                    <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded" (click)="addPermission()"
+                      style="background-color: red; height: 30px; width: 30px; margin-top: 5px;">
                     </button>
                   </div>
                 </div>
@@ -198,3 +204,25 @@
   </ng-template>
 </p-table>
 </ng-template>
+
+<p-confirmDialog #cd key="addPermissionDialog" [style]="{width: '450px'}" icon="pi pi-exclamation-circle">
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-times"
+     label="{{'global.action.close' | translate }}" (onClick)="cd.reject()">
+    </p-button>
+    <p-button icon="pi pi-check"
+     label="{{'global.action.confirm' | translate }}" (onClick)="cd.accept()">
+    </p-button>
+  </ng-template>
+</p-confirmDialog>
+
+<p-confirmDialog #cd2 key="deletePermissionDialog" [style]="{width: '450px'}" icon="pi pi-exclamation-circle">
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-times"
+     label="{{'global.action.close' | translate }}" (onClick)="cd2.reject()">
+    </p-button>
+    <p-button icon="pi pi-check"
+     label="{{'global.action.confirm' | translate }}" (onClick)="cd2.accept()">
+    </p-button>
+  </ng-template>
+</p-confirmDialog>

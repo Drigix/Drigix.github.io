@@ -132,9 +132,4 @@ export class UserProfileComponent implements OnInit {
       },
     });
   }
-
-  temp(): void {
-    console.log(this.user);
-    console.log(this.changeUser);
-  }
 }
