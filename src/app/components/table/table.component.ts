@@ -1,3 +1,5 @@
+import { Employee } from './../../entities/employees/employee.model';
+import { AuthorityService } from 'src/app/account/authority/service/authority.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, TemplateRef, ViewChild } from "@angular/core";
 import { ConfirmationService, LazyLoadEvent, SortEvent } from "primeng/api";
@@ -74,7 +76,7 @@ export class TableComponent implements OnChanges {
   }, 500, { trailing: true });
 
   constructor(private cd: ChangeDetectorRef, private renderer: Renderer2, private confirmationService: ConfirmationService,
-    private translateService: TranslateService) { }
+    private translateService: TranslateService, private authorityService: AuthorityService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/prefer-optional-chain
@@ -214,6 +216,15 @@ export class TableComponent implements OnChanges {
     }
   }
 
+  selectEmployee(event: any): void {
+    console.log(event);
+    if(this.selection === event) {
+      this. selection = null;
+    } else {
+      this.selection = event;
+    }
+  }
+
   changePermissions(event: any): void {
     this.tableWithUnablePermissions = this.permissions;
     event.forEach((element: Permission) => {
@@ -225,30 +236,69 @@ export class TableComponent implements OnChanges {
     });
   }
 
-  addPermission(): void {
+  addPermission(permission: Permission, ablePermissions: Permission[]): void {
     this.confirmationService.confirm({
       key: 'addPermissionDialog',
       header: this.translateService.instant('global.header.confirmAdd'),
       message: this.translateService.instant('global.message.confirmAdd'),
-      accept: () => this.handleAddPermissionDialogResponse()
+      accept: () => this.handleAddPermissionDialogResponse(permission, ablePermissions)
     });
   }
 
-  deletePermission(): void {
+  deletePermission(permission: Permission, ablePermissions: Permission[]): void {
     this.confirmationService.confirm({
       key: 'deletePermissionDialog',
       header: this.translateService.instant('global.header.confirmDelete'),
       message: this.translateService.instant('global.message.confirmDelete'),
-      accept: () => this.handleDeletePermissionDialogResponse()
+      accept: () => this.handleDeletePermissionDialogResponse(permission, ablePermissions)
     });
   }
 
-  handleAddPermissionDialogResponse(): void {
-
+  handleAddPermissionDialogResponse(permission: Permission, ablePermissions: Permission[]): void {
+    ablePermissions.push(permission);
+    this.tableWithUnablePermissions.forEach((item, index) => {
+      if(item.id === permission.id) {
+        this.tableWithUnablePermissions.slice(index, 1);
+      }
+    });
+    const requestTable: string[] = [];
+    ablePermissions.forEach((item) => {
+      requestTable.push(item.id!);
+    });
+    const requestEmployee: Employee = this.selection;
+    this.authorityService.changePermissions(requestEmployee.employeeId!, requestTable).subscribe(
+      {
+        next: () => {
+          console.log('sukces');
+        },
+        error: () => {
+          console.log('error');
+        }
+      }
+    );
   }
 
-  handleDeletePermissionDialogResponse(): void {
-
+  handleDeletePermissionDialogResponse(permission: Permission, ablePermissions: Permission[]): void {
+    ablePermissions.forEach((item, index) => {
+      if(permission.id === item.id) {
+        ablePermissions.splice(index, 1);
+      }
+    })
+    const requestTable: string[] = [];
+    ablePermissions.forEach((item) => {
+      requestTable.push(item.id!);
+    });
+    const requestEmployee: Employee = this.selection;
+    this.authorityService.changePermissions(requestEmployee.employeeId!, requestTable).subscribe(
+      {
+        next: () => {
+          console.log('sukces');
+        },
+        error: () => {
+          console.log('error');
+        }
+      }
+    );
   }
 
 }

@@ -1,3 +1,4 @@
+import { ButtonModule } from 'primeng/button';
 import { PhotoService } from './../photo-service/photo-service.service';
 import { GalleriaComponent } from './galleria.component';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ import {GalleriaModule} from 'primeng/galleria';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    GalleriaModule
+    GalleriaModule,
+    ButtonModule
   ],
   providers: [
     PhotoService

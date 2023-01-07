@@ -1,5 +1,5 @@
 <div *ngIf="expanded; else normal">
-  <p-table #t [columns]="columns" [value]="values"
+  <p-table #t [columns]="columns" [value]="values" [selectionMode]="selectMode" [(selection)]="selection"
        responsiveLayout="scroll" dataKey="employeeId" (onSort)="handleSort($event)"
        rowExpandMode="single">
       <ng-template pTemplate="caption">
@@ -24,7 +24,7 @@
       <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
         <tr>
           <td>
-            <button type="button" pButton pRipple [pRowToggler]="rowData" (click)="changePermissions(rowData.permissions)"
+            <button type="button" pButton pRipple [pRowToggler]="rowData" (click)="changePermissions(rowData.permissions); selectEmployee(rowData)"
               class="p-button-text p-button-rounded p-button-plain"
               [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
           </td>
@@ -54,13 +54,13 @@
                 <div class="p-3 ticket-list">
                   <div *ngFor="let permission of employee.permissions" style="padding: 10px;">
                     {{permission.name}}
-                    <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded" (click)="deletePermission()"
+                    <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded" (click)="deletePermission(permission, employee.permissions)"
                       style="background-color: green; height: 30px; width: 30px; margin-top: 5px;">
                     </button>
                   </div>
                   <div *ngFor="let permission of tableWithUnablePermissions " style="padding: 10px;">
                     {{permission.name}}
-                    <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded" (click)="addPermission()"
+                    <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded" (click)="addPermission(permission, employee.permissions)"
                       style="background-color: red; height: 30px; width: 30px; margin-top: 5px;">
                     </button>
                   </div>

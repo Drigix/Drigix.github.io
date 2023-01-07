@@ -14,7 +14,6 @@ export class CardComponent implements OnInit {
 
   @ViewChild('element') element?: ElementRef;
   @ViewChild('carousel', {static: true}) carousel?: Carousel;
-  @Input() formName?: FormGroup;
   @Input() availableTermsTemplate = false;
   @Input() industriesTemplate = false;
   @Input() availableTerms?: string[];
