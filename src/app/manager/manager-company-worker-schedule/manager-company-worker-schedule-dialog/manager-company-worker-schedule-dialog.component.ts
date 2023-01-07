@@ -32,6 +32,7 @@ export class ManagerCompanyWorkerScheduleDialogComponent implements OnInit {
   startMinute: number | null = null;
   endTime: Date | null = null;
   endMinute: number | null = null;
+  currentDate: Date = new Date();
 
   name: any;
 
@@ -61,7 +62,16 @@ export class ManagerCompanyWorkerScheduleDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.schedule!.shiftDate = this.selectedDate?.getFullYear().toString() + '-' + (this.selectedDate!.getUTCMonth() + 1).toString() + '-' + this.selectedDate?.getDate();
+    if((this.selectedDate!.getUTCMonth() + 1) < 10) {
+      this.schedule!.shiftDate = this.selectedDate?.getFullYear().toString() + '-' + '0' + (this.selectedDate!.getUTCMonth() + 1).toString();
+    } else {
+      this.schedule!.shiftDate = this.selectedDate?.getFullYear().toString() + '-' + (this.selectedDate!.getUTCMonth() + 1).toString();
+    }
+    if(this.selectedDate!.getDate() < 10) {
+      this.schedule!.shiftDate +=  '-' + '0' + this.selectedDate?.getDate();
+    } else {
+      this.schedule!.shiftDate +=  '-' + this.selectedDate?.getDate();
+    }
     this.schedule!.startTime = this.startTime?.getHours().toString() + ':' + this.startTime?.getMinutes().toString();
     this.schedule!.endTime = this.endTime?.getHours().toString() + ':' + this.endTime?.getMinutes().toString();
     this.schedule!.employeeId = this.selectedWoker?.employeeId;

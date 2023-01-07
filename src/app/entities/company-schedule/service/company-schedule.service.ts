@@ -23,6 +23,10 @@ export class CompanyScheduleService {
       return this.http.post(this.SCHEDULES_URL, companySchedule);
     }
 
+    findTermForEmployee(date: string): Observable<EntityArrayResponseType> {
+      return this.http.get<CompanySchedule[]>(this.SCHEDULES_URL, { params:{date: date}, observe: 'response'});
+    }
+
     findAll(): Observable<EntityArrayResponseType> {
       return this.http.get<CompanySchedule[]>(this.SCHEDULES_URL, {observe: 'response'});
     }

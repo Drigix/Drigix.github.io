@@ -1,3 +1,5 @@
+import { HttpResponse } from '@angular/common/http';
+import { CompanyScheduleService } from './../../entities/company-schedule/service/company-schedule.service';
 import { PermissionService } from './../../account/authority/service/permission.service';
 import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
@@ -6,6 +8,8 @@ import { DialogService } from "primeng/dynamicdialog";
 import { UniversalTableColumn } from "src/app/components/table/column.model";
 import { CompanySchedule } from "src/app/entities/company-schedule/company-schedule.model";
 import { ManagerCompanyWorkerScheduleDialogComponent } from "./manager-company-worker-schedule-dialog/manager-company-worker-schedule-dialog.component";
+import { USER_ROLE } from 'src/app/account/authority/authority.component';
+import { Authority } from 'src/app/account/authority/authority.model';
 
 @Component({
   selector: 'app-manager-company-worker-schedule',
@@ -48,19 +52,30 @@ export class ManagerCompanyWorkerScheduleComponent implements OnInit {
     private translateService: TranslateService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private companyScheduleService: CompanyScheduleService
   ) {}
 
   ngOnInit(): void {
     this.permissionService.checkSchedulesPermission() ? this.permission = true : this.permission = false;
+    if(USER_ROLE === Authority.EMPLOYEE) {
+      this.loadEmployeeSchedule();
+    }
     this.loadColumns();
+  }
+
+  loadEmployeeSchedule(): void {
+    this.companyScheduleService.findTermForEmployee('').subscribe(
+      (res: HttpResponse<CompanySchedule[]>) => {
+        this.workerSchedules = res.body ?? [];
+        console.log(this.workerSchedules);
+      }
+    )
   }
 
   loadColumns(): void {
     this.reservationsColumns = [
-      { field: 'name', header: 'Imie' },
-      { field: 'surname', header: 'Nazwisko' },
-      { field: 'data', header: 'Data' },
+      { field: 'shiftDate', header: 'Data' },
       { field: 'startTime', header: 'Godzina rozpoczęcie' },
       { field: 'endTime', header: 'Godzina zakończenia' }
     ];
