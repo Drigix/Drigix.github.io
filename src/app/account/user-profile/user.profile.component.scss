@@ -28,6 +28,16 @@
   }
 }
 
+.settings {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.account-data {
+  padding-left: 25px;
+  padding-top: 10px;
+}
+
 .buttons-container {
   text-align: center;
 }
@@ -43,5 +53,6 @@
   margin: 20px;
 }
 
-
-
+:host ::ng-deep .p-float-label {
+  margin-bottom: 10px;
+}
