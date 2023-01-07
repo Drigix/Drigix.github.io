@@ -8,48 +8,6 @@
     </div>
     <label name="category">{{ 'global.home.categoryServices' | translate }}</label>
     <div class="category">
-      <!-- <a routerLink="services/7228be80-f7f2-4977-a1f5-770ff986537a" [queryParams]="{type: '7228be80-f7f2-4977-a1f5-770ff986537a'}">
-        <p-card header="{{'global.services.hairdresser' | translate}}" >
-          <ng-template pTemplate="header">
-              <img alt="Card" src="https://piotrsierpinski.pl/wp-content/uploads/2021/06/fryzjer-poznan.jpg">
-          </ng-template>
-        </p-card>
-      </a>
-      <a routerLink="/services/barber" [state]="{type: 'barber'}">
-        <p-card header="{{'global.services.barber' | translate}}" >
-          <ng-template pTemplate="header">
-              <img alt="Card" src="https://barberstore.pl/img/cms/strzy%C5%BCenie%20w%20barbershopie.jpg">
-          </ng-template>
-        </p-card>
-      </a>
-      <a routerLink="/services/beautician" [state]="{type: 'beautician'}">
-        <p-card header="{{'global.services.beautician' | translate}}" >
-          <ng-template pTemplate="header">
-              <img alt="Card" src="https://dbmzwqcmiz51l.cloudfront.net/images/p-64772-jakie-uslugi-swiadcza-mobilne-kosmetyczki.jpg">
-          </ng-template>
-        </p-card>
-      </a>
-      <a routerLink="/services/d67cdf00-c65a-44ad-8f17-b4580f79e5b0" [queryParams]="{type: 'd67cdf00-c65a-44ad-8f17-b4580f79e5b0'}">
-        <p-card header="{{'global.services.tatoo' | translate}}" >
-          <ng-template pTemplate="header">
-              <img alt="Card" src="https://www.miedzynami.net.pl/wp-content/uploads/2021/10/tatuaz-wroclaw.jpg">
-          </ng-template>
-        </p-card>
-      </a>
-      <a routerLink="/services/spa" [state]="{type: 'spa'}">
-        <p-card header="{{'global.services.spa' | translate}}">
-          <ng-template pTemplate="header">
-              <img alt="Card" src="https://cdn.pkt.pl/f-26466-mobilna-kosmetyczka-niezwykla-wygoda-dla-kazdej-kobiety.jpg">
-          </ng-template>
-        </p-card>
-      </a>
-      <a routerLink="/services/piercing" [state]="{type: 'piercing'}">
-        <p-card header="{{'global.services.piercing' | translate}}" >
-          <ng-template pTemplate="header">
-              <img alt="Card" src="https://images.squarespace-cdn.com/content/v1/584c5737ebbd1a316fc7faf1/1635192643527-Y3IVZ5C09GEL6S9CV029/industrial.png?format=1000w">
-          </ng-template>
-        </p-card>
-      </a> -->
       <app-card [industriesTemplate]="true"></app-card>
     </div>
 
@@ -66,14 +24,39 @@
       <div class="rounded"></div>
     </div>
 
-    <div class="text-with-photo">
-      <div class="text-area">
-        <h2>Chcesz szybko zarezerwować termin?</h2>
-        <h2>Rezerwacja bez zakładania konta?</h2>
-        <h2>Gdzie najbliżej do danej usługi?</h2>
-        <p>Wszystko to dostępne w naszej aplikacji, przyjemnej do oka, łatwej w obłudze i oczywiście bezpłatnej.</p>
+    <div style="display: grid; grid-template-columns: 400px 400px; justify-items: center; justify-content: center;">
+      <div class="left-side" style="margin: 20px;">
+        <div class="advertising-card">
+          <i class="pi pi-wallet"></i>
+          <div class="advertising-card-text">
+            <p style="font-weight: bold;">Wszystko dostępne za darmo!</p>
+            <p>Rezerwuj usługi, zostań pracownikiem a nawet właścicielem.</p>
+          </div>
+        </div>
+        <div class="advertising-card">
+          <i class="pi pi-star-fill"></i>
+          <div class="advertising-card-text">
+            <p style="font-weight: bold;">Przyjazna dla użytkowników!</p>
+            <p>Przeglądaj i wybieraj pod własne wymagania.</p>
+          </div>
+        </div>
       </div>
-      <img src="https://hrnews.pl/storage/2017/12/owen-spencer-500933-unsplash-683x1024.jpg">
+      <div class="right-side" style="margin: 20px;">
+        <div class="advertising-card">
+          <i class="pi pi-thumbs-up-fill"></i>
+          <div class="advertising-card-text">
+            <p style="font-weight: bold;">Wysokie oceny!</p>
+            <p>Użytkownicy polecają naszą aplikacje</p>
+          </div>
+        </div>
+        <div class="advertising-card">
+          <i class="pi pi-phone"></i>
+          <div class="advertising-card-text">
+            <p style="font-weight: bold;">Szybko i łatwo!</p>
+            <p>Rezerwuj bez wychodzenia z domu!</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="text-with-photo">

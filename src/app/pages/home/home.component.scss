@@ -24,6 +24,11 @@
 }
 
 @media only screen and (max-width: 700px) {
+  .home {
+    label {
+      font-size: 40px
+    }
+  }
   .text-with-photo {
     display: grid;
     grid-template-columns: 200px auto;
@@ -50,6 +55,11 @@
 }
 
 @media only screen and (min-width: 700px) {
+  .home {
+    label {
+      font-size: 50px
+    }
+  }
   .text-with-photo {
     display: grid;
     grid-template-columns: 300px auto;
@@ -101,4 +111,24 @@
   }
 }
 
-
+.advertising-card {
+  margin-bottom: 20px;
+  i {
+    position: relative;
+    left: 25px;
+    top: 25px;
+    border: 2px solid var(--primary-color);
+    background-color: var(--primary-color);
+    border-radius: 15px;
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+  }
+  .advertising-card-text {
+    border: 1px solid rgb(198, 189, 189);
+    border-radius: 15px;
+    width: 300px;
+    padding: 15px;
+    background-color: rgb(245, 245, 245);
+  }
+}
