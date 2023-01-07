@@ -31,6 +31,7 @@ export class AuthorityService {
   RESET_PASSWORD_URL = this.resourceUrl + '/Account/password-reset';
   ACCOUNT_DETAILS_URL = this.resourceUrl + '/Account/details';
   ALL_PERMISSIONS_URL = this.resourceUrl + '/Account/all-permissions'
+  CHANGE_PERMISSIONS_URL = this.resourceUrl + '/Account/permissions';
 
   jwt: Jwt | null = null;
   decodeAccessToken: { [key: string]: string } = {};
@@ -71,6 +72,10 @@ export class AuthorityService {
 
   getAllPermisions(): Observable<PermissionEntityArrayResponseType> {
     return this.http.get<Permission[]>(this.ALL_PERMISSIONS_URL, {observe: 'response'})
+  }
+
+  changePermissions(employeeId: string, permissions: string[]): Observable<any> {
+    return this.http.put(`${this.CHANGE_PERMISSIONS_URL}/${employeeId}`, {permissions});
   }
 
   checkIsEmployeed(): boolean {

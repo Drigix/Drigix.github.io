@@ -98,7 +98,7 @@ import { GlobalPermission } from './account/authority/permission.model';
         data: {
           authorities: [Authority.OWNER, Authority.EMPLOYEE],
           permissions: [
-            GlobalPermission.SCHEDULES_READ
+            GlobalPermission.SCHEDULES_EDIT
           ]
         },
         canActivate: [UserRouteAccessService],

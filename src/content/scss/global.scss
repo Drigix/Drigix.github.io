@@ -107,10 +107,17 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  button {
+    margin: 20px;
+  }
 }
 
 .button-width {
   width: 120px;
+}
+
+.button-confirm-width {
+  width: 140px;
 }
 
 .full-height {
@@ -145,3 +152,6 @@ html {
   justify-content: center;
 }
 
+.calendar-full-width {
+  width: 100%;
+}

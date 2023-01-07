@@ -5,6 +5,6 @@ export enum GlobalPermission {
   SERVICES_EDIT = 'services-edit',
   RESERVATIONS_READ = 'reservations-read',
   RESERVATIONS_EDIT = 'reservations-edit',
-  SCHEDULES_READ = 'schedules_read',
-  SCHEDULES_EDIT = 'schedules_edit'
+  SCHEDULES_READ = 'schedules-read',
+  SCHEDULES_EDIT = 'schedules-edit'
 }
