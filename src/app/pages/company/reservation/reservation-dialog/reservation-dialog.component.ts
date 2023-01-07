@@ -21,7 +21,6 @@ export class ReservationDialogComponent implements OnInit {
   reservationFormBuilder = this.fb.group({
     date: ['', [Validators.required]],
     employee: ['', [Validators.required]],
-    term: [''],
     description: ['']
   });
 
@@ -62,24 +61,8 @@ export class ReservationDialogComponent implements OnInit {
       });
   }
 
-  onEmployeeChange(): void {
-    this.reservationFormBuilder.get('term')?.valueChanges.subscribe(() => {
-      this.reservationFormBuilder.get('term')?.setValidators(Validators.required);
-    })
-    //this.reservationFormBuilder.get('term')?.setValidators(Validators.required);
-    this.cd.detectChanges();
-  }
-
   setTerm(event: any): void {
     this.selectedTerm = event;
-    if(this.selectedTerm) {
-      console.log('wchodzi');
-      this.reservationFormBuilder.get('term')?.setValidators(Validators.nullValidator);
-    }
-    this.cd.detectChanges();
-    // this.reservationFormBuilder.get('term')?.valueChanges.subscribe(() => {
-    //   this.reservationFormBuilder.get('term')?.setValidators(Validators.nullValidator);
-    // })
   }
 
   onSubmit(): void {

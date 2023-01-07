@@ -9,13 +9,12 @@
         appendTo="body"></p-calendar>
       </div>
       <div class="right-side">
-        <div class="workers">
+        <div class="workers" style="margin-bottom: 20px;">
           <p-dropdown id="bookWorkers" name="bookWorkers"
             [options]="availableWorkers" optionLabel="employeeName" formControlName="employee"
             [(ngModel)]="selectedEmployee"
-            (onChange)="onEmployeeChange()"
             placeholder="{{'global.reservation.chooseWorker' | translate}}"
-            appendTo="body">
+            appendTo="body" [style]="{width: '100%'}">
           </p-dropdown>
         </div>
         <div *ngIf="selectedEmployee" class="terms">
@@ -25,7 +24,7 @@
         <div class="remarks">
           <textarea rows="5" cols="30" pInputTextarea placeholder="Dodatkowe uwagi" formControlName="description" [(ngModel)]="reservation.note"></textarea>
         </div>
-        <p-button styleClass="button-width" label="{{'global.action.book' | translate}}" type="submit" [disabled]="reservationFormBuilder.invalid === true">
+        <p-button styleClass="button-width" label="{{'global.action.book' | translate}}" type="submit" [disabled]="reservationFormBuilder.invalid === true || selectedTerm === null || selectedTerm === undefined">
         </p-button>
       </div>
     </div>
