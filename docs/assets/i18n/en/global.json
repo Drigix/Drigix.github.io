@@ -8,6 +8,7 @@
       "search": "Search",
       "check": "Sprawdź",
       "confirm": "Confirm",
+      "back": "Back",
       "close": "Close",
       "send": "Send",
       "login": "Login",
@@ -30,11 +31,13 @@
       "login": "Login",
       "createCompany": "Create company website",
       "createWorkerId": "Generate worker id",
+      "confirmAdd": "Confirm add",
       "confirmDelete": "Confirm delete",
       "companyWorkers": "Company workers",
       "addCompanyWorker": "Add new worker",
       "editCompanyWorker": "Edit worker",
       "reservations": "Reservations",
+      "workerSchedule": "Employee schedule",
       "addReservation": "Add reservation",
       "editReservation": "Edit reservation"
     },
@@ -54,7 +57,9 @@
       "userDataChangeSuccess": "Your data has been change!",
       "userDataChangeError": "Error occured, try again!",
       "addWorkerSuccess": "New employee has been added!",
-      "addWorkerError": "Something went wrong, please try again!"
+      "addWorkerError": "Something went wrong, please try again!",
+      "addReservationSuccess": "Your reservation has been added!",
+      "addReservationError": "Something went wrong, please try again!"
     },
     "form": {
       "fieldRequired": "This field is required",

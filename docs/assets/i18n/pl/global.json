@@ -8,6 +8,7 @@
       "search": "Szukaj",
       "check": "Sprawdź",
       "confirm": "Potwierdź",
+      "back": "Wstecz",
       "close": "Anuluj",
       "send": "Wyślij",
       "login": "Zaloguj",
@@ -34,6 +35,7 @@
       "login": "Logowanie",
       "createCompany": "Tworzenie strony firmy",
       "createWorkerId": "Generowanie identyfiaktora pracowniczego",
+      "confirmAdd": "Potwierdź dodanie",
       "confirmDelete": "Powierdź usunięcie",
       "companyWorkers": "Pracownicy firmy",
       "addCompanyWorker": "Dodanie nowego pracownika",
@@ -43,6 +45,7 @@
       "editReservation": "Edycja rezerwacji",
       "addService": "Dodanie usługi",
       "editService": "Edycja usługi",
+      "workerSchedule": "Harmonogram pracowników",
       "addWorkerSchedule": "Dodanie harmonogramu pracownika",
       "editWorkerSchedule": "Edycja harmonogramu pracownika"
     },
@@ -53,6 +56,7 @@
       "loginSuccess": "Zalogowano pomyślnie!",
       "activatingEmail": "Email aktywacyjny zostął wysłany na podaney email",
       "signUpError": "Wystąpił błąd podczas zakładania konta, spróbuj ponownie!",
+      "confirmAdd": "Czy na pewno chcesz dodać ten element?",
       "confirmDelete": "Czy na pewno chcesz usunąć ten element?",
       "differentPasswords": "Hasło i hasło potwierdzające różnią się",
       "wrongEmailOrPassword": "Podane email lub hasło jest nieprawidłowe!",
@@ -65,7 +69,11 @@
       "userDataChangeSuccess": "Twoje dane zostały zmienione!",
       "userDataChangeError": "Wystąpił błąd podczas zmiany danych, spróbuj jeszcze raz!",
       "addWorkerSuccess": "Dodano nowego pracownika!",
-      "addWorkerError": "Wystąpił błąd podczas dodawania nowego pracownika, spróbuj ponownie!"
+      "addWorkerError": "Wystąpił błąd podczas dodawania nowego pracownika, spróbuj ponownie!",
+      "addReservationSuccess": "Wybrany przez ciebie termin został zarezerwowany!",
+      "addReservationError": "Wystąpił błąd podczas rezerwacji terminu, spróbuj ponowbnie!",
+      "editPermissionSuccess": "Edytowano permisje!",
+      "editPermissionError": "Edycja permisji nie powiodła się!"
     },
     "form": {
       "fieldRequired": "To pole jest wymagane",
