@@ -20,7 +20,7 @@ export class ManagerCompanyWorkersComponent implements OnInit {
   workersColumns: UniversalTableColumn[] = [];
   workers: Employee[] = [];
   permissions: Permission[] = [];
-  permission = false;
+  isPermission = false;
 
   selectedWorker: any | null = null;
 
@@ -35,7 +35,7 @@ export class ManagerCompanyWorkersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.permissionService.checkWorkersPermission() ? this.permission = true : this.permission = false;
+    this.permissionService.checkWorkersPermission() ? this.isPermission = true : this.isPermission = false;
     this.loadWorkers();
     this.loadColumns();
   }
@@ -62,9 +62,12 @@ export class ManagerCompanyWorkersComponent implements OnInit {
       });
   }
 
+  onReload(event: any) {
+    this.loadWorkers();
+  }
+
   onWorkerSelect(event: any): void {
     this.selectedWorker = event;
-    console.log(this.selectedWorker);
   }
 
   openCompanyWorkerDialog(edit = false): void {

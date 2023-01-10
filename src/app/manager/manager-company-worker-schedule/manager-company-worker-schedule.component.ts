@@ -10,6 +10,7 @@ import { CompanySchedule } from "src/app/entities/company-schedule/company-sched
 import { ManagerCompanyWorkerScheduleDialogComponent } from "./manager-company-worker-schedule-dialog/manager-company-worker-schedule-dialog.component";
 import { USER_ROLE } from 'src/app/account/authority/authority.component';
 import { Authority } from 'src/app/account/authority/authority.model';
+import { CompanyEmployeeSchedule, CompanyEmployeeSchedules } from 'src/app/entities/company-schedule/company-employee-schedule';
 
 @Component({
   selector: 'app-manager-company-worker-schedule',
@@ -19,31 +20,10 @@ import { Authority } from 'src/app/account/authority/authority.model';
 export class ManagerCompanyWorkerScheduleComponent implements OnInit {
 
   reservationsColumns: UniversalTableColumn[] = [];
-  reservations = [
-    {
-      name: 'Michał',
-      surname: 'Ławinski',
-      data: '02.02.2022',
-      startTime: '9:00',
-      endTime: '18:00'
-    },
-    {
-      name: 'Michał',
-      surname: 'Ławinski',
-      data: '02.02.2022',
-      startTime: '9:00',
-      endTime: '12:00'
-    },
-    {
-      name: 'Michał',
-      surname: 'Ławinski',
-      data: '02.02.2022',
-      startTime: '15:00',
-      endTime: '20:00'
-    }
-  ];
   permission = false;
   workerSchedules: CompanySchedule[] = [];
+  companyEmployeeSchedules: CompanyEmployeeSchedules[] = [];
+  companyEmployeeSchedule: CompanyEmployeeSchedule[] = [];
 
   selectedWorker: any | null = null;
 
@@ -60,17 +40,44 @@ export class ManagerCompanyWorkerScheduleComponent implements OnInit {
     this.permissionService.checkSchedulesPermission() ? this.permission = true : this.permission = false;
     if(USER_ROLE === Authority.EMPLOYEE) {
       this.loadEmployeeSchedule();
+      this.loadColumns();
+    } else if(USER_ROLE === Authority.OWNER) {
+      this.loadAllSchedule();
+      this.loadManagerColumns();
     }
-    this.loadColumns();
+  }
+
+  loadAllSchedule(): void {
+    this.companyScheduleService.findAllEmployeesSchedules().subscribe(
+      (res: HttpResponse<CompanySchedule[]>) => {
+        this.workerSchedules = res.body ?? [];
+      //   this.companyEmployeeSchedules = res.body ?? [];
+      //   this.companyEmployeeSchedules.forEach((item) => {
+      //     item.schedules?.forEach((schedule) => {
+      //       const employeeSchedule: CompanyEmployeeSchedule = new CompanyEmployeeSchedule(item.employeeId, item.employeeName, schedule.shiftDate, schedule.startTime, schedule.endTime);
+      //       this.companyEmployeeSchedule.push(employeeSchedule);
+      //     });
+      //   })
+      }
+    )
   }
 
   loadEmployeeSchedule(): void {
-    this.companyScheduleService.findTermForEmployee('').subscribe(
+    this.companyScheduleService.findEmployeeSchedule('').subscribe(
       (res: HttpResponse<CompanySchedule[]>) => {
         this.workerSchedules = res.body ?? [];
         console.log(this.workerSchedules);
       }
     )
+  }
+
+  loadManagerColumns(): void {
+    this.reservationsColumns = [
+      { field: 'employeeName', header: 'Pracownik'},
+      { field: 'shiftDate', header: 'Data' },
+      { field: 'startTime', header: 'Godzina rozpoczęcie' },
+      { field: 'endTime', header: 'Godzina zakończenia' }
+    ];
   }
 
   loadColumns(): void {
