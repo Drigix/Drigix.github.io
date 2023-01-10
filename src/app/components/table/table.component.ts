@@ -2,7 +2,7 @@ import { Employee } from './../../entities/employees/employee.model';
 import { AuthorityService } from 'src/app/account/authority/service/authority.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, TemplateRef, ViewChild } from "@angular/core";
-import { ConfirmationService, LazyLoadEvent, SortEvent } from "primeng/api";
+import { ConfirmationService, LazyLoadEvent, MessageService, SortEvent } from "primeng/api";
 import { Table } from "primeng/table";
 import { UniversalTableColumn } from "./column.model";
 import * as moment from 'moment';
@@ -36,6 +36,7 @@ export class TableComponent implements OnChanges {
   @Input() permissions: Permission[] = [];
 
   @Input() selectMode: 'single' | 'multiple' = 'single';
+  @Output() reload = new EventEmitter<any>();
   @Output() selected = new EventEmitter<any | any[]>();
   _selection: any | any[];
   set selection(selection) {
@@ -76,7 +77,7 @@ export class TableComponent implements OnChanges {
   }, 500, { trailing: true });
 
   constructor(private cd: ChangeDetectorRef, private renderer: Renderer2, private confirmationService: ConfirmationService,
-    private translateService: TranslateService, private authorityService: AuthorityService) { }
+    private translateService: TranslateService, private authorityService: AuthorityService, private messageService: MessageService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/prefer-optional-chain
@@ -255,47 +256,49 @@ export class TableComponent implements OnChanges {
   }
 
   handleAddPermissionDialogResponse(permission: Permission, ablePermissions: Permission[]): void {
-    ablePermissions.push(permission);
-    this.tableWithUnablePermissions.forEach((item, index) => {
-      if(item.id === permission.id) {
-        this.tableWithUnablePermissions.slice(index, 1);
-      }
-    });
+    const tempTable = ablePermissions;
+    tempTable.push(permission);
+
     const requestTable: string[] = [];
-    ablePermissions.forEach((item) => {
+    tempTable.forEach((item) => {
       requestTable.push(item.id!);
     });
     const requestEmployee: Employee = this.selection;
     this.authorityService.changePermissions(requestEmployee.employeeId!, requestTable).subscribe(
       {
         next: () => {
-          console.log('sukces');
+          this.reload.emit(true);
+          this.changePermissions(ablePermissions);
+          this.messageService.add({key: 'mainToast', severity: 'success', summary:this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.editPermissionSuccess')});
         },
         error: () => {
-          console.log('error');
+          this.messageService.add({key: 'mainToast', severity: 'error', summary:this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.editPermissionError')});
         }
       }
     );
   }
 
   handleDeletePermissionDialogResponse(permission: Permission, ablePermissions: Permission[]): void {
-    ablePermissions.forEach((item, index) => {
+    const tempTable = ablePermissions;
+    tempTable.forEach((item, index) => {
       if(permission.id === item.id) {
-        ablePermissions.splice(index, 1);
+        tempTable.splice(index, 1);
       }
     })
     const requestTable: string[] = [];
-    ablePermissions.forEach((item) => {
+    tempTable.forEach((item) => {
       requestTable.push(item.id!);
     });
     const requestEmployee: Employee = this.selection;
     this.authorityService.changePermissions(requestEmployee.employeeId!, requestTable).subscribe(
       {
         next: () => {
-          console.log('sukces');
+          this.reload.emit(true);
+          this.changePermissions(ablePermissions);
+          this.messageService.add({key: 'mainToast', severity: 'success', summary:this.translateService.instant('global.message.success'), detail: this.translateService.instant('global.message.editPermissionSuccess')});
         },
         error: () => {
-          console.log('error');
+          this.messageService.add({key: 'mainToast', severity: 'error', summary:this.translateService.instant('global.message.error'), detail: this.translateService.instant('global.message.editPermissionError')});
         }
       }
     );

@@ -4,7 +4,7 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 import { CompanyScheduleService } from 'src/app/entities/company-schedule/service/company-schedule.service';
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CompanySchedule } from 'src/app/entities/company-schedule/company-schedule.model';
 import { CompanyAvailableSchedule, CompanyAvailableScheduleEmployee } from 'src/app/entities/company-schedule/company-available-schedule.model';
 import { Services } from 'src/app/entities/services/services.model';
@@ -41,7 +41,7 @@ export class ReservationDialogComponent implements OnInit {
 
   constructor(private companyScheduleService: CompanyScheduleService, public config: DynamicDialogConfig, private fb: UntypedFormBuilder,
     private cd: ChangeDetectorRef, private reservationService: ReservationService,
-    private messageService: MessageService, private translateService: TranslateService) {}
+    private messageService: MessageService, private translateService: TranslateService, public ref: DynamicDialogRef) {}
 
   ngOnInit(): void {
     this.service = this.config.data.service;
@@ -84,6 +84,7 @@ export class ReservationDialogComponent implements OnInit {
         next: () => {
           this.messageService.add({key: 'mainToast', severity: 'success', summary: this.translateService.instant('global.message.success'),
           detail: this.translateService.instant('global.message.addReservationSuccess')});
+          this.ref.close();
         },
         error: () => {
           this.messageService.add({key: 'mainToast', severity: 'error', summary: this.translateService.instant('global.message.error'),
