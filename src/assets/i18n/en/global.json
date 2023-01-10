@@ -37,6 +37,7 @@
       "addCompanyWorker": "Add new worker",
       "editCompanyWorker": "Edit worker",
       "reservations": "Reservations",
+      "workerSchedule": "Employee schedule",
       "addReservation": "Add reservation",
       "editReservation": "Edit reservation"
     },

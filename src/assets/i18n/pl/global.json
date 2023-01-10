@@ -45,6 +45,7 @@
       "editReservation": "Edycja rezerwacji",
       "addService": "Dodanie usługi",
       "editService": "Edycja usługi",
+      "workerSchedule": "Harmonogram pracowników",
       "addWorkerSchedule": "Dodanie harmonogramu pracownika",
       "editWorkerSchedule": "Edycja harmonogramu pracownika"
     },
@@ -70,7 +71,9 @@
       "addWorkerSuccess": "Dodano nowego pracownika!",
       "addWorkerError": "Wystąpił błąd podczas dodawania nowego pracownika, spróbuj ponownie!",
       "addReservationSuccess": "Wybrany przez ciebie termin został zarezerwowany!",
-      "addReservationError": "Wystąpił błąd podczas rezerwacji terminu, spróbuj ponowbnie!"
+      "addReservationError": "Wystąpił błąd podczas rezerwacji terminu, spróbuj ponowbnie!",
+      "editPermissionSuccess": "Edytowano permisje!",
+      "editPermissionError": "Edycja permisji nie powiodła się!"
     },
     "form": {
       "fieldRequired": "To pole jest wymagane",
