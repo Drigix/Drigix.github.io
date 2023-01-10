@@ -11,11 +11,12 @@ import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChi
 import { MenuItem, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AppComponent } from 'src/app/app.component';
-import { isUserLogin, USER_ROLE } from 'src/app/account/authority/authority.component';
+import { isUserLogin, USER_PERMISSIONS, USER_ROLE } from 'src/app/account/authority/authority.component';
 import { Authority } from 'src/app/account/authority/authority.model';
 import { phoneView, tabletView } from '../main/main.component';
 import { HttpResponse } from '@angular/common/http';
 import { Category } from 'src/app/entities/industry/category.model';
+import { PermissionService } from 'src/app/account/authority/service/permission.service';
 
 @Component({
   selector: 'app-navbar',
@@ -82,7 +83,7 @@ export class NavbarComponent implements OnInit {
 
     constructor(public dialogService: DialogService, public messageService: MessageService, public appComponent: AppComponent,
       private servicesPageComponent: ServicesPageComponent, private router: Router, private cd: ChangeDetectorRef, private authorityService: AuthorityService,
-      private translateService: TranslateService, private categoryService: CategoryService) {}
+      private translateService: TranslateService, private categoryService: CategoryService, private permissionService: PermissionService) {}
 
     ngOnInit(): void {
       this.setLanguages();
@@ -139,24 +140,38 @@ export class NavbarComponent implements OnInit {
 
     setEmployeeMenu(): void {
       if(this.authorityService.checkIsEmployeed()) {
-        this.items = [
-          {
-            label: 'Home',
-            routerLink: '/'
-          },
-          {
+        this.items = [{
+          label: 'Home',
+          routerLink: '/'
+        }];
+        if(this.permissionService.checkWorkersReadPermission()) {
+          this.items.push({
+            label: 'Pracownicy',
+            routerLink: 'manager/company-workers'
+          });
+        }
+        if(this.permissionService.checkReservationsReadPermission()) {
+          this.items.push({
             label: 'Rezerwacje',
             routerLink: 'manager/company-reservations'
-          },
-          {
+          });
+        }
+        if(this.permissionService.checkSerivceReadPermission()) {
+          this.items.push({
+            label: 'Usługi',
+            routerLink: 'manager/company-services'
+          });
+        }
+        if(this.permissionService.checkSchedulesReadPermission()) {
+          this.items.push({
             label: 'Harmonogram rezerwacji',
             routerLink: '/manager/company-schedule'
           },
           {
             label: 'Harmonogram pracowników',
             routerLink: '/manager/company-worker-schedule'
-          }
-        ];
+          });
+        }
       } else {
         this.items = [
           {
