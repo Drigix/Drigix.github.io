@@ -74,8 +74,8 @@ export class AuthorityService {
     return this.http.get<Permission[]>(this.ALL_PERMISSIONS_URL, {observe: 'response'})
   }
 
-  changePermissions(employeeId: string, permissions: string[]): Observable<any> {
-    return this.http.put(`${this.CHANGE_PERMISSIONS_URL}/${employeeId}`, {permissions});
+  changePermissions(employeeId: string, permissionsIds: string[]): Observable<any> {
+    return this.http.put(`${this.CHANGE_PERMISSIONS_URL}/${employeeId}`, {permissionsIds});
   }
 
   checkIsEmployeed(): boolean {

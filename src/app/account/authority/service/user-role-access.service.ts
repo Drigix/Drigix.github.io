@@ -42,6 +42,7 @@ export class UserRouteAccessService implements CanActivate {
       this.roleAuthority = route.data['authorities'];
       this.permissionsAuthority = route.data['permissions'];
       var isCheck = false;
+      console.log(USER_PERMISSIONS);
       if(this.permissionsAuthority === null || this.permissionsAuthority === undefined) {
         if(this.roleAuthority.includes(USER_ROLE)) {
           isCheck = true;
