@@ -1,3 +1,4 @@
+import { ReservationService } from './../../entities/reservation/service/reservation.service';
 import { MessageService } from 'primeng/api';
 import { HttpResponse } from '@angular/common/http';
 import { AuthorityService } from './../authority/service/authority.service';
@@ -7,6 +8,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/entities/user/user.model';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { Reservation, ReservationHistory } from 'src/app/entities/reservation/reservation.model';
 
 @Component({
   selector: 'app-navbar',
@@ -40,6 +42,8 @@ export class UserProfileComponent implements OnInit {
   changeUser: User | null = null;
   changeUserBirthday: Date | null = null;
   maxDateValue: Date = new Date();
+  reservationHistory: ReservationHistory | null = null;
+  reservationPage: number = 0;
   loading = true;
 
   constructor(
@@ -47,7 +51,8 @@ export class UserProfileComponent implements OnInit {
     public translateService: TranslateService,
     private authorityService: AuthorityService,
     private messageService: MessageService,
-    private fb: UntypedFormBuilder
+    private fb: UntypedFormBuilder,
+    private reservationService: ReservationService
   ) {}
 
   ngOnInit(): void {
@@ -81,6 +86,13 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  loadReservationsHistory(): void {
+    this.reservationService.findAll().subscribe(
+      (res: HttpResponse<ReservationHistory>) => {
+        this.reservationHistory = res.body;
+      });
+  }
+
   changeMenu(menuOption: string): void {
     if (menuOption === 'profile') {
       this.isMenuProfile = true;
@@ -90,6 +102,7 @@ export class UserProfileComponent implements OnInit {
       this.isMenuProfile = false;
       this.isMenuHistory = true;
       this.isMenuSettings = false;
+      this.loadReservationsHistory();
     } else if (menuOption === 'settings') {
       this.isMenuProfile = false;
       this.isMenuHistory = false;
