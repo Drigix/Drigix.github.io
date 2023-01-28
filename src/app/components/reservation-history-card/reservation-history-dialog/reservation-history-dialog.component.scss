@@ -1,0 +1,20 @@
+.opinion-content {
+  display: grid;
+  grid-template-columns: auto auto;
+  .rate-data {
+    display: flex;
+    padding: 20px;
+    label {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+}
+
+:host ::ng-deep .pi-star {
+  font-size: 20px;
+}
+
+:host ::ng-deep .pi-star-fill {
+  font-size: 20px;
+}

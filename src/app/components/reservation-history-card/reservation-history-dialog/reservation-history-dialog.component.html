@@ -1,0 +1,22 @@
+<div>
+  <div class="opinion-content">
+    <div class="rate">
+      <div class="rate-data">
+        <label for="atmosphere">Atmosfera:</label>
+        <p-rating [(ngModel)]="rateAtmosphere"></p-rating>
+      </div>
+      <div class="rate-data">
+        <label for="service-performed">Usługa:</label>
+        <p-rating [(ngModel)]="rateService"></p-rating>
+      </div>
+      <div class="rate-data">
+        <label for="price">Cena:</label>
+        <p-rating [(ngModel)]="ratePrice"></p-rating>
+      </div>
+    </div>
+    <div class="description">
+      <textarea pInputTextarea rows="8" cols="25" [(ngModel)]="content"></textarea>
+    </div>
+  </div>
+  <p-button label="Wyślij opinię" styleClass="button-width" (onClick)="addOpinion()"></p-button>
+</div>
