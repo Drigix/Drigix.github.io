@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { ClientOpinions } from "src/app/entities/opinions/opinions.model";
 
 @Component({
   selector: 'app-opinion-card',
@@ -7,10 +8,11 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class OpinionCardComponent implements OnInit {
 
-  @Input() companyOpinions: any[]  = [];
+  @Input() companyOpinions: ClientOpinions[]  = [];
   @Input() page?: number;
 
   ngOnInit(): void {
+    console.log(this.companyOpinions);
     console.log(this.page);
   }
 }
