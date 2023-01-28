@@ -10,6 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MenuItem, MessageService } from "primeng/api";
 import { Services } from 'src/app/entities/services/services.model';
+import { OpinionsService } from 'src/app/entities/opinions/service/opinions.service';
+import { CompanyOpinions } from 'src/app/entities/opinions/opinions.model';
 
 @Component({
   selector: 'app-company-page',
@@ -29,13 +31,13 @@ export class CompanyPageComponent implements OnInit {
 
   currentCompany: Company | null = null;
 
-  companyOpinions: any = [];
+  companyOpinions: CompanyOpinions| null = null;
 
   servicePage = 0;
   opinionPage = 0;
 
   constructor(private translateService: TranslateService, private dialogService: DialogService, private messageService: MessageService,
-    private router: Router, private route: ActivatedRoute, private companyService: CompanyService) {}
+    private router: Router, private route: ActivatedRoute, private companyService: CompanyService, private opinionsService: OpinionsService) {}
 
   ngOnInit(): void {
     this.companyId = this.route.snapshot.paramMap.get('companyName');
@@ -46,11 +48,11 @@ export class CompanyPageComponent implements OnInit {
       {label: this.translateService.instant('global.company.header.localization'), icon: 'pi pi-fw pi-map-marker', command: ()=> this.changeMenuItem('lokalization')},
       {label: this.translateService.instant('global.company.header.opinions'), icon: 'pi pi-fw pi-comment', command: ()=> this.changeMenuItem('opinions')}
     ];
-    console.log(this.actualCompanyId);
     if(this.actualCompanyId) {
       this.companyId = this.actualCompanyId;
     }
     this.loadCompany();
+    this.loadOpinions();
   }
 
   exportCompany(): void {
@@ -64,6 +66,14 @@ export class CompanyPageComponent implements OnInit {
         this.exportCompany();
       }
     )
+  }
+
+  loadOpinions(): void {
+    this.opinionsService.findByCompanyId(this.companyId!).subscribe(
+      (res: HttpResponse<CompanyOpinions>) => {
+        this.companyOpinions = res.body;
+        console.log(this.companyOpinions?.opinions);
+      });
   }
 
   changeMenuItem(view: string): void {

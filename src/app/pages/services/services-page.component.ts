@@ -7,6 +7,7 @@ import { ChangeDetectorRef, Component, NgZone, OnChanges, OnInit, SimpleChanges,
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/entities/industry/category.model';
 import { Dropdown } from 'primeng/dropdown';
+import { combineAll } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,7 @@ export class ServicesPageComponent implements OnInit, OnChanges {
   showFilter = true;
   industries: Category[] = [];
   companies: Company[] = [];
-  tempList: Company[] = [];
+  handleCompanies: Company[] = [];
   loading = false;
 
   cities = ['Gliwice', 'Katowice', 'Zabrze'];
@@ -70,19 +71,26 @@ export class ServicesPageComponent implements OnInit, OnChanges {
   filterByIndustry(): void {
     this.companyService.findWithIndustryId(this.selectedIndustry!.code!).subscribe(
       (res: HttpResponse<Company[]>) => {
-        //setTimeout(()=> {this.ngZone.run(() => {this.companies = res.body ?? []}), 1000});
         this.companies = res.body ?? [];
+        this.handleCompanies = this.companies;
         this.loading = false;
       });
   }
 
   filterByCities(): void {
-    this.filterByIndustry();
-    // if(this.selectedCity.length !== 0) {
-    //   this.companies = this.companies.filter((item) =>
-    //     this.selectedServiceType ? item.address!.city === this.selectedCity[0] && item.categoryId === this.selectedServiceType
-    //     :item.address!.city === this.selectedCity[0]);
-    // }
+    //this.filterByIndustry();
+    this.companies = this.handleCompanies;
+    if(this.selectedCity.length !== 0) {
+      const tempCopanies: Company[] = [];
+      this.companies.forEach((company) => {
+        this.selectedCity.forEach((city) => {
+          if(company.address?.city === city) {
+            tempCopanies.push(company);
+          }
+        })
+      });
+      this.companies = tempCopanies;
+    }
   }
 
   changePage(event: any): void {

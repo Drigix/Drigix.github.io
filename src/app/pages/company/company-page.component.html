@@ -72,8 +72,8 @@
           <label for="opinions">{{'global.company.header.opinions' | translate}}</label>
           <div class="rounded"></div>
         </div>
-        <app-opinion-card [companyOpinions]="companyOpinions" [page]="opinionPage"></app-opinion-card>
-        <p-paginator [rows]="9" [totalRecords]="companyOpinions.length" (onPageChange)="changePage($event)"></p-paginator>
+        <app-opinion-card [companyOpinions]="companyOpinions?.opinions!" [page]="opinionPage"></app-opinion-card>
+        <p-paginator [rows]="9" [totalRecords]="companyOpinions?.opinions?.length!" (onPageChange)="changePage($event)"></p-paginator>
       </div>
     </div>
 
@@ -141,8 +141,8 @@
               <h2>{{'global.company.header.opinions' | translate}}</h2>
               <div class="rounded"></div>
             </div>
-            <app-opinion-card [companyOpinions]="companyOpinions" [page]="opinionPage"></app-opinion-card>
-            <p-paginator [rows]="9" [totalRecords]="companyOpinions.length" (onPageChange)="changePage($event)"></p-paginator>
+            <app-opinion-card [companyOpinions]="companyOpinions?.opinions!" [page]="opinionPage"></app-opinion-card>
+            <p-paginator [rows]="9" [totalRecords]="companyOpinions?.opinions?.length!" (onPageChange)="changePage($event)"></p-paginator>
           </div>
 
         </div>
